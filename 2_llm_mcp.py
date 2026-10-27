@@ -78,7 +78,7 @@ class BaseAgent:
 class LLMPlannerAgent(BaseAgent):
     """
     An agent that uses an LLM to triage cases into diagnostic pathways.
-
+    THIS IS WHERE THE AGENT THE ML MODEL CALLED FOR THE PREDICTED DOMAIN(S).
     TODO: implement the step method for this class yourself.
     """
     def __init__(self, unique_id, model, call_llm_fn):
@@ -208,6 +208,9 @@ class MCPMesaModel:
                     "heart": y_h_true
                 }
             }
+            print(payload["text"])
+            print(payload["labels"])
+            exit()
             
             self.case_queue.append((pid, payload))
 
