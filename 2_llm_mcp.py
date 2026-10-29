@@ -7,21 +7,58 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.datasets import load_breast_cancer
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
-
+from datetime import datetime
+from pathlib import Path
 import json
 import re
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+# init logging
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+log_dir = Path("logs")
+log_dir.mkdir(exist_ok=True)
+log_file = log_dir / f"run_{timestamp}.txt"
+def log(input: str, output: str, parsed_output: dict, verdict: str):
+    """Log the original inputm, output, parsed output, and verdict of output."""
+    with log_file.open("a", encoding="utf-8") as f:
+        f.write("=====START=====\n"+ "- INPUT:\n" + input + "\n- OUTPUT:\n" + output + "\n- PARSED OUTPUT:\n" + str(parsed_output) + "\n- VERDICT:\n" + verdict + "\n=====END=====\n")
+    return
+
+# init LLM
+model_id = "openai/gpt-oss-20b"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(
+    model_id,
+    torch_dtype="auto",
+    device_map="cuda",
+)
 
 warnings.filterwarnings("ignore")
 
 def call_llm_fn(prompt: str) -> str:
     # Replace with your actual OpenAI/LLM client call.
     # Must return raw text from the model. This is just a placeholder (that allows you to run the code).
-    return """{
-  "routes": ["diabetes", "heart"],
-  "primary": "heart",
-  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05},
-  "notes": "Brief triage rationale."
-}"""
+
+    #     return """{
+    #   "routes": ["diabetes", "heart"],
+    #   "primary": "heart",
+    #   "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05},
+    #   "notes": "Brief triage rationale."
+    # }"""
+
+    messages = [
+        {"role": "user", "content": prompt},
+    ]
+    inputs = tokenizer.apply_chat_template(
+        messages,
+        add_generation_prompt=True,
+        return_tensors="pt",
+        return_dict=True,
+        reasoning_effort="medium",
+    ).to(model.device)
+    generated = model.generate(**inputs, max_new_tokens=5000)
+    return tokenizer.decode(generated[0][inputs["input_ids"].shape[-1]:])
+
 
 
 def make_case_text(pid, d_row, b_row, h_row):
@@ -86,13 +123,83 @@ class LLMPlannerAgent(BaseAgent):
         self.role = "llm_planner"
         self.call_llm = call_llm_fn
 
-    def _extract_json(self, text):
-        # robust-ish: find first {...} block
+    @staticmethod
+    def _extract_json(text):
+        # robust-ish: find biggest {...} block
         m = re.search(r"\{.*\}", text, flags=re.DOTALL)
         if not m:
             print("No json!")
             raise ValueError("No JSON object found in LLM output.")
         return json.loads(m.group(0))
+
+    @staticmethod
+    def _extract_last_json(text):
+        # robust-ish: find last {...} block if multiple json objects are present
+        text_len = len(text)
+        first = True
+        end = 0
+        start = 0
+        counter = 0
+        # Scan backwards and count '}' and '{' with a counter to determine start and end of json object
+        for i in range(text_len-1, -1, -1):
+            if counter == 0 and not first:
+                start = i+1
+                break
+            if text[i] == "}":
+                counter += 1
+                if first:
+                    first = False
+                    end = i+1
+            if text[i] == "{":
+                if first:
+                    continue
+                counter -= 1
+    
+        return text[start:end]
+
+    @staticmethod
+    def _find_key_words(json_text):
+        """finds the keys in the json text and returns a list of match objects"""
+        return list(re.finditer(r"routes?|primary|confidence|notes?", json_text, re.IGNORECASE))
+
+    def _parse_json_text(self, json_text):
+        """parse the json text into a dict with keys: routes, primary, confidence, notes"""
+        key_words = self._find_key_words(json_text)
+        for idx in range(len(key_words)):
+            next_idx = key_words[idx+1].start() if idx+1 < len(key_words) else len(json_text)
+            curr = key_words[idx]
+
+            # preprocesses possible variations in keys and values to get a consistent output
+            preprocess_domains = lambda x: x.replace(" ", "_").replace("-", "_")
+            preprocess_numbers = lambda x: float(x.replace(",", ".") if x.lower() != "none" else 0)
+    
+            match curr.group():
+                case "routes" | "route":
+                    # create a list with the possible domains
+                    between_text = json_text[curr.end()+1:next_idx].strip()
+                    routes = re.findall(r"diabetes|heart|breast[_ -]cancer", between_text, re.IGNORECASE)
+                    routes = list(map(preprocess_domains, routes))
+                case "primary":
+                    # find the first domain mentioned after the primary key
+                    between_text = json_text[curr.end()+1:next_idx].strip()
+                    primary_group = re.search(r"diabetes|heart|breast[_ -]cancer", between_text, re.IGNORECASE)
+                    primary = preprocess_domains(primary_group.group()) if primary_group else None
+                case "confidence":
+                    # find all domains and their corresponding confidence values
+                    between_text = json_text[curr.end()+1:next_idx].strip()
+                    confidence_keys = re.findall(r"diabetes|heart|breast[_ -]cancer", between_text, re.IGNORECASE)
+                    confidence_values = re.findall(r"\d+[.,]?\d*|none", between_text, re.IGNORECASE)
+                    confidence = dict(zip(
+                        map(preprocess_domains, confidence_keys),
+                        map(preprocess_numbers, confidence_values)
+                    ))
+                case "notes" | "note":
+                    # find the string text after the notes key
+                    between_text = json_text[curr.end()+1:next_idx].strip()
+                    notes_match = re.search(r'".*"', between_text, re.DOTALL)
+                    notes = notes_match.group().strip('"') if notes_match else None
+    
+        return {"routes": routes, "primary": primary, "confidence": confidence, "notes": notes}
 
     def step(self):
         if not self.model.case_queue:
@@ -105,7 +212,54 @@ class LLMPlannerAgent(BaseAgent):
             prompt = payload["text"]
 
             # Call LLM and parse response
+            reps = 0
+            max_reps = 3
+            while reps < max_reps:
+                reps += 1
+                response = self.call_llm(prompt)                 # get response from LLM
+                response_ = self._extract_json(response)         # get all {...} blocks
+                response_ = self._extract_last_json(response_)   # get last {...} block
+                response_dict = self._parse_json_text(response_) # parse the JSON text into a dict
 
+                verdict = "" # init verdict
+
+                # check confidence
+                # if no confidence: prompt again!
+                if len(response_dict["confidence"]) == 0: # if no confidence key present: we make the confidence 0
+                    if reps < max_reps:
+                        verdict = "Missing confidence values. Prompting again."
+                    else:
+                        verdict = "Missing confidence values. Max retries reached. Lets diagnose everything, better safe then sorry."
+                        response_dict["routes"] = ["diabetes", "heart", "breast_cancer"]
+                        response_dict["primary"] = response_dict["primary"] if response_dict["primary"] else "diabetes"
+                    log(input=prompt, output=response, parsed_output=response_dict, verdict=verdict)
+                    continue
+
+                # check and fix primary
+                # if no primary, get highest confidence as primary
+                if response_dict["primary"] is None:
+                    response_dict["primary"] = max(response_dict["confidence"], key=response_dict["confidence"].get)
+                    verdict = "Missing primary. Set to highest confidence domain."
+
+                # check and fix routes
+                # if no routes, get domain above certain threshold (50%), if still no route: get primary as route
+                if len(response_dict["routes"]) == 0:
+                    response_dict["routes"] = [domain for domain, conf in response_dict["confidence"].items() if conf >= 0.5]
+                if len(response_dict["routes"]) == 0:
+                    response_dict["routes"] = [response_dict["primary"]]
+                    verdict += "\nMissing routes. Set to primary."
+                else:
+                    verdict += "\nMissing routes. Set to domains with confidence >= 0.5."
+
+                if verdict == "":
+                    verdict = "LLM output parsed successfully."
+                    
+                log(input=prompt, output=response, parsed_output=response_dict, verdict=verdict)
+                
+                break
+                
+           
+           
             # store triage decision in model context
             # self.model.triage_log.append({
             #         "PatientID": pid,
@@ -113,8 +267,20 @@ class LLMPlannerAgent(BaseAgent):
             #         "primary": primary_decision,
             #         "labels": payload["labels"]
             #     })
+            self.model.triage_log.append({
+                    "PatientID": pid,
+                    "routes": response_dict["routes"],
+                    "primary": response_dict["primary"],
+                    "labels": payload["labels"]
+                })
 
             # Route to appropriate executors based on LLM decision
+            # add to model.context with correct task_{domain}_{pid} name
+            for domain in response_dict["routes"]:
+                task_id = f"task_{domain}_{pid}"
+                task = {"id": pid, "description": f"Analyze {domain} data", "data": payload["data"][domain], "y_true": payload["labels"][domain]}
+                self.model.context[task_id] = task
+                print(f"[{self.role}] Planned task {task_id}")
 
         self.model.case_queue = remaining
 
