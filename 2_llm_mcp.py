@@ -427,6 +427,15 @@ for step in range(3):
 # STEP 5: Visualize Results with Seaborn
 # ==========================================
 
+# TODO: make it work on netherite, 
+# MAKE SURE TO RUN 0_train_models.py first on the machine before 2_llm_mcp.py !!!
+
+# TODO (Extra):
+# - Add another disease from the UCI repository
+# - Simulate human-in-the-loop decision making 
+# - Add uncertainty thresholds and abstention logic (we already have this a little bit)
+# - Add an evaluator or verifier agent (maybe, lets see the rest first)
+
 # TODO: implement the analysis and visualization of results yourself. Below is just a starting point.
 
 results_df = pd.DataFrame(model.results)
@@ -441,3 +450,5 @@ print(results_df.head())
 triage_df = pd.DataFrame(model.triage_log)
 print("Triage Collected:", len(triage_df))
 print(triage_df.head())
+
+
