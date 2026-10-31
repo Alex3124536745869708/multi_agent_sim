@@ -11,9 +11,7 @@ from datetime import datetime
 from pathlib import Path
 import json
 import re
-from time import perf_counter_ns
-# hier below must be uncommented
-# from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # init logging
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -26,30 +24,26 @@ def log(input: str, output: str, parsed_output: dict, verdict: str):
         f.write("=====START=====\n"+ "- INPUT:\n" + input + "\n- OUTPUT:\n" + output + "\n- PARSED OUTPUT:\n" + str(parsed_output) + "\n- VERDICT:\n" + verdict + "\n=====END=====\n")
     return
 
-# hier below must be uncommended
-# # init LLM
-# model_id = "openai/gpt-oss-20b"
-# tokenizer = AutoTokenizer.from_pretrained(model_id)
-# model = AutoModelForCausalLM.from_pretrained(
-#     model_id,
-#     torch_dtype="auto",
-#     device_map="cuda",
-# )
+# init LLM
+model_id = "openai/gpt-oss-20b"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(
+    model_id,
+    torch_dtype="auto",
+    device_map="cuda",
+)
 
 warnings.filterwarnings("ignore")
 
 def call_llm_fn(prompt: str) -> str:
-    # Replace with your actual OpenAI/LLM client call.
-    # Must return raw text from the model. This is just a placeholder (that allows you to run the code).
+    """Call LLM and return raw text output."""
+    # return """{
+    #   "routes": ["diabetes", "heart"],
+    #   "primary": "heart",
+    #   "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05},
+    #   "notes": "Brief triage rationale."
+    # }"""
 
-    return """{
-      "routes": ["diabetes", "heart"],
-      "primary": "heart",
-      "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05},
-      "notes": "Brief triage rationale."
-    }"""
-
-    # ======hier====== below is the correct code
     messages = [
         {"role": "user", "content": prompt},
     ]
@@ -62,8 +56,6 @@ def call_llm_fn(prompt: str) -> str:
     ).to(model.device)
     generated = model.generate(**inputs, max_new_tokens=5000)
     return tokenizer.decode(generated[0][inputs["input_ids"].shape[-1]:])
-
-
 
 def make_case_text(pid, d_row, b_row, h_row):
     # d_row, b_row, h_row are 1D arrays (same as you pass to models)
