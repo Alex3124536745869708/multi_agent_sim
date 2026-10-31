@@ -11,7 +11,9 @@ from datetime import datetime
 from pathlib import Path
 import json
 import re
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from time import perf_counter_ns
+# hier below must be uncommented
+# from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # init logging
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -24,14 +26,15 @@ def log(input: str, output: str, parsed_output: dict, verdict: str):
         f.write("=====START=====\n"+ "- INPUT:\n" + input + "\n- OUTPUT:\n" + output + "\n- PARSED OUTPUT:\n" + str(parsed_output) + "\n- VERDICT:\n" + verdict + "\n=====END=====\n")
     return
 
-# init LLM
-model_id = "openai/gpt-oss-20b"
-tokenizer = AutoTokenizer.from_pretrained(model_id)
-model = AutoModelForCausalLM.from_pretrained(
-    model_id,
-    torch_dtype="auto",
-    device_map="cuda",
-)
+# hier below must be uncommended
+# # init LLM
+# model_id = "openai/gpt-oss-20b"
+# tokenizer = AutoTokenizer.from_pretrained(model_id)
+# model = AutoModelForCausalLM.from_pretrained(
+#     model_id,
+#     torch_dtype="auto",
+#     device_map="cuda",
+# )
 
 warnings.filterwarnings("ignore")
 
@@ -39,13 +42,14 @@ def call_llm_fn(prompt: str) -> str:
     # Replace with your actual OpenAI/LLM client call.
     # Must return raw text from the model. This is just a placeholder (that allows you to run the code).
 
-    #     return """{
-    #   "routes": ["diabetes", "heart"],
-    #   "primary": "heart",
-    #   "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05},
-    #   "notes": "Brief triage rationale."
-    # }"""
+    return """{
+      "routes": ["diabetes", "heart"],
+      "primary": "heart",
+      "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05},
+      "notes": "Brief triage rationale."
+    }"""
 
+    # ======hier====== below is the correct code
     messages = [
         {"role": "user", "content": prompt},
     ]
@@ -211,15 +215,14 @@ class LLMPlannerAgent(BaseAgent):
             pid, payload = case  # payload is dict with data per domain + text
             prompt = payload["text"]
 
-            # Call LLM and parse response
+            # Call LLM and parse response, LLM has 3 tries per case to give a valid answer
             reps = 0
             max_reps = 3
             while reps < max_reps:
                 reps += 1
                 response = self.call_llm(prompt)                 # get response from LLM
-                response_ = self._extract_json(response)         # get all {...} blocks
-                response_ = self._extract_last_json(response_)   # get last {...} block
-                response_dict = self._parse_json_text(response_) # parse the JSON text into a dict
+                response_ = self._extract_last_json(response)    # get last {...} block
+                response_dict = self._parse_json_text(response_) # parse the text into a dict
 
                 verdict = "" # init verdict
 
@@ -245,11 +248,11 @@ class LLMPlannerAgent(BaseAgent):
                 # if no routes, get domain above certain threshold (50%), if still no route: get primary as route
                 if len(response_dict["routes"]) == 0:
                     response_dict["routes"] = [domain for domain, conf in response_dict["confidence"].items() if conf >= 0.5]
-                if len(response_dict["routes"]) == 0:
-                    response_dict["routes"] = [response_dict["primary"]]
-                    verdict += "\nMissing routes. Set to primary."
-                else:
-                    verdict += "\nMissing routes. Set to domains with confidence >= 0.5."
+                    if len(response_dict["routes"]) == 0:
+                        response_dict["routes"] = [response_dict["primary"]]
+                        verdict += "\nMissing routes. Set to primary."
+                    else:
+                        verdict += "\nMissing routes. Set to domains with confidence >= 0.5."
 
                 if verdict == "":
                     verdict = "LLM output parsed successfully."
@@ -347,7 +350,7 @@ class MCPMesaModel:
         self.triage_log = []
 
         # Add cases to queue (patients)
-        for _ in range(100):
+        for _ in range(3): #hier was 100
             pid = str(uuid.uuid4().int)[:4]
             idx_d = X_d.sample(1).index[0]
             d_row = X_d.loc[idx_d].values
@@ -374,9 +377,6 @@ class MCPMesaModel:
                     "heart": y_h_true
                 }
             }
-            print(payload["text"])
-            print(payload["labels"])
-            exit()
             
             self.case_queue.append((pid, payload))
 
@@ -418,10 +418,7 @@ clf_heart = joblib.load("model/heart.pkl")
 
 
 model = MCPMesaModel(X_d, X_b, X_h, clf_diabetes, clf_breast, clf_heart)
-
-for step in range(3):
-    print(f"\n========== MESA STEP {step + 1} ==========")
-    model.step()
+model.step()
 
 # ==========================================
 # STEP 5: Visualize Results with Seaborn
@@ -438,17 +435,69 @@ for step in range(3):
 
 # TODO: implement the analysis and visualization of results yourself. Below is just a starting point.
 
-results_df = pd.DataFrame(model.results)
-print("Results Collected:", len(results_df))
-print(results_df.head())
-
-
-
-
 # Analyse the triage performance
-
+print("======== Done with scheduling and execution ==========\n")
 triage_df = pd.DataFrame(model.triage_log)
 print("Triage Collected:", len(triage_df))
 print(triage_df.head())
 
+# calculate Triage precision and recall
+TP = 0
+FP = 0
+FN = 0
+TN = 0
+for index, row in triage_df.iterrows():
+    for domain in row["labels"].keys():
+        truth_label = row["labels"][domain]
 
+        if domain in row["routes"] and truth_label == 1:
+            TP += 1
+        elif domain in row["routes"] and truth_label == 0:
+            FP += 1
+        elif domain not in row["routes"] and truth_label == 1:
+            FN += 1
+        else:
+            TN += 1
+precision = TP/(TP+FP)
+recall = TP/(TP+FN)
+print(f"\n====== Triage performance: =====\nTP: {TP}\nFP: {FP}\nFN: {FN}\nPrecision: {precision}\nRecall: {recall}")
+
+
+# show first 5 results
+results_df = pd.DataFrame(model.results)
+print("Results Collected:", len(results_df))
+print(results_df.head())
+print()
+# save confusion matrix plot per tested disease
+if not results_df.empty and "Disease" in results_df.columns and "y_pred" in results_df.columns:
+    plt.figure(figsize=(10, 6))
+    sns.countplot(data=results_df, x="Disease", hue="y_pred")
+    plt.title("Predictions by Disease Type")
+    plt.ylabel("Number of Cases")
+    plt.xlabel("Disease")
+    plt.legend(title="Prediction", labels=["Negative", "Positive"])
+    plt.tight_layout()
+    plt.savefig("results/output.png")
+else:
+    print("No results to display.")
+
+# print confusion matrix per tested disease
+for disease in results_df["Disease"].unique():
+    sub = results_df[results_df["Disease"] == disease].dropna(subset=["y_true", "y_pred"])
+    if sub.empty:
+        print(f"\n--- {disease}: no labeled results ---")
+        continue
+
+    y_true = sub["y_true"].astype(int).values
+    y_pred = sub["y_pred"].astype(int).values
+
+    print(f"\n=== {disease} ===")
+    print(classification_report(y_true, y_pred, digits=3))
+
+    cm = confusion_matrix(y_true, y_pred)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+    disp.plot()
+    plt.title(f"Confusion matrix: {disease}")
+    plt.tight_layout()
+    plt.savefig(f"results/confusion_{disease}.png")
+    plt.close()
