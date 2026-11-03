@@ -7,6 +7,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.datasets import load_breast_cancer
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
+from ucimlrepo import fetch_ucirepo
 
 
 warnings.filterwarnings("ignore")
@@ -88,7 +89,7 @@ class ExecutorAgent(BaseAgent):
 # ==========================================
 
 class MCPMesaModel:
-    def __init__(self, X_d, X_b, X_h, clf_d, clf_b, clf_h):
+    def __init__(self, X_d, X_b, X_h, X_p, clf_d, clf_b, clf_h, clf_p):
         self.schedule = CustomScheduler(self)
         self.context = {}
         self.case_queue = []
@@ -105,15 +106,20 @@ class MCPMesaModel:
             # Heart
             idx = X_h.sample(1).index[0]
             self.case_queue.append((pid, X_h.loc[idx].values, "heart", int(y_h.loc[idx])))
+            # Parkinson
+            idx = X_p.sample(1).index[0]
+            self.case_queue.append((pid, X_p.loc[idx].values, "parkinson", int(y_p.loc[idx])))
 
         # Add agents
         self.schedule.add(PlannerAgent("planner_diabetes", self, "diabetes"))
         self.schedule.add(PlannerAgent("planner_breast_cancer", self, "breast_cancer"))
         self.schedule.add(PlannerAgent("planner_heart", self, "heart"))
+        self.schedule.add(PlannerAgent("planner_parkinson", self, "parkinson"))
 
         self.schedule.add(ExecutorAgent("executor_diabetes", self, "diabetes", clf_d))
         self.schedule.add(ExecutorAgent("executor_breast_cancer", self, "breast_cancer", clf_b))
         self.schedule.add(ExecutorAgent("executor_heart", self, "heart", clf_h))
+        self.schedule.add(ExecutorAgent("executor_parkinson", self, "parkinson", clf_p))
 
     def step(self):
         self.schedule.step()
@@ -138,13 +144,19 @@ y_b = breast.target  # 0 = malignant, 1 = benign
 heart = pd.read_csv("data/heart.csv")
 X_h, y_h = heart.drop("target", axis=1), heart["target"]
 
+# Parkinson
+parkinsons = fetch_ucirepo(id=174)
+X_p = parkinsons.data.features 
+y_p = parkinsons.data.targets
+
 # load models from files
 clf_diabetes = joblib.load("model/diabetes.pkl")
 clf_breast = joblib.load("model/breast.pkl")
 clf_heart = joblib.load("model/heart.pkl")
+clf_parkinson = joblib.load("model/parkinson.pkl")
 
 
-model = MCPMesaModel(X_d, X_b, X_h, clf_diabetes, clf_breast, clf_heart)
+model = MCPMesaModel(X_d, X_b, X_h, X_p, clf_diabetes, clf_breast, clf_heart, clf_parkinson)
 
 for step in range(3):
     print(f"\n========== MESA STEP {step + 1} ==========")

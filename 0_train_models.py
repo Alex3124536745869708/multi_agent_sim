@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import warnings
 from sklearn.datasets import load_breast_cancer
 from sklearn.ensemble import RandomForestClassifier
+from ucimlrepo import fetch_ucirepo
 
 warnings.filterwarnings("ignore")
 
@@ -42,5 +43,16 @@ X_h, y_h = heart.drop("target", axis=1), heart["target"]
 
 clf_heart = RandomForestClassifier().fit(X_h, y_h)
 joblib.dump(clf_heart, "model/heart.pkl")
+
+# Parkinson Model
+print("Training Parkinson Model...")
+parkinsons = fetch_ucirepo(id=174) 
+  
+# data (as pandas dataframes) 
+X_p = parkinsons.data.features 
+y_p = parkinsons.data.targets
+
+clf_parkinson = RandomForestClassifier().fit(X_p, y_p)
+joblib.dump(clf_parkinson, "model/parkinson.pkl")
 
 print("Models trained and saved in 'model/' folder.")

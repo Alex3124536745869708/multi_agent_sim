@@ -11,6 +11,7 @@ from datetime import datetime
 from pathlib import Path
 import json
 import re
+from ucimlrepo import fetch_ucirepo
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # init logging
@@ -36,14 +37,16 @@ LLM = AutoModelForCausalLM.from_pretrained(
 warnings.filterwarnings("ignore")
 
 def call_llm_fn(prompt: str) -> str:
-    """Call LLM and return raw text output."""
-    # return """{
-    #   "routes": ["diabetes", "heart"],
-    #   "primary": "heart",
-    #   "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05},
-    #   "notes": "Brief triage rationale."
-    # }"""
-
+    """Call LLM and return raw text output.
+    
+    Example output: return '''{
+          "routes": ["diabetes", "heart", "parkinson"],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }'''
+    """
+    
     messages = [
         {"role": "user", "content": prompt},
     ]
@@ -57,7 +60,7 @@ def call_llm_fn(prompt: str) -> str:
     generated = LLM.generate(**inputs, max_new_tokens=5000)
     return tokenizer.decode(generated[0][inputs["input_ids"].shape[-1]:])
 
-def make_case_text(pid, d_row, b_row, h_row):
+def make_case_text(pid, d_row, b_row, h_row, p_row):
     # d_row, b_row, h_row are 1D arrays (same as you pass to models)
     # Keep it short; it’s triage, not a full report.
     return f"""
@@ -71,13 +74,23 @@ slope={h_row[10]}, ca={h_row[11]},
 Pregnancies={d_row[0]}, Glucose={d_row[1]}, Blood Pressure={d_row[2]}, Skin Thickness={d_row[3]},
 Insulin={d_row[4]}, BMI={d_row[5]}, Diabetes Pedigree Function={d_row[6]}.
 Breast features: mean radius={b_row[0]:.3f}, mean texture={b_row[1]:.3f}, mean perimeter={b_row[2]:.3f}, mean area={b_row[3]:.3f}, mean smoothness={b_row[4]:.3f}.
+Movement features: 
+MDVP:Fo={p_row[0]:.3f}, MDVP:Fhi={p_row[1]:.3f}, MDVP:Flo={p_row[2]:.3f},
+MDVP:Jitter={p_row[3]:.3f}, MDVP:Jitter={p_row[4]:.3f},
+MDVP:RAP={p_row[5]:.3f}, MDVP:PPQ={p_row[6]:.3f}, Jitter:DDP={p_row[7]:.3f},
+MDVP:Shimmer={p_row[8]:.3f}, MDVP:Shimmer={p_row[9]:.3f},
+Shimmer:APQ3={p_row[10]:.3f}, Shimmer:APQ5={p_row[11]:.3f},
+MDVP:APQ={p_row[12]:.3f}, Shimmer:DDA={p_row[13]:.3f},
+NHR={p_row[14]:.3f}, HNR={p_row[15]:.3f}, RPDE={p_row[16]:.3f},
+DFA={p_row[17]:.3f}, spread1={p_row[18]:.3f}, spread2={p_row[19]:.3f},
+D2={p_row[20]:.3f}, PPE={p_row[21]:.3f}.
 
 Output JSON only.
 Output format (example):
 {{
   "routes": ["diabetes", "heart"],
   "primary": "heart",
-  "confidence": {{"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05}},
+  "confidence": {{"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20}},
   "notes": "Brief triage rationale."
 }}
 """.strip()
@@ -173,17 +186,17 @@ class LLMPlannerAgent(BaseAgent):
                 case "routes" | "route":
                     # create a list with the possible domains
                     between_text = json_text[curr.end()+1:next_idx].strip()
-                    routes = re.findall(r"diabetes|heart|breast[_ -]cancer", between_text, re.IGNORECASE)
+                    routes = re.findall(r"diabetes|heart|breast[_ -]cancer|parkinson", between_text, re.IGNORECASE)
                     routes = list(map(preprocess_domains, routes))
                 case "primary":
                     # find the first domain mentioned after the primary key
                     between_text = json_text[curr.end()+1:next_idx].strip()
-                    primary_group = re.search(r"diabetes|heart|breast[_ -]cancer", between_text, re.IGNORECASE)
+                    primary_group = re.search(r"diabetes|heart|breast[_ -]cancer|parkinson", between_text, re.IGNORECASE)
                     primary = preprocess_domains(primary_group.group()) if primary_group else None
                 case "confidence":
                     # find all domains and their corresponding confidence values
                     between_text = json_text[curr.end()+1:next_idx].strip()
-                    confidence_keys = re.findall(r"diabetes|heart|breast[_ -]cancer", between_text, re.IGNORECASE)
+                    confidence_keys = re.findall(r"diabetes|heart|breast[_ -]cancer|parkinson", between_text, re.IGNORECASE)
                     confidence_values = re.findall(r"\d+[.,]?\d*|none", between_text, re.IGNORECASE)
                     confidence = dict(zip(
                         map(preprocess_domains, confidence_keys),
@@ -220,12 +233,12 @@ class LLMPlannerAgent(BaseAgent):
 
                 # check confidence
                 # if no confidence: prompt again!
-                if len(response_dict["confidence"]) == 0: # if no confidence key present: we make the confidence 0
+                if len(response_dict["confidence"]) == 0:
                     if reps < max_reps:
                         verdict = "Missing confidence values. Prompting again."
                     else:
                         verdict = "Missing confidence values. Max retries reached. Lets diagnose everything, better safe then sorry."
-                        response_dict["routes"] = ["diabetes", "heart", "breast_cancer"]
+                        response_dict["routes"] = ["diabetes", "heart", "breast_cancer", "parkinson"]
                         response_dict["primary"] = response_dict["primary"] if response_dict["primary"] else "diabetes"
                     log(input=prompt, output=response, parsed_output=response_dict, verdict=verdict)
                     continue
@@ -253,15 +266,7 @@ class LLMPlannerAgent(BaseAgent):
                 
                 break
                 
-           
-           
             # store triage decision in model context
-            # self.model.triage_log.append({
-            #         "PatientID": pid,
-            #         "routes": routes,
-            #         "primary": primary_decision,
-            #         "labels": payload["labels"]
-            #     })
             self.model.triage_log.append({
                     "PatientID": pid,
                     "routes": response_dict["routes"],
@@ -334,7 +339,7 @@ class ExecutorAgent(BaseAgent):
 # ==========================================
 
 class MCPMesaModel:
-    def __init__(self, X_d, X_b, X_h, clf_d, clf_b, clf_h):
+    def __init__(self, X_d, X_b, X_h, X_p, clf_d, clf_b, clf_h, clf_p):
         self.schedule = CustomScheduler(self)
         self.context = {}
         self.case_queue = []
@@ -356,17 +361,23 @@ class MCPMesaModel:
             h_row = X_h.loc[idx_h].values
             y_h_true = int(y_h.loc[idx_h])
 
+            idx_p = X_p.sample(1).index[0]
+            p_row = X_p.loc[idx_p].values
+            y_p_true = int(y_p.loc[idx_p])
+
             payload = {
-                "text": make_case_text(pid, d_row, b_row, h_row),
+                "text": make_case_text(pid, d_row, b_row, h_row, p_row),
                 "data": {
                     "diabetes": d_row,
                     "breast_cancer": b_row,
-                    "heart": h_row
+                    "heart": h_row,
+                    "parkinson": p_row
                 },
                 "labels": {
                     "diabetes": y_d_true,
                     "breast_cancer": y_b_true,
-                    "heart": y_h_true
+                    "heart": y_h_true,
+                    "parkinson": y_p_true
                 }
             }
             
@@ -379,6 +390,7 @@ class MCPMesaModel:
         self.schedule.add(ExecutorAgent("executor_diabetes", self, "diabetes", clf_d))
         self.schedule.add(ExecutorAgent("executor_breast_cancer", self, "breast_cancer", clf_b))
         self.schedule.add(ExecutorAgent("executor_heart", self, "heart", clf_h))
+        self.schedule.add(ExecutorAgent("executor_parkinson", self, "parkinson", clf_p))
 
     def step(self):
         self.schedule.step()
@@ -403,29 +415,23 @@ y_b = breast.target  # 0 = malignant, 1 = benign
 heart = pd.read_csv("data/heart.csv")
 X_h, y_h = heart.drop("target", axis=1), heart["target"]
 
+# Parkinson
+parkinsons = fetch_ucirepo(id=174)
+X_p = parkinsons.data.features 
+y_p = parkinsons.data.targets
+
 # load models from files
 clf_diabetes = joblib.load("model/diabetes.pkl")
 clf_breast = joblib.load("model/breast.pkl")
 clf_heart = joblib.load("model/heart.pkl")
+clf_parkinson = joblib.load("model/parkinson.pkl")
 
-
-model = MCPMesaModel(X_d, X_b, X_h, clf_diabetes, clf_breast, clf_heart)
+model = MCPMesaModel(X_d, X_b, X_h, X_p, clf_diabetes, clf_breast, clf_heart, clf_parkinson)
 model.step()
 
 # ==========================================
 # STEP 5: Visualize Results with Seaborn
 # ==========================================
-
-# TODO: make it work on netherite, 
-# MAKE SURE TO RUN 0_train_models.py first on the machine before 2_llm_mcp.py !!!
-
-# TODO (Extra):
-# - Add another disease from the UCI repository
-# - Simulate human-in-the-loop decision making 
-# - Add uncertainty thresholds and abstention logic (we already have this a little bit)
-# - Add an evaluator or verifier agent (maybe, lets see the rest first)
-
-# TODO: implement the analysis and visualization of results yourself. Below is just a starting point.
 
 # Analyse the triage performance
 print("======== Done with scheduling and execution ==========\n")
@@ -450,12 +456,23 @@ for index, row in triage_df.iterrows():
             FN += 1
         else:
             TN += 1
+# print precision and recall
 precision = TP/(TP+FP)
 recall = TP/(TP+FN)
-print(f"\n====== Triage performance: =====\nTP: {TP}\nFP: {FP}\nFN: {FN}\nPrecision: {precision}\nRecall: {recall}")
+print(f"\n====== Triage performance: =====\nTP: {TP}\nFP: {FP}\nTN: {TN}\nFN: {FN}\nPrecision: {precision}\nRecall: {recall}")
+
+# plot confussion matrix
+cm = np.array([[TN, FP],[FN, TP]])
+sns.heatmap(cm, annot=True, fmt="d", cmap= "viridis",
+            xticklabels=['0', '1'],
+            yticklabels=['0', '1'])
+plt.xlabel("Predicted label")
+plt.ylabel("True label")
+plt.title("Confusion Matrix: triage performance")
+plt.savefig("results/confusion_triage.png")
 
 
-# show first 5 results
+# show first 5 results of diseases
 results_df = pd.DataFrame(model.results)
 print("Results Collected:", len(results_df))
 print(results_df.head())
