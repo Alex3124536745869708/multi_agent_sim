@@ -10,7 +10,7 @@ dependencies = [
     "cycler==0.12.1",
     "fonttools==4.61.1",
     "joblib>=1.5.3",
-    "kernels>=0.18.0",
+    "kernels==0.17.2",
     "kiwisolver==1.4.9",
     "matplotlib==3.10.8",
     "mesa==3.0.3",
