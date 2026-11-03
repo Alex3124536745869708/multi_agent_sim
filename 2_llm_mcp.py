@@ -27,7 +27,7 @@ def log(input: str, output: str, parsed_output: dict, verdict: str):
 # init LLM
 model_id = "openai/gpt-oss-20b"
 tokenizer = AutoTokenizer.from_pretrained(model_id)
-model = AutoModelForCausalLM.from_pretrained(
+LLM = AutoModelForCausalLM.from_pretrained(
     model_id,
     torch_dtype="auto",
     device_map="cuda",
@@ -53,8 +53,8 @@ def call_llm_fn(prompt: str) -> str:
         return_tensors="pt",
         return_dict=True,
         reasoning_effort="medium",
-    ).to(model.device)
-    generated = model.generate(**inputs, max_new_tokens=5000)
+    ).to(LLM.device)
+    generated = LLM.generate(**inputs, max_new_tokens=5000)
     return tokenizer.decode(generated[0][inputs["input_ids"].shape[-1]:])
 
 def make_case_text(pid, d_row, b_row, h_row):
@@ -342,7 +342,7 @@ class MCPMesaModel:
         self.triage_log = []
 
         # Add cases to queue (patients)
-        for _ in range(3): #hier was 100
+        for _ in range(100):
             pid = str(uuid.uuid4().int)[:4]
             idx_d = X_d.sample(1).index[0]
             d_row = X_d.loc[idx_d].values
