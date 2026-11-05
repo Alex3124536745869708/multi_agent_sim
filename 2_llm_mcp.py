@@ -179,7 +179,7 @@ class LLMPlannerAgent(BaseAgent):
             curr = key_words[idx]
 
             # preprocesses possible variations in keys and values to get a consistent output
-            preprocess_domains = lambda x: x.replace(" ", "_").replace("-", "_")
+            preprocess_domains = lambda x: x.replace(" ", "_").replace("-", "_").lower()
             preprocess_numbers = lambda x: float(x.replace(",", ".") if x.lower() != "none" else 0)
     
             match curr.group():
