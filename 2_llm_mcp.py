@@ -168,8 +168,14 @@ class LLMPlannerAgent(BaseAgent):
 
     @staticmethod
     def _find_key_words(json_text):
-        """finds the keys in the json text and returns a list of match objects"""
-        return list(re.finditer(r"routes?|primary|confidence|notes?", json_text, re.IGNORECASE))
+        """finds the keys in the json text and returns a list of match objects. Only the first key occurence is saved."""
+        keys = [r"routes?",r"primary",r"confidence",r"notes?"]
+        matches = []
+        for key in keys:
+            for match in re.finditer(key, json_text, re.IGNORECASE):
+                matches.append(match)
+                break
+        return matches
 
     def _parse_json_text(self, json_text):
         """parse the json text into a dict with keys: routes, primary, confidence, notes"""
@@ -182,12 +188,13 @@ class LLMPlannerAgent(BaseAgent):
             preprocess_domains = lambda x: x.replace(" ", "_").replace("-", "_").lower()
             preprocess_numbers = lambda x: float(x.replace(",", ".") if x.lower() != "none" else 0)
     
-            match curr.group():
+            match curr.group().lower():
                 case "routes" | "route":
                     # create a list with the possible domains
                     between_text = json_text[curr.end()+1:next_idx].strip()
                     routes = re.findall(r"diabetes|heart|breast[_ -]cancer|parkinson", between_text, re.IGNORECASE)
                     routes = list(map(preprocess_domains, routes))
+                    routes = list(set(routes)) # remove duplicates if they exist
                 case "primary":
                     # find the first domain mentioned after the primary key
                     between_text = json_text[curr.end()+1:next_idx].strip()
