@@ -1,0 +1,14 @@
+Ignoring corrupted tree cache file /local/.cache/huggingface/hub/models--openai--gpt-oss-20b/trees/6cee5e81ee83917806bbde320786a8fb61efebee.json: [Errno 13] Permission denied: '/local/.cache/huggingface/hub/models--openai--gpt-oss-20b/trees/6cee5e81ee83917806bbde320786a8fb61efebee.json'
+Ignoring corrupted tree cache file /local/.cache/huggingface/hub/kernels--kernels-community--gpt-oss-triton-kernels/trees/fdbd64ad91bec746f5b2f858b1bd0d99ec471644.json: [Errno 13] Permission denied: '/local/.cache/huggingface/hub/kernels--kernels-community--gpt-oss-triton-kernels/trees/fdbd64ad91bec746f5b2f858b1bd0d99ec471644.json'
+Fetching 44 files:   0%|          | 0/44 [00:00<?, ?it/s]Fetching 44 files: 100%|██████████| 44/44 [00:00<00:00, 2050.98it/s]
+Loading weights:   0%|          | 0/411 [00:00<?, ?it/s]Loading weights:   0%|          | 1/411 [00:00<01:45,  3.87it/s]Loading weights:   1%|          | 5/411 [00:00<00:26, 15.29it/s]Loading weights:  10%|▉         | 41/411 [00:00<00:02, 124.23it/s]Loading weights:  18%|█▊        | 72/411 [00:00<00:01, 177.21it/s]Loading weights:  23%|██▎       | 94/411 [00:00<00:01, 179.66it/s]Loading weights:  30%|██▉       | 123/411 [00:00<00:01, 208.34it/s]Loading weights:  36%|███▌      | 146/411 [00:00<00:01, 198.85it/s]Loading weights:  43%|████▎     | 175/411 [00:01<00:01, 210.65it/s]Loading weights:  48%|████▊     | 198/411 [00:01<00:01, 199.32it/s]Loading weights:  55%|█████▍    | 225/411 [00:01<00:00, 213.11it/s]Loading weights:  60%|██████    | 247/411 [00:01<00:00, 195.44it/s]Loading weights:  67%|██████▋   | 277/411 [00:01<00:00, 216.51it/s]Loading weights:  73%|███████▎  | 300/411 [00:01<00:00, 209.49it/s]Loading weights:  80%|███████▉  | 327/411 [00:01<00:00, 221.95it/s]Loading weights:  85%|████████▌ | 350/411 [00:01<00:00, 204.88it/s]Loading weights:  92%|█████████▏| 378/411 [00:02<00:00, 215.99it/s]Loading weights:  97%|█████████▋| 400/411 [00:02<00:00, 202.23it/s]Loading weights: 100%|██████████| 411/411 [00:02<00:00, 189.50it/s]
+Traceback (most recent call last):
+  File "/local/s3692442/multi_agent_sim/2_llm_mcp.py", line 430, in <module>
+    model.step()
+  File "/local/s3692442/multi_agent_sim/2_llm_mcp.py", line 396, in step
+    self.schedule.step()
+  File "/local/s3692442/multi_agent_sim/2_llm_mcp.py", line 113, in step
+    agent.step()
+  File "/local/s3692442/multi_agent_sim/2_llm_mcp.py", line 281, in step
+    task = {"id": pid, "description": f"Analyze {domain} data", "data": payload["data"][domain], "y_true": payload["labels"][domain]}
+KeyError: 'Breast_cancer'

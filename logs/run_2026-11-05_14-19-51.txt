@@ -1,0 +1,2130 @@
+=====START=====
+- INPUT:
+Patient 2477. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=50.0, sex=0.0, cp=0.0, trestbps=110.0, chol=254.0,
+fbs=0.0, rest ecg=0.0, thalach=159.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=0.0, Glucose=137.0, Blood Pressure=40.0, Skin Thickness=35.0,
+Insulin=168.0, BMI=43.1, Diabetes Pedigree Function=2.288.
+Breast features: mean radius=11.220, mean texture=33.810, mean perimeter=70.790, mean area=386.800, mean smoothness=0.078.
+Movement features: 
+MDVP:Fo=113.166, MDVP:Fhi=130.270, MDVP:Flo=100.673,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.008,
+MDVP:Shimmer=0.053, MDVP:Shimmer=0.053,
+Shimmer:APQ3=0.029, Shimmer:APQ5=0.033,
+MDVP:APQ=0.041, Shimmer:DDA=0.087,
+NHR=0.037, HNR=16.747, RPDE=0.625,
+DFA=0.709, spread1=-4.655, spread2=0.304,
+D2=2.672, PPE=0.274.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathways to run: diabetes, breast_cancer or heart. We have patient features: age 50.0, sex 0.0? Typically sex: 0=male, 1=female? Here 0.0 male. cp=0.0 chest pain type? heart disease data.
+
+Blood pressure 40? Wait Blood Pressure variable: 40.0 maybe diastolic? Not sure.
+
+Features: Glucose 137, BMI 43.1, Diabetes Pedigree Function 2.288. That's high risk of diabetes. Also risk of heart disease: age 50, male, chest pain type 0? cp maybe typical angina? but cp=0.0 maybe no chest pain? thalach 159 moderate, oldpeak 0, exang 0. These features somewhat normal. But cholesterol 254, higher. Trestbps 110, low BP, fbs 0.0, rest ecg normal.
+
+Heart disease risk moderate: maybe need heart evaluation if cp non-zero. cp=0 maybe typical? I'm not sure.
+
+Breast cancer: has features mean radius 11.22, mean texture 33.81, etc. Those are mammogram features from the Breast Cancer Wisconsin dataset. Need to see malignant or benign? We can't compute exactly. But maybe risk? Let's approximate: radius 11.22 small, texture 33.81 high? Hard.
+
+But we can compute a quick rule: If mean radius > 12? This is small. I think likely benign, but risk? Not high. Since age 50 and sex male; but breast cancer is irrelevant to male but could for female. But sex is male; so breast cancer risk is negligible. So we don't run breast cancer.
+
+Thus recommended routes: diabetes and heart. Primary high risk: diabetes (due to BMI 43, glucose 137, high diabetic pedigree). Heart maybe lower but still maybe.
+
+We must output confidence: maybe diabetes 0.8, heart 0.4, breast_cancer 0.1. But we must include all three. We'll set probabilities sum not necessarily 1 but relative. Provide primary as "diabetes".
+
+Notes: Brief triage rationale.
+
+Ok.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["diabetes", "heart"],
+  "primary": "diabetes",
+  "confidence": {
+    "diabetes": 0.78,
+    "heart": 0.45,
+    "breast_cancer": 0.12,
+    "parkinson": 0.18
+  },
+  "notes": "Male patient, age 50, obese (BMI 43.1) with elevated glucose (137 mg/dL) and high diabetes pedigree function (2.29). These factors strongly indicate a need for a diabetes diagnostic pathway. Heart eval is warranted given male sex, age, cholesterol 254 mg/dL and resting heart rate 159 bpm, albeit less urgent than diabetes. Breast cancer risk is negligible for a male and thus excluded from the recommended pathways."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'diabetes', 'confidence': {'diabetes': 0.78, 'heart': 0.45, 'breast_cancer': 0.12, 'parkinson': 0.18}, 'notes': 'Male patient, age 50, obese (BMI 43.1) with elevated glucose (137 mg/dL) and high diabetes pedigree function (2.29). These factors strongly indicate a need for a diabetes diagnostic pathway. Heart eval is warranted given male sex, age, cholesterol 254 mg/dL and resting heart rate 159 bpm, albeit less urgent than diabetes. Breast cancer risk is negligible for a male and thus excluded from the recommended pathways.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2134. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=70.0, sex=1.0, cp=0.0, trestbps=130.0, chol=322.0,
+fbs=0.0, rest ecg=0.0, thalach=109.0, exang=0.0, oldpeak=2.4,
+slope=1.0, ca=3.0,
+Pregnancies=1.0, Glucose=95.0, Blood Pressure=60.0, Skin Thickness=18.0,
+Insulin=58.0, BMI=23.9, Diabetes Pedigree Function=0.26.
+Breast features: mean radius=11.130, mean texture=16.620, mean perimeter=70.470, mean area=381.100, mean smoothness=0.082.
+Movement features: 
+MDVP:Fo=208.519, MDVP:Fhi=220.315, MDVP:Flo=199.020,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.004, MDVP:PPQ=0.003, Jitter:DDP=0.011,
+MDVP:Shimmer=0.018, MDVP:Shimmer=0.018,
+Shimmer:APQ3=0.010, Shimmer:APQ5=0.011,
+MDVP:APQ=0.013, Shimmer:DDA=0.029,
+NHR=0.008, HNR=22.407, RPDE=0.338,
+DFA=0.712, spread1=-6.471, spread2=0.184,
+D2=2.502, PPE=0.136.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathways to run: diabetes, breast_cancer, heart. We have patient features: age 70, sex 1 (male), chest pain 0, etc. We need to evaluate risk for heart disease via features: cp, trestbps, chol, fbs, rest ecg, thalach, oldpeak, slope, ca. Age 70 and 3 coronary arteries (ca=3). Maybe high risk for heart disease. Should include heart. Diabetes: features: Pregnancies 1 (but sex 1 male—pregnancies irrelevant but dataset includes? 0?). Glucose 95 normal, BMI 23.9, insulin 58, diabetes pedigree 0.26. Probably low risk of diabetes but we can still run? The guidelines: triage assistant decide run diagnostic pathways: should consider heart with high risk, maybe breast cancer since age 70 with female? Sex 1 means male? Wait sex=1.0 usually indicates male. So breast cancer not applicable. So probably only heart. Might also consider diabetes given age 70 but risk moderate? Could consider? Provide primary as heart. Confidence values: high 0.8 for heart, lower for diabetes 0.2, 0.05 for breast cancer. Provide rationale: Age and coronary artery count high, etc.
+
+Let's craft JSON.
+
+Check "confidences" must include all three: diabetes, heart, breast_cancer. Maybe add parkinson? example included but not relevant. We'll just list required three. Provide values: heart 0.85, diabetes 0.15, breast_cancer 0.05. Also might use 0.85, 0.1, 0.05. Provide "routes" list includes those with high thresholds: heart only. But could also include diabetes? In triage, decide which to run. Might include heart only. Keep only heart.
+
+Return JSON.
+
+<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["heart"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.12,
+    "heart": 0.85,
+    "breast_cancer": 0.03
+  },
+  "notes": "The patient is a 70‑year‑old male with 3 coronary arteries involved, an elevated oldpeak (2.4), and high triglyceride levels (Trestbps 130, Chol 322). These factors strongly suggest coronary artery disease, justifying the heart diagnostic pathway. Diabetes risk is low (normal glucose, BMI, and pedigree function), and breast cancer is unlikely given the male sex."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.12, 'heart': 0.85, 'breast_cancer': 0.03}, 'notes': 'The patient is a 70‑year‑old male with 3 coronary arteries involved, an elevated oldpeak (2.4), and high triglyceride levels (Trestbps 130, Chol 322). These factors strongly suggest coronary artery disease, justifying the heart diagnostic pathway. Diabetes risk is low (normal glucose, BMI, and pedigree function), and breast cancer is unlikely given the male sex.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 7224. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=58.0, sex=0.0, cp=0.0, trestbps=100.0, chol=248.0,
+fbs=0.0, rest ecg=0.0, thalach=122.0, exang=0.0, oldpeak=1.0,
+slope=1.0, ca=0.0,
+Pregnancies=8.0, Glucose=181.0, Blood Pressure=68.0, Skin Thickness=36.0,
+Insulin=495.0, BMI=30.1, Diabetes Pedigree Function=0.615.
+Breast features: mean radius=20.290, mean texture=14.340, mean perimeter=135.100, mean area=1297.000, mean smoothness=0.100.
+Movement features: 
+MDVP:Fo=197.076, MDVP:Fhi=206.896, MDVP:Flo=192.055,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.011, MDVP:Shimmer=0.011,
+Shimmer:APQ3=0.006, Shimmer:APQ5=0.007,
+MDVP:APQ=0.008, Shimmer:DDA=0.017,
+NHR=0.003, HNR=26.775, RPDE=0.422,
+DFA=0.741, spread1=-7.348, spread2=0.178,
+D2=1.744, PPE=0.086.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathways for patient: diabetes, breast_cancer, heart. Use features:
+
+- Age 58, sex=0.0 maybe female? If sex=0.0 indicates female, 1 male? Commonly sex: 0=male? Actually in heart dataset, sex variable: 0 male 1 female? I'm not sure. But we can approximate.
+
+Features for diabetes: Glucose 181 (>140 suggests high), BMI 30.1 (overweight), Insulin 495 high, etc. So diabetes diagnosis likely.
+
+Heart: chest pain cp=0? Actually cp 0 means typical angina? In UCI dataset values 0: typical angina, 1 atypical angina,2 non-anginal pain,3 asymptomatic. CP=0 indicates typical angina. Trestbps=100, cholesterol 248, FBS=0 (normal), etc. Exang=0 (no). Thalach=122. Oldpeak=1.0 indicating mild. Slope=1.0 (upsloping). Ca=0. So heart disease risk moderate.
+
+Breast cancer: features of tumor: mean radius, texture etc. Typically malignant thresholds. For benign: mean radius 20.3? Usually malignant mean radius above 20 maybe? For the Brea dataset mean radius of malignant average around 22 maybe. 20.29 close to threshold; but texture 14.34 maybe lower, perimeter 135, area 1297. Usually malignant tumor area > ~1500? Not sure. Let's approximate: risk for breast cancer moderate but not high. The question says we must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Given we only have 3 options. We might decide to run two pathways: diabetes and heart? Let's compute confidence.
+
+Confidence scoring: We can guess probabilities.
+
+- Diabetes: high risk. Conf ~0.8.
+
+- Heart: risk moderate; 0.6 maybe.
+
+- Breast cancer: low; 0.1.
+
+Confidence need sum >1? Not required.
+
+We need primary: maybe main disease. Pick diabetes as primary.
+
+But if we choose to run both diabetes and heart, we should output routes list. Must provide confidence dict for all three? Example has all four. Provide for the three relevant.
+
+Should we include other categories? output format shows 4 categories including parkinson. But we only mention three? Provide confidence for each available. I think we should include all but we can set zero or some values. The example had parkinson though not present. But we may include it with 0.20. Let's keep consistent: maybe include parkinson 0.0. Provide 4 categories.
+
+Better to not mention parkinson if not relevant. But instructions say output format example includes 4 categories though only 3. Could produce "confidence" dictionary with any keys. Provide for given categories: diabetes, heart, breast_cancer. maybe others 0.
+
+Let's produce:
+
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "diabetes",
+  "confidence": {"diabetes": 0.78, "heart": 0.62, "breast_cancer": 0.12},
+  "notes": "High fasting glucose, elevated insulin and BMI indicate diabetes; typical chest pain with borderline risk scores suggests heart disease; breast tumor size and texture below malignant threshold."
+}
+
+Make sure note brief. Output JSON.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["diabetes", "heart"],
+  "primary": "diabetes",
+  "confidence": {
+    "diabetes": 0.78,
+    "heart": 0.62,
+    "breast_cancer": 0.12
+  },
+  "notes": "Glucose 181 mg/dL and insulin 495 µU/mL combined with BMI 30.1 strongly suggest diabetes. Chest pain (type 0) with borderline ECG/heart‑risk parameters warrants a heart‑disease pathway. Breast‑related measurements are near benign thresholds, so a breast‑cancer screen is low priority."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'diabetes', 'confidence': {'diabetes': 0.78, 'heart': 0.62, 'breast_cancer': 0.12}, 'notes': 'Glucose 181\u202fmg/dL and insulin 495\u202fµU/mL combined with BMI 30.1 strongly suggest diabetes. Chest pain (type 0) with borderline ECG/heart‑risk parameters warrants a heart‑disease pathway. Breast‑related measurements are near benign thresholds, so a breast‑cancer screen is low priority.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2502. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=50.0, sex=0.0, cp=2.0, trestbps=120.0, chol=219.0,
+fbs=0.0, rest ecg=1.0, thalach=158.0, exang=0.0, oldpeak=1.6,
+slope=1.0, ca=0.0,
+Pregnancies=0.0, Glucose=102.0, Blood Pressure=78.0, Skin Thickness=40.0,
+Insulin=90.0, BMI=34.5, Diabetes Pedigree Function=0.238.
+Breast features: mean radius=18.220, mean texture=18.700, mean perimeter=120.300, mean area=1033.000, mean smoothness=0.115.
+Movement features: 
+MDVP:Fo=112.547, MDVP:Fhi=133.374, MDVP:Flo=105.715,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.014, MDVP:Shimmer=0.014,
+Shimmer:APQ3=0.007, Shimmer:APQ5=0.008,
+MDVP:APQ=0.011, Shimmer:DDA=0.020,
+NHR=0.004, HNR=26.436, RPDE=0.413,
+DFA=0.757, spread1=-6.324, spread2=0.219,
+D2=2.193, PPE=0.160.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide diagnostic pathways: diabetes, breast_cancer, heart. Use features.
+
+Age 50, sex=0 -> female (0 maybe female, 1 male). CP: 2, trestbps 120, chol 219, fbs 0, rest ecg 1, thalach 158, exang 0, oldpeak 1.6, slope 1, ca 0. Heart disease risk? Classic risk factors: age 50, female, CP 2 indicates possible chest pain? Maybe ischemic? but sex female less risk but age 50 not extreme. Trestbps normal 120, cholesterol somewhat high 219 (borderline). fbs=0 <120 so maybe not diabetic risk. Oldpeak 1.6 >1.0, mild.
+
+Breast: mean radius 18.2, mean texture 18.7, mean perimeter 120.3, mean area 1033. Maybe benign? But features: radius 18 might be low? average malignant radius ~14? Wait typical malignant radius mean ~14? Actually in Wisconsin dataset malignant radius mean ~14? I'm not sure. We check for risk: radius large >20 is malignant? Actually malignant radius typically larger >20. Here 18.2 borderline. Texture 18.7 lower. Smoothness 0.115 low. Area 1033 <2000, perimeter 120 <200. So likely benign.
+
+Diabetes: Blood Pressure 78? Wait 'Blood Pressure=78' unclear. This 78 is likely diastolic? But typical normal 80. Also glucose 102 borderline. BMI 34.5 high. Insulin 90. Diabetes Pedigree 0.238 low. Age 50. Maybe risk moderate due to high BMI but glucose 102 fasting? but still mild.
+
+Better to run heart tests? Likely risk moderate. Provide pathways: heart and diabetes maybe? Breast likely not needed.
+
+Confidence numeric: e.g., heart 0.7, diabetes 0.3, breast 0.05.
+
+Primary: heart maybe.
+
+Notes: Based on risk factors: chest pain, oldpeak moderate.
+
+Let's output JSON.
+
+<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["heart", "diabetes"],
+  "primary": "heart",
+  "confidence": {
+    "heart": 0.68,
+    "diabetes": 0.32,
+    "breast_cancer": 0.05,
+    "parkinson": 0.02
+  },
+  "notes": "Patient presents typical cardiac risk factors: age 50, chest pain rating 2, mild ST‑depression (oldpeak 1.6), and moderately elevated cholesterol. Diabetes risk is moderate due to high BMI and fasting glucose 102, while breast morphology is within benign ranges. Hence, prioritize cardiac evaluation, with diabetes screening as secondary."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'heart': 0.68, 'diabetes': 0.32, 'breast_cancer': 0.05, 'parkinson': 0.02}, 'notes': 'Patient presents typical cardiac risk factors: age 50, chest pain rating 2, mild ST‑depression (oldpeak 1.6), and moderately elevated cholesterol. Diabetes risk is moderate due to high BMI and fasting glucose 102, while breast morphology is within benign ranges. Hence, prioritize cardiac evaluation, with diabetes screening as secondary.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2493. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=70.0, sex=1.0, cp=0.0, trestbps=145.0, chol=174.0,
+fbs=0.0, rest ecg=1.0, thalach=125.0, exang=1.0, oldpeak=2.6,
+slope=0.0, ca=0.0,
+Pregnancies=4.0, Glucose=83.0, Blood Pressure=86.0, Skin Thickness=19.0,
+Insulin=0.0, BMI=29.3, Diabetes Pedigree Function=0.317.
+Breast features: mean radius=20.600, mean texture=29.330, mean perimeter=140.100, mean area=1265.000, mean smoothness=0.118.
+Movement features: 
+MDVP:Fo=214.289, MDVP:Fhi=260.277, MDVP:Flo=77.973,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.009,
+MDVP:Shimmer=0.019, MDVP:Shimmer=0.019,
+Shimmer:APQ3=0.010, Shimmer:APQ5=0.012,
+MDVP:APQ=0.014, Shimmer:DDA=0.031,
+NHR=0.044, HNR=21.209, RPDE=0.463,
+DFA=0.664, spread1=-5.724, spread2=0.191,
+D2=2.555, PPE=0.149.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathway(s) to run: diabetes, breast_cancer, or heart. For patient age 70, sex=1? Possibly code: sex=1 male? cp=0? chest pain? etc.
+
+We want to output JSON only. We need to decide primary route. Provide confidence based on features.
+
+We have features for diabetes from Pima dataset: Pregnancies, Glucose, Blood Pressure, Skin Thickness, Insulin, BMI, Diabetes Pedigree Function. But Insulin=0, indicates missing? Some datasets maybe treat. Glucose 83, normal. BMI 29.3, overweight, predisposition? Diabetes pedigree 0.317 moderate. Not high. Likely diabetes risk moderate but not high. Probability maybe 0.35.
+
+Heart disease: Use typical UCI heart dataset features: cp (chest pain type) 0 indicates typical angina maybe? Trestbps 145 high; Chol 174 borderline high; fbs 0; rest ecg 1 (ST abnormality); thalach 125 (low); exang 1, so exercise induced angina yes; oldpeak 2.6 (anterior MI sign). slope 0; ca 0. So high risk for heart disease. So confidence high 0.72.
+
+Breast cancer: Data from breast cancer dataset: mean radius, texture, perimeter, area, smoothness. We need to see if features indicate malignant? For malignant, radius ~20.6 moderate, texture 29.33 maybe high? Area 1265; smoothness 0.118 slightly high? Typically malignant tumors have higher radius, roughness. Maybe borderline. Confidence low 0.05.
+
+Should we include "parkinson"? No. They just said "breast_cancer" not parkinson.
+
+Thus output: routes: include all three that may need tests. Primary: heart. Confidence percentages.
+
+Also include notes: mention risk factors.
+
+Ok produce JSON.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["diabetes", "breast_cancer", "heart"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.36,
+    "heart": 0.72,
+    "breast_cancer": 0.08
+  },
+  "notes": "Heart‑related symptoms (exercise‑induced angina, high resting BP, ST‑abnormality, high oldpeak) make cardiac evaluation the priority. Diabetes risk is moderate: glucose normal but BMI+pedigree suggest possible future risk; Breast cancer features are borderline, but overall risk appears low."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'diabetes', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.36, 'heart': 0.72, 'breast_cancer': 0.08}, 'notes': 'Heart‑related symptoms (exercise‑induced angina, high resting BP, ST‑abnormality, high oldpeak) make cardiac evaluation the priority. Diabetes risk is moderate: glucose normal but BMI+pedigree suggest possible future risk; Breast cancer features are borderline, but overall risk appears low.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 9200. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=45.0, sex=1.0, cp=0.0, trestbps=104.0, chol=208.0,
+fbs=0.0, rest ecg=0.0, thalach=148.0, exang=1.0, oldpeak=3.0,
+slope=1.0, ca=0.0,
+Pregnancies=4.0, Glucose=125.0, Blood Pressure=80.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=32.3, Diabetes Pedigree Function=0.536.
+Breast features: mean radius=13.560, mean texture=13.900, mean perimeter=88.590, mean area=561.300, mean smoothness=0.105.
+Movement features: 
+MDVP:Fo=242.852, MDVP:Fhi=255.034, MDVP:Flo=227.911,
+MDVP:Jitter=0.002, MDVP:Jitter=0.002,
+MDVP:RAP=0.001, MDVP:PPQ=0.001, Jitter:DDP=0.004,
+MDVP:Shimmer=0.015, MDVP:Shimmer=0.015,
+Shimmer:APQ3=0.008, Shimmer:APQ5=0.009,
+MDVP:APQ=0.010, Shimmer:DDA=0.025,
+NHR=0.005, HNR=25.032, RPDE=0.431,
+DFA=0.639, spread1=-6.996, spread2=0.102,
+D2=2.366, PPE=0.103.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathways: diabetes, breast_cancer, heart. We have features: age 45, sex 1 (likely female? 1.0 maybe male? In UCI heart dataset sex: 1 male, 0 female. So 1 male. But there are pregnancy data, breast carcinoma features etc. But we probably need to judge if risk of each condition.
+
+Calculate risk. For diabetes: age 45, glucose 125 (fasting?), BMI 32.3 (obese), diabetes pedigree function 0.536. FBS 0.0? Fbs=0? Actually from heart dataset fbs indicates fasting blood sugar >= 120 mg/dl. Here 0.0. However we also have glucose 125. That might indicate risk.
+
+Diabetes risk high due to BMI >30, glucose 125, age 45, female? but sex male. Diabetes risk maybe 0.7.
+
+Heart: chest pain type? cp=0? In dataset 0: typical angina? Actually in UCI, cp: typical angina 0, atypical 1, non-anginal 2, asymptomatic 3. cp=0 indicates typical angina. Trestbps=104 (low). Chol 208 (moderate). fbs=0. So not high. Exang=1, oldpeak 3.0 high ST depression. thalach 148. Slope=1. So likely heart disease risk moderate-high. Maybe 0.6.
+
+Breast cancer: mean radius 13.56, texture 13.90, perimeter 88.59, area 561.3, smoothness 0.105. For malignant vs benign: malignant mean radius around 15-20 and high texture etc. This values low (probably benign). Breast cancer risk low maybe 0.1.
+
+We output routes: decision recommended. We should pick all three that have significant risk? The instructions: decide which diagnostic pathway(s) to run. So we might run multiple.
+
+Let's produce routes: ["diabetes", "heart"] maybe plus "breast_cancer"? But risk low. Maybe include all but indicate low confidence for breast_cancer.
+
+Confidence: estimate probability of disease positive. Provide numbers: diabetes 0.65, heart 0.55, breast_cancer 0.08. Provide other categories maybe parkinson? no. But we must output the keys for each of the three only? In example includes parkinson. But we can include all four. We'll add parkinson dummy 0? maybe irrelevant. We can include 0.1.
+
+Notes: summary.
+
+Ok.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.67,
+    "heart": 0.56,
+    "breast_cancer": 0.08,
+    "parkinson": 0.02
+  },
+  "notes": "The patient shows classic indicators of elevated diabetes risk: age 45, BMI 32.3, fasting glucose 125 and high pedigree function. Heart disease risk is moderate‑high due to typical angina chest pain (cp=0), significant exercise‑induced ST depression (oldpeak=3.0), and the presence of exertional angina (exang=1). Breast cancer likelihood is low based on benign‑looking imaging metrics (mean radius, texture, etc.). Parkinson’s risk is negligible. Thus, diabetes and cardiovascular pathways should be prioritized, with breast cancer screening kept low priority."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.67, 'heart': 0.56, 'breast_cancer': 0.08, 'parkinson': 0.02}, 'notes': 'The patient shows classic indicators of elevated diabetes risk: age 45, BMI 32.3, fasting glucose 125 and high pedigree function. Heart disease risk is moderate‑high due to typical angina chest pain (cp=0), significant exercise‑induced ST depression (oldpeak=3.0), and the presence of exertional angina (exang=1). Breast cancer likelihood is low based on benign‑looking imaging metrics (mean radius, texture, etc.). Parkinson’s risk is negligible. Thus, diabetes and cardiovascular pathways should be prioritized, with breast cancer screening kept low priority.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1713. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=63.0, sex=0.0, cp=1.0, trestbps=140.0, chol=195.0,
+fbs=0.0, rest ecg=1.0, thalach=179.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=2.0,
+Pregnancies=0.0, Glucose=93.0, Blood Pressure=60.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=35.3, Diabetes Pedigree Function=0.263.
+Breast features: mean radius=12.000, mean texture=15.650, mean perimeter=76.950, mean area=443.300, mean smoothness=0.097.
+Movement features: 
+MDVP:Fo=117.870, MDVP:Fhi=127.349, MDVP:Flo=95.654,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.004, MDVP:PPQ=0.003, Jitter:DDP=0.011,
+MDVP:Shimmer=0.031, MDVP:Shimmer=0.031,
+Shimmer:APQ3=0.017, Shimmer:APQ5=0.018,
+MDVP:APQ=0.024, Shimmer:DDA=0.050,
+NHR=0.026, HNR=22.431, RPDE=0.628,
+DFA=0.652, spread1=-3.584, spread2=0.208,
+D2=2.440, PPE=0.206.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We have patient features for diabetes, heart (angina?), breast cancer. Only these three pathways. We need to decide which diagnostic pathways to run. Patient features: age 63, sex 0 (assuming male? Usually 1 male, 0 female or vice versa; sex=0.0 could be female? Actually in the Heart dataset: sex (0 = female, 1 = male). So sex=0 => female. Age 63. CP=1.0 chest pain type. Trestbps 140. Chol 195. fbs 0.0. RestECG=1.0. Thalach 179. Exang 0.0. Oldpeak 0.0. Slope 2.0. Ca 2.0.
+
+Blood pressure (another field) 60.0? Actually maybe random. Also BMI 35.3. Glucose 93.0.
+
+Breast cancer features given: mean radius 12.0, mean texture 15.65, mean perimeter 76.95, mean area 443.3, mean smoothness 0.097.
+
+Movement features: voice features? Not used in these pathways.
+
+We need to output JSON: routes array with which diagnostics to undertake. primary: the most likely condition. Confidence: list of probabilities? For each of the 3 possible pathways plus maybe parkinson (but we don't need that? The example listed four possibilities but we only consider 3).
+
+We should consider risk factors: Diabetes: BMI high 35.3, but glucose 93 normal, fbs 0, BP 60? Actually low? Might be error. Diabetes risk moderate.
+
+Heart disease: age > 45, male female but female. CP type 1 (typical angina). Trestbps 140, cholesterol 195 moderate, fbs 0, Thalach 179 high, exang 0. Oldpeak 0, slope 2.0 (upsloping). Ca=2.0 (positive for major vessels). That suggests some chance of heart disease. The resting ECG abnormal, CP type typical suggests possible heart disease. Age 63.
+
+Breast cancer: mean radius 12 - might be suspicious? For malignant lumps, mean radius > around 12? Actually typical malignant tumors have larger radius maybe > 20? I'm not sure. Mean radius 12 is small, mean texture 15.65 also small. Smoothness 0.097 low. This might be benign/low risk. Typically malignant features have bigger radius > ~30. So probably benign.
+
+Thus we would focus on diabetes and heart. But need to determine if diabetes test needed? 93 mg/dl glucose is normal, fbs 0. However BMI high, but no other diabetes signs. So maybe low risk. But maybe recommended.
+
+But we are triage assistant, so probably decide to run heart diagnostic, maybe also diabetes. Breast cancer maybe not. So routes: ["heart", "diabetes"] possibly "breast_cancer" if high risk?
+
+What's the thresholds? Breast cancer dataset: mean radius at 12 is quite low, typical malignant at > 20 maybe. So low risk. So we may not need breast cancer screening. But still, at age 63 with unknown history maybe screening recommended. But triage would consider features.
+
+Thus I'd set routes: ["heart", "diabetes"] or maybe only heart? But instructions: decide which diagnostic pathway(s) to run. So choose possibly both? Use confidence values: heart 0.72, diabetes 0.35, breast 0.05.
+
+But the example includes confidence for parkinson even though not considered. They include all possible? They included 4. We have 3. So fill with those.
+
+Confidence values should sum maybe 1? In example: 0.35+0.72+0.05+0.20 = 1.32. They did not sum to 1. So we can provide arbitrary 0-1 values indicative.
+
+Thus we can set: heart: 0.70, diabetes: 0.25, breast_cancer: 0.05. Primary: heart.
+
+Notes: brief rationale: older female with typical chest pain, elevated blood pressure, mild ECG abnormality, etc.
+
+Return JSON.
+
+Let's produce JSON.
+
+<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["heart", "diabetes"],
+  "primary": "heart",
+  "confidence": {
+    "heart": 0.73,
+    "diabetes": 0.24,
+    "breast_cancer": 0.03
+  },
+  "notes": "Patient is 63 with typical angina symptoms (CP=1), elevated resting BP (140) and abnormal resting ECG (1). The presence of 2 coronary vessels (ca=2) elevates heart disease risk. Glucose is normal (93 mg/dL) and fbs is negative, so diabetes risk is lower but BMI 35.3 justifies screening. Breast‑cancer indicators (mean radius 12, mean texture 15.6, smoothness 0.097) are within benign ranges; thus routine screening, not urgent diagnosis, is advised."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'heart': 0.73, 'diabetes': 0.24, 'breast_cancer': 0.03}, 'notes': 'Patient is 63 with typical angina symptoms (CP=1), elevated resting BP (140) and abnormal resting ECG (1). The presence of 2 coronary vessels (ca=2) elevates heart disease risk. Glucose is normal (93 mg/dL) and fbs is negative, so diabetes risk is lower but BMI 35.3 justifies screening. Breast‑cancer indicators (mean radius 12, mean texture 15.6, smoothness 0.097) are within benign ranges; thus routine screening, not urgent diagnosis, is advised.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 9980. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=45.0, sex=0.0, cp=1.0, trestbps=130.0, chol=234.0,
+fbs=0.0, rest ecg=0.0, thalach=175.0, exang=0.0, oldpeak=0.6,
+slope=1.0, ca=0.0,
+Pregnancies=3.0, Glucose=111.0, Blood Pressure=56.0, Skin Thickness=39.0,
+Insulin=0.0, BMI=30.1, Diabetes Pedigree Function=0.557.
+Breast features: mean radius=20.570, mean texture=17.770, mean perimeter=132.900, mean area=1326.000, mean smoothness=0.085.
+Movement features: 
+MDVP:Fo=183.520, MDVP:Fhi=216.814, MDVP:Flo=161.340,
+MDVP:Jitter=0.015, MDVP:Jitter=0.015,
+MDVP:RAP=0.008, MDVP:PPQ=0.008, Jitter:DDP=0.025,
+MDVP:Shimmer=0.060, MDVP:Shimmer=0.060,
+Shimmer:APQ3=0.029, Shimmer:APQ5=0.041,
+MDVP:APQ=0.064, Shimmer:DDA=0.086,
+NHR=0.061, HNR=14.367, RPDE=0.478,
+DFA=0.769, spread1=-4.277, spread2=0.356,
+D2=3.142, PPE=0.336.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathway or pathways to run: diabetes, breast_cancer, heart. Provide primary path, confidence scores for each. Provide short rationale in notes.
+
+We must analyze provided features. Let's see.
+
+Patient 9980. Age 45, sex 0? Sex might be male=0 or female=1 maybe, but here sex=0.0 maybe male? But also pregnancies=3 indicates female. So sex label may be misinterpreted; maybe 0.0 indicates female. Let's assume 0 indicates female. The features include "Pregnancies=3", so female.
+
+For diabetes: features: Age 45, Glucose 111 (fasting?), BMI 30.1 (obese), Skin Thickness 39 (high?), Insulin 0, Diabetes Pedigree Function 0.557 (moderate). FBS0, maybe Fasting glucose 111 borderline high. But no high risk? But pregnant? pregnancies 3. Diabetes risk moderate, but still.
+
+Could suspect diabetes. Confidence moderate.
+
+Breast Cancer: Breast features show mean radius 20.57, mean texture 17.77, mean perimeter 132.9, mean area 1326, mean smoothness 0.085. These values? For malignant vs benign values: malignant tends to larger radius, area, etc. But I'm not sure. For benign average radius around 10-12? Malignant higher maybe 20+. This is 20.57; borderline maybe high. Smoothness 0.085 moderate. Might consider risk? We have no other breast imaging. But the features might indicate malignant because radius bigger. However, also other features: We didn't see mean symmetry, etc. Hard.
+
+Heart: features from Framingham risk scoring: cp (chest pain type) 1.0 maybe typical angina. Treated blood pressure 130, cholesterol 234, fbs=0, rest ecg=0, thalach 175, exang=0, oldpeak 0.6, slope 1, ca=0. Age 45. Sex female. Risk factors moderate: TChol 234 > 200, SBP 130, BMI 30, no smoking mention. FBS normal. Age 45. So mild risk? According to Framingham, risk maybe moderate. But 0.6 oldpeak under 2, no rest ECG abnormal. So maybe low to moderate.
+
+Given triage priorities: maybe pick diabetes and heart. Breast cancer maybe not necessary if risk low? But radius 20.57 maybe indicates risk.
+
+We need to output probabilities for each. Likely heart 0.6, diabetes 0.3, breast_cancer 0.1. Primary heart.
+
+Let's produce.
+
+But we should use confidence scores sum to 1? Not required but helpful.
+
+Add notes: Based on risk factor profile and features, heart disease moderate risk, diabetes moderate, breast cancer lower risk.
+
+Make JSON.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["diabetes", "heart", "breast_cancer"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.32,
+    "heart": 0.59,
+    "breast_cancer": 0.09
+  },
+  "notes": "The patient presents with moderate classic risk factors for coronary artery disease – age 45, female, LDL‑like cholesterol 234 mg/dL, BMI 30.1, and a pre‑diabetic glucose of 111 mg/dL. Heart score dominates. Diabetes risk is notable due to obesity and borderline glucose; breast‑cancer risk appears low‑to‑moderate based on size/texture metrics, so it is included as secondary."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes', 'breast_cancer'], 'primary': 'heart', 'confidence': {'diabetes': 0.32, 'heart': 0.59, 'breast_cancer': 0.09}, 'notes': 'The patient presents with moderate classic risk factors for coronary artery disease – age 45, female, LDL‑like cholesterol 234\u202fmg/dL, BMI 30.1, and a pre‑diabetic glucose of 111\u202fmg/dL. Heart score dominates. Diabetes risk is notable due to obesity and borderline glucose; breast‑cancer risk appears low‑to‑moderate based on size/texture metrics, so it is included as secondary.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2745. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=53.0, sex=1.0, cp=2.0, trestbps=130.0, chol=246.0,
+fbs=1.0, rest ecg=0.0, thalach=173.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=3.0,
+Pregnancies=1.0, Glucose=146.0, Blood Pressure=56.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=29.7, Diabetes Pedigree Function=0.564.
+Breast features: mean radius=14.960, mean texture=19.100, mean perimeter=97.030, mean area=687.300, mean smoothness=0.090.
+Movement features: 
+MDVP:Fo=139.224, MDVP:Fhi=586.567, MDVP:Flo=66.157,
+MDVP:Jitter=0.030, MDVP:Jitter=0.030,
+MDVP:RAP=0.019, MDVP:PPQ=0.016, Jitter:DDP=0.056,
+MDVP:Shimmer=0.094, MDVP:Shimmer=0.094,
+Shimmer:APQ3=0.056, Shimmer:APQ5=0.050,
+MDVP:APQ=0.060, Shimmer:DDA=0.167,
+NHR=0.259, HNR=10.489, RPDE=0.596,
+DFA=0.641, spread1=-3.269, spread2=0.271,
+D2=2.691, PPE=0.445.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathways to run. Based on features: Age 53, male (sex=1.0 maybe male? Typically 1.0 male, 0.0 female). Symptoms: chest pain, high blood pressure. For heart disease, presence of typical risk factors: age >45, male, cp=2 (typical angina?), trestbps 130, chol 246, fbs 1 (fasting blood sugar >120), restECG normal, thalach 173, exang 0, oldpeak 0, slope 2, ca=3 (significant coronary artery disease; 3 vessels). This strongly suggests heart disease.
+
+Diabetes: Glucose 146 (above normal), BMI 29.7, Diabetes Pedigree 0.564. But fbs 1 indicates >120 mg/dL. Age 53. Many risk factors. So diabetes likely high.
+
+Breast Cancer: patient is male? Breast features: but male breast cancer extremely rare. Also features like mean radius=14.96 (typical malignant? small maybe?). Breast cancer test probably not relevant. So likely not. But maybe we still consider.
+
+Given features, heart and diabetes are high. Confidence values: assign heart high ~0.80, diabetes ~0.65, breast_cancer ~0.05. Provide notes.
+
+Also there's "movement features" maybe voice? not needed.
+
+Hence output JSON. Ensure keys exactly as required. Provide "routes" list of selected pathways: "heart", "diabetes" maybe also "breast_cancer"? Probably not.
+
+Let's produce JSON:
+
+{
+  "routes": ["heart", "diabetes"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.67, "heart": 0.82, "breast_cancer": 0.04, "parkinson": 0.12},
+  "notes": "Strong evidence of coronary artery disease (age, sex, chest pain, high BP, cholesterol, 3-vessel disease). Elevated glucose/BMI supports diabetes screen."
+}
+
+Note: maybe include parkinson? Not needed but included only if path? It's fine. But "confidence" structure may include irrelevant. The example had parkinson though. But we only needed those 4 categories: diabetes, breast_cancer, heart, maybe others. Provide only provided categories? The confidence must have entries for all categories maybe. I think include all four.
+
+Make sure output JSON only.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["heart", "diabetes"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.67,
+    "heart": 0.82,
+    "breast_cancer": 0.04,
+    "parkinson": 0.12
+  },
+  "notes": "Patient presents with classic indicators of coronary artery disease (male, 53, chest pain type 2, elevated BP and cholesterol, fbs=1, 3-vessel disease). Elevated glucose, BMI and pedigree function warrant diabetes screening. Male breast cancer risk is negligible, so breast cancer pathway is deprioritized."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.67, 'heart': 0.82, 'breast_cancer': 0.04, 'parkinson': 0.12}, 'notes': 'Patient presents with classic indicators of coronary artery disease (male, 53, chest pain type 2, elevated BP and cholesterol, fbs=1, 3-vessel disease). Elevated glucose, BMI and pedigree function warrant diabetes screening. Male breast cancer risk is negligible, so breast cancer pathway is deprioritized.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1460. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=70.0, sex=1.0, cp=1.0, trestbps=156.0, chol=245.0,
+fbs=0.0, rest ecg=0.0, thalach=143.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=2.0, Glucose=82.0, Blood Pressure=52.0, Skin Thickness=22.0,
+Insulin=115.0, BMI=28.5, Diabetes Pedigree Function=1.699.
+Breast features: mean radius=12.580, mean texture=18.400, mean perimeter=79.830, mean area=489.000, mean smoothness=0.084.
+Movement features: 
+MDVP:Fo=117.870, MDVP:Fhi=127.349, MDVP:Flo=95.654,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.004, MDVP:PPQ=0.003, Jitter:DDP=0.011,
+MDVP:Shimmer=0.031, MDVP:Shimmer=0.031,
+Shimmer:APQ3=0.017, Shimmer:APQ5=0.018,
+MDVP:APQ=0.024, Shimmer:DDA=0.050,
+NHR=0.026, HNR=22.431, RPDE=0.628,
+DFA=0.652, spread1=-3.584, spread2=0.208,
+D2=2.440, PPE=0.206.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to assign routes, primary, confidence. Need to evaluate risk based on features: age 70 male? sex 1 indicates M? For heart disease features: cp=1 chest pain typical angina? cp 1 maybe typical angina; trestbps high 156; chol 245; thalach 143; exang 0; oldpeak 0; slope 2; #ca 0; these moderate risk for coronary heart disease. For diabetes: features: Pregnancies=2 but sex male. Glucose=82 (normal), BMI 28.5, BP 52? Wait 52 is weird blood pressure? Possibly 52 mmHg systolic? No. Diabetes Pedigree 1.699 high. Insulin 115. But fasting glucose 82 normal. risk moderate due to high BMI, high pedigree function, high insulin. For breast cancer: mean radius 12.58, texture 18.4, perimeter 79.83, area 489, smoothness 0.084. These are malignant? Actually lower radius maybe benign. We can say low probability. So choose heart and diabetes. Primary likely heart due to age and risk factors.
+
+Confidence: heart high 0.75; diabetes moderate 0.4; breast cancer low 0.05; others maybe parkinson not relevant - not included but keep? Provide as example include parkinson maybe 0.05. Provide notes.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["heart", "diabetes"],
+  "primary": "heart",
+  "confidence": {
+    "heart": 0.78,
+    "diabetes": 0.41,
+    "breast_cancer": 0.06,
+    "parkinson": 0.05
+  },
+  "notes": "Patient is 70‑year‑old male with elevated resting blood pressure, high total cholesterol, and typical anginal chest pain (cp=1). These findings place him at moderate‑high risk for coronary artery disease, warranting a cardiac diagnostic pathway. Diabetes risk is also elevated by high BMI, insulin level, and a high diabetes pedigree function, so a diabetes screening panel is advised. Breast cancer risk appears low given the benign‑looking BI-RADS‑like radiomic parameters. Parkinson’s is not indicated by the available data."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'heart': 0.78, 'diabetes': 0.41, 'breast_cancer': 0.06, 'parkinson': 0.05}, 'notes': 'Patient is 70‑year‑old male with elevated resting blood pressure, high total cholesterol, and typical anginal chest pain (cp=1). These findings place him at moderate‑high risk for coronary artery disease, warranting a cardiac diagnostic pathway. Diabetes risk is also elevated by high BMI, insulin level, and a high diabetes pedigree function, so a diabetes screening panel is advised. Breast cancer risk appears low given the benign‑looking BI-RADS‑like radiomic parameters. Parkinson’s is not indicated by the available data.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2385. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=58.0, sex=1.0, cp=2.0, trestbps=112.0, chol=230.0,
+fbs=0.0, rest ecg=0.0, thalach=165.0, exang=0.0, oldpeak=2.5,
+slope=1.0, ca=1.0,
+Pregnancies=2.0, Glucose=92.0, Blood Pressure=52.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=30.1, Diabetes Pedigree Function=0.141.
+Breast features: mean radius=14.610, mean texture=15.690, mean perimeter=92.680, mean area=664.900, mean smoothness=0.076.
+Movement features: 
+MDVP:Fo=136.926, MDVP:Fhi=159.866, MDVP:Flo=131.276,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.001, MDVP:PPQ=0.002, Jitter:DDP=0.004,
+MDVP:Shimmer=0.013, MDVP:Shimmer=0.013,
+Shimmer:APQ3=0.007, Shimmer:APQ5=0.007,
+MDVP:APQ=0.011, Shimmer:DDA=0.020,
+NHR=0.006, HNR=25.703, RPDE=0.461,
+DFA=0.647, spread1=-6.547, spread2=0.153,
+D2=2.041, PPE=0.139.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We are triage assistant deciding which diagnostic pathway(s) to run: diabetes, breast_cancer or heart. We need output JSON with routes list, primary as the most likely, confidence for each. The patient features include many, combining heart dataset, diabetes dataset, breast cancer dataset, speech features though irrelevant.
+
+We compute estimated risk.
+
+Heart: age 58, chest pain type cp=2 (typical angina?), Trestbps 112 normal, chol 230 high, thalach 165 moderately high, oldpeak 2.5 indicates some ischemia. slope 1 (upsloping), ca 1 (calcification). Exang 0 (no). These features indicate moderate risk. Use classic logistic formula? We'll approximate: older age, high cholesterol, oldpeak >2 indicates risk. Probably heart suspect.
+
+Breast cancer: features: mean radius 14.61, mean texture 15.69, perimeter 92.68, area 664.9, smoothness 0.076. For breast cancer dataset typical malignant values generally higher radius, area, lower smoothness? Actually malignant mean radius often >18, mean smoothness >0.1? Here radius low, texture low, perimeter low, area moderate, smoothness low (<0.1). Those are suggestive of benign. So risk low.
+
+Diabetes: Age 58, BMI 30.1 high, Blood Pressure 52? 52 seems low? Actually BP 52 seems low; but maybe it's from dataset. Glucose 92 borderline normal, insulin 0 (not recorded), Diabetes pedigree function 0.141 low. BMI high >30, but glucose normal. Risk moderate? Could be prediabetes but not high. So diabetes risk moderate low.
+
+Thus routes: heart likely. Primary: heart. Confidence: heart 0.75, diabetes 0.20, breast_cancer 0.05. Provide notes.
+
+We include routes array sorted by confidence maybe descending.
+
+Output JSON.
+
+Let's produce.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["heart", "diabetes", "breast_cancer"],
+  "primary": "heart",
+  "confidence": {
+    "heart": 0.78,
+    "diabetes": 0.18,
+    "breast_cancer": 0.04
+  },
+  "notes": "The patient has classic markers of coronary artery disease: age 58, elevated cholesterol, exercise‑induced ST‑segment depression (oldpeak 2.5), and a non‑zero number of coronary calcium segments (ca=1). Breast‑cancer features are consistent with a benign tumor profile (low radius, area, and smoothness). Diabetes risk is modest: BMI is high but fasting glucose is normal and the diabetes pedigree score is low."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes', 'breast_cancer'], 'primary': 'heart', 'confidence': {'heart': 0.78, 'diabetes': 0.18, 'breast_cancer': 0.04}, 'notes': 'The patient has classic markers of coronary artery disease: age 58, elevated cholesterol, exercise‑induced ST‑segment depression (oldpeak 2.5), and a non‑zero number of coronary calcium segments (ca=1). Breast‑cancer features are consistent with a benign tumor profile (low radius, area, and smoothness). Diabetes risk is modest: BMI is high but fasting glucose is normal and the diabetes pedigree score is low.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1745. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=44.0, sex=1.0, cp=0.0, trestbps=120.0, chol=169.0,
+fbs=0.0, rest ecg=1.0, thalach=144.0, exang=1.0, oldpeak=2.8,
+slope=0.0, ca=0.0,
+Pregnancies=2.0, Glucose=108.0, Blood Pressure=52.0, Skin Thickness=26.0,
+Insulin=63.0, BMI=32.5, Diabetes Pedigree Function=0.318.
+Breast features: mean radius=13.380, mean texture=30.720, mean perimeter=86.340, mean area=557.200, mean smoothness=0.092.
+Movement features: 
+MDVP:Fo=117.963, MDVP:Fhi=134.209, MDVP:Flo=100.757,
+MDVP:Jitter=0.018, MDVP:Jitter=0.018,
+MDVP:RAP=0.011, MDVP:PPQ=0.007, Jitter:DDP=0.034,
+MDVP:Shimmer=0.049, MDVP:Shimmer=0.049,
+Shimmer:APQ3=0.026, Shimmer:APQ5=0.022,
+MDVP:APQ=0.029, Shimmer:DDA=0.078,
+NHR=0.107, HNR=19.075, RPDE=0.631,
+DFA=0.647, spread1=-3.444, spread2=0.303,
+D2=2.965, PPE=0.261.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathways to run: diabetes, breast_cancer, heart. We have parameters relevant to each. Use risk thresholds? We don't have model. Do approximate inference.
+
+Age 44, female (sex=1). For heart disease features: cp 0 (likely no chest pain), trestbps 120 normal, chol 169 borderline high, fbs 0 (< 120, okay), rest ecg 1 (maybe abnormal), thalach 144 (not extremely high), exang 1 (exercise induced angina). oldpeak 2.8 high. slope 0.0 (flat?). ca 0 (no major vessels). This patient has some concerning features: exang, oldpeak. 44 y might be earlier than typical heart disease age but risk factors: Chol 169 high, resting BP 120, BP? Actually 120. BMI 32.5 overweight. Age 44.
+
+Diabetes: Glucose 108 (fasting? borderline normal? 100-125 mild impaired). Insulin 63, BMI 32.5, Pregnancies 2, PD-F 0.318, Skin thickness 26, etc. Risk moderate. Not high. Diabetes screening recommended for overweight adults >45 with risk. She at 44. Should run diabetes test.
+
+Breast cancer: features: mean radius 13.38, texture 30.72, perimeter 86.34, area 557.20, smoothness 0.092. Hard to interpret. In dataset, malignant cells have higher radius, area, etc. These values moderate. For malignant? Radii often >15-20. So maybe normal. So low risk.
+
+Heart: features moderate. But exang + oldpeak 2.8 indicates ischemia. Though age 44 low. Also cp=0 maybe none. But we need choose which to run. We'll include heart.
+
+So routes: "diabetes", "heart". Not breast.
+
+Confidence: heart higher than diabetes perhaps? Age 44 but features exang + oldpeak. Could assign 0.60 heart, 0.3 diabetes, rest 0.1 breast. Provide rational.
+
+Output JSON.
+
+Let's craft.<|end|><|start|>assistant<|channel|>final<|message|>```json
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.28,
+    "heart": 0.65,
+    "breast_cancer": 0.07
+  },
+  "notes": "The patient shows moderate cardiovascular risk (exang, oldpeak 2.8, abnormal resting ECG) warranting a heart disease assessment. Fasting glucose of 108 mg/dL, BMI 32.5, and insulin value suggest impaired glucose regulation, so a diabetes work‑up is also indicated. Breast cancer risk markers are within normal ranges, so a breast assessment is not prioritized."
+}
+```
+<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.28, 'heart': 0.65, 'breast_cancer': 0.07}, 'notes': 'The patient shows moderate cardiovascular risk (exang, oldpeak 2.8, abnormal resting ECG) warranting a heart disease assessment. Fasting glucose of 108 mg/dL, BMI 32.5, and insulin value suggest impaired glucose regulation, so a diabetes work‑up is also indicated. Breast cancer risk markers are within normal ranges, so a breast assessment is not prioritized.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3891. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=54.0, sex=1.0, cp=2.0, trestbps=125.0, chol=273.0,
+fbs=0.0, rest ecg=0.0, thalach=152.0, exang=0.0, oldpeak=0.5,
+slope=0.0, ca=1.0,
+Pregnancies=1.0, Glucose=108.0, Blood Pressure=88.0, Skin Thickness=19.0,
+Insulin=0.0, BMI=27.1, Diabetes Pedigree Function=0.4.
+Breast features: mean radius=9.295, mean texture=13.900, mean perimeter=59.960, mean area=257.800, mean smoothness=0.137.
+Movement features: 
+MDVP:Fo=116.286, MDVP:Fhi=177.291, MDVP:Flo=96.983,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.001, MDVP:PPQ=0.002, Jitter:DDP=0.004,
+MDVP:Shimmer=0.016, MDVP:Shimmer=0.016,
+Shimmer:APQ3=0.007, Shimmer:APQ5=0.010,
+MDVP:APQ=0.017, Shimmer:DDA=0.020,
+NHR=0.007, HNR=24.199, RPDE=0.599,
+DFA=0.654, spread1=-5.593, spread2=0.134,
+D2=2.059, PPE=0.214.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide diagnostic pathways: diabetes, breast_cancer, heart. Use patient features. Age 54 male? sex=1.0 likely male. cp=2 chest pain? For heart disease. We can approximate risk. chest pain type 2 (atypical angina). trestbps 125, chol 273, fbs=0 (fasting blood sugar < 120). thalach 152, exang=0, oldpeak 0.5 (slight ST depression). slope 0, ca 1. Age 54, male with one calcium? For heart, typical risk factors: age, sex, cp, trestbps, chol, oldpeak > 0, slope, ca. Probably moderate risk. For diabetes: Glucose 108 mild high, BMI 27 overweight, insulin 0, Diabetes Pedigree Function 0.4 low. Likely no diabetes. Breast cancer risk: only 49? 54 female? sex=1 male. So breast cancer unlikely. We could consider if features of breast? but male breast cancer rare. So only heart disease likely. Provide routes ["heart"], primary "heart", confidence high ~0.8. Provide notes. Output JSON.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["heart"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.12,
+    "heart": 0.82,
+    "breast_cancer": 0.02
+  },
+  "notes": "Patient is a 54‑year‑old male with chest pain type II, borderline blood pressure, elevated LDL cholesterol, and a modest ST‑segment depression (oldpeak 0.5) with a single coronary artery calcium.  These findings meet typical diagnostic criteria for suspected coronary artery disease.  Glucose and BMI are in the prediabetic range but lack other classic risk factors, so diabetes risk is low.  Male sex and age reduce breast cancer likelihood."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.12, 'heart': 0.82, 'breast_cancer': 0.02}, 'notes': 'Patient is a 54‑year‑old male with chest pain type II, borderline blood pressure, elevated LDL cholesterol, and a modest ST‑segment depression (oldpeak\xa00.5) with a single coronary artery calcium.  These findings meet typical diagnostic criteria for suspected coronary artery disease.  Glucose and BMI are in the prediabetic range but lack other classic risk factors, so diabetes risk is low.  Male sex and age reduce breast cancer likelihood.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1969. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=45.0, sex=1.0, cp=3.0, trestbps=110.0, chol=264.0,
+fbs=0.0, rest ecg=1.0, thalach=132.0, exang=0.0, oldpeak=1.2,
+slope=1.0, ca=0.0,
+Pregnancies=6.0, Glucose=154.0, Blood Pressure=78.0, Skin Thickness=41.0,
+Insulin=140.0, BMI=46.1, Diabetes Pedigree Function=0.571.
+Breast features: mean radius=11.290, mean texture=13.040, mean perimeter=72.230, mean area=388.000, mean smoothness=0.098.
+Movement features: 
+MDVP:Fo=96.106, MDVP:Fhi=108.664, MDVP:Flo=84.510,
+MDVP:Jitter=0.007, MDVP:Jitter=0.007,
+MDVP:RAP=0.004, MDVP:PPQ=0.004, Jitter:DDP=0.012,
+MDVP:Shimmer=0.040, MDVP:Shimmer=0.040,
+Shimmer:APQ3=0.023, Shimmer:APQ5=0.025,
+MDVP:APQ=0.029, Shimmer:DDA=0.068,
+NHR=0.018, HNR=19.055, RPDE=0.545,
+DFA=0.770, spread1=-4.442, spread2=0.155,
+D2=2.646, PPE=0.328.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart. Provide routes array listing ones to run. Determine primary with highest confidence. Provide confidences for each possible path. Compute based on features. Need reasoning: age 45 female. Diabetes risk: BMI 46.1, OGTT 154, glucose high, insulin 140, FBS 0, but Glucose given 154 probably fasting? Fasting blood sugar FBS=0 indicates not diabetic? But glucose 154 maybe random; high. BMI high. So high probability for diabetes. Heart: chest pain type 3, rest BP 110, chol 264, cholesterol high, CP type 3 suggests typical angina? cp3 maybe atypical chest pain. But age 45 relatively low risk but risk factors: high BMI, cholesterol. So moderate heart risk. Breast cancer: breast features: mean radius 11.29, texture 13.04, perimeter 72.23, area 388, smoothness 0.098. These are all lower than malignant typical? I think malignant mean radius often >12. Breast cancer risk: age 45 female. Not too high. But features show possibly benign? So lower risk. So we route diabetes, heart. Primary: diabetes. Provide confidences: diabetes high maybe 0.85, heart moderate 0.60, breast 0.15. Ensure sum not requirement. Provide notes. Let's craft.<|end|><|start|>assistant<|channel|>final<|message|>```json
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "diabetes",
+  "confidence": {
+    "diabetes": 0.85,
+    "heart": 0.60,
+    "breast_cancer": 0.15,
+    "parkinson": 0.05
+  },
+  "notes": "BMI > 45, elevated random glucose (154 mg/dL) and insulin (140 μU/mL) strongly suggest impaired glucose tolerance/diabetes; hence diabetes screening is essential. Cardiovascular risk factors (high LDL, high-normal BP, chest pain type 3, elevated cholesterol) warrant heart evaluation. Breast morphometric features are within benign ranges (radius, texture, area low), so breast cancer screening has lower priority."
+}
+```<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'diabetes', 'confidence': {'diabetes': 0.85, 'heart': 0.6, 'breast_cancer': 0.15, 'parkinson': 0.05}, 'notes': 'BMI > 45, elevated random glucose (154 mg/dL) and insulin (140 μU/mL) strongly suggest impaired glucose tolerance/diabetes; hence diabetes screening is essential. Cardiovascular risk factors (high LDL, high-normal BP, chest pain type 3, elevated cholesterol) warrant heart evaluation. Breast morphometric features are within benign ranges (radius, texture, area low), so breast cancer screening has lower priority.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 5634. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=50.0, sex=1.0, cp=2.0, trestbps=140.0, chol=233.0,
+fbs=0.0, rest ecg=1.0, thalach=163.0, exang=0.0, oldpeak=0.6,
+slope=1.0, ca=1.0,
+Pregnancies=4.0, Glucose=137.0, Blood Pressure=84.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=31.2, Diabetes Pedigree Function=0.252.
+Breast features: mean radius=12.960, mean texture=18.290, mean perimeter=84.180, mean area=525.200, mean smoothness=0.074.
+Movement features: 
+MDVP:Fo=114.847, MDVP:Fhi=271.314, MDVP:Flo=104.680,
+MDVP:Jitter=0.009, MDVP:Jitter=0.009,
+MDVP:RAP=0.004, MDVP:PPQ=0.005, Jitter:DDP=0.011,
+MDVP:Shimmer=0.032, MDVP:Shimmer=0.032,
+Shimmer:APQ3=0.018, Shimmer:APQ5=0.020,
+MDVP:APQ=0.025, Shimmer:DDA=0.054,
+NHR=0.011, HNR=21.660, RPDE=0.548,
+DFA=0.817, spread1=-4.609, spread2=0.222,
+D2=1.832, PPE=0.316.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathways to run: diabetes, breast_cancer or heart.
+
+We have patient features: Age 50, Sex 1 (likely female? sex=1 maybe female). Cardiovascular risk factors: cp=2 (angina class?) chest pain type 2 typical angina? trestbps 140, chol 233, fbs 0, rest_ecg 1, thalach 163, exang 0, oldpeak 0.6, slope 1, ca 1. Also diabetes risk features: Pregnancies 4, Glucose 137, BP 84, skin thickness 0, insulin 0, BMI 31.2, diabetes pedigree 0.252. Pregnancy? pregnant? Not sure. Breast features: malignant vs benign - maybe benign. Breast features: mean radius 12.96, mean texture 18.29, mean perimeter 84.18, mean area 525.2, mean smoothness 0.074. Need to evaluate risk. Age 50 female with breast: typical risk. Need classification: we can approximate using known thresholds: In Wisconsin Diagnostic Breast Cancer dataset, mean radius < 13 maybe benign, but radius 12.96 borderline. For texture 18.29 (low is benign). Perimeter 84.18 (low). Area 525.2 (low). Smoothness 0.074 (low). So likely benign. So breast_cancer not required. But could run? Might flag low risk. Diabetes: Glucose 137 above 125? Fasting glucose above 126 suggests diabetes. Also BMI 31.2, but Pregnancies 4, insulin 0. So risk. So run diabetes pathway.
+
+Heart: chest pain type 2, high blood pressure 140, cholesterol 233, oldpeak 0.6, thalach 163, slope 1. Age 50. Likely need heart risk pathway. So run heart. Also perhaps high risk for coronary artery disease. So route: ["diabetes", "heart"]. primary: maybe heart. Confidence: need plausible numbers: heart 0.75, diabetes 0.6, breast_cancer 0.05, parkinson 0.1? parkinson unspecified maybe not relevant. Use given format: provide confidence for all four? They mention parkinson, but we didn't consider. Provide minimal.
+
+Notes: Provide rational.
+
+Let's output JSON.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.58,
+    "heart": 0.74,
+    "breast_cancer": 0.07,
+    "parkinson": 0.11
+  },
+  "notes": "Patient 50‑year‑old female with borderline elevated fasting glucose (137) and BMI of 31.2 flags moderate diabetes risk, warranting a diabetes diagnostic pathway. Cardiovascular indicators (typical angina, trestbps 140, chol 233, oldpeak 0.6, elevated thalach, and a coronary calcium score of 1) suggest a higher likelihood of coronary artery disease; thus the heart diagnostic pathway is the primary focus. Breast cancer features (mean radius 12.96, texture 18.29, smoothness 0.074) fall within benign ranges, so a breast_cancer screening is not prioritized. Parkinson’s pathway is not indicated by the presented data.}"
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'heart': 0.75, 'diabetes': 0.6, 'breast_cancer': 0.05, 'parkinson': 0.1}, 'notes': 'routes": ["diabetes", "heart"],\n  "primary": "heart",\n  "confidence": {\n    "diabetes": 0.58,\n    "heart": 0.74,\n    "breast_cancer": 0.07,\n    "parkinson": 0.11\n  },\n  "notes": "Patient 50‑year‑old female with borderline elevated fasting glucose (137) and BMI of 31.2 flags moderate diabetes risk, warranting a diabetes diagnostic pathway. Cardiovascular indicators (typical angina, trestbps 140, chol 233, oldpeak 0.6, elevated thalach, and a coronary calcium score of 1) suggest a higher likelihood of coronary artery disease; thus the heart diagnostic pathway is the primary focus. Breast cancer features (mean radius 12.96, texture 18.29, smoothness 0.074) fall within benign ranges, so a breast_cancer screening is not prioritized. Parkinson’s pathway is not indicated by the presented data.}'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2482. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=38.0, sex=1.0, cp=2.0, trestbps=138.0, chol=175.0,
+fbs=0.0, rest ecg=1.0, thalach=173.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=4.0,
+Pregnancies=4.0, Glucose=99.0, Blood Pressure=72.0, Skin Thickness=17.0,
+Insulin=0.0, BMI=25.6, Diabetes Pedigree Function=0.294.
+Breast features: mean radius=20.180, mean texture=23.970, mean perimeter=143.700, mean area=1245.000, mean smoothness=0.129.
+Movement features: 
+MDVP:Fo=110.707, MDVP:Fhi=122.611, MDVP:Flo=105.007,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.008,
+MDVP:Shimmer=0.022, MDVP:Shimmer=0.022,
+Shimmer:APQ3=0.013, Shimmer:APQ5=0.012,
+MDVP:APQ=0.017, Shimmer:DDA=0.039,
+NHR=0.005, HNR=25.197, RPDE=0.464,
+DFA=0.807, spread1=-5.478, spread2=0.315,
+D2=1.862, PPE=0.229.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathways to run: diabetes, breast_cancer, heart. Based on patient features. Age 38, female. Diabetes risk: BMI 25.6, glucose 99, insulin 0, blood pressure 72 (?), but in dataset maybe "Blood Pressure" refers to oral glucose tolerance test? Wait features: Pregnancies, Glucose, Blood Pressure, Skin Thickness, Insulin, BMI, Diabetes Pedigree Function. For diabetic risk: Glucose 99 (within normal 86-99). Blood Pressure 72 mmHg (filling?). Insulin 0 indicates missing. BMI 25.6 borderline overweight. Diabetes pedigree 0.294 low. So diabetic risk low.
+
+Heart: CP=2 (anginal). Trestbps 138 (elevated). Chol 175 (borderline). FBS 0 (normal). Rest ECG 1 (ST-T). Thalach 173 (normal). exang 0. oldpeak 0. Slope 2. Ca 4 (strongly positive). Age 38. So heart risk moderate? Ca=4 indicates 4-vessel disease. So heart risk moderate-high. Might run heart diagnostic.
+
+Breast cancer: breast features: mean radius 20.18, mean texture 23.97, area 1245, mean smoothness 0.129. Typical malignant values: radius >14, area >1000, etc. Smoothness 0.129 typical? Hard to say. 4 pregnancies (within average). There's no direct breast cancer marker.
+
+Breast cancer risk moderate? Usually age 38 female with some risk factors? no high. But we might still run breast_cancer.
+
+We should provide routes list maybe "heart" only. But we may also include "diabetes", "breast_cancer" if some small risk? Let's analyze.
+
+Compute approximate risk using typical logistic thresholds: Diabetes risk: fasting glucose 99 borderline; insulin 0; insulin indicates maybe missing data. BMI 25.6 borderline overweight. Diabetes pedigree 0.294 low. So risk near low to moderate.
+
+Heart: Ca=4 indicates high. Age 38 lower risk. But cp 2 indicates typical angina? Actually chest pain type 2 typical angina. Could be heart disease.
+
+Breast: mean radius 20.18 moderate, area 1245 moderate-large. Smoothness 0.129 (mild). I think malignant clusters have high radius >14. It's >20; but I'm not sure. So risk moderate.
+
+Given the triage, we should probably run heart and breast_cancer, maybe not diabetes. But if we want to catch micro-late diabetes, could run diabetes as well. But as triage I'd prioritize heart, breast. The output format includes lists for routes. Provide confidence scores. Let's estimate:
+
+heart: 0.75
+breast_cancer: 0.3
+diabetes: 0.15
+
+Only run heart, breast_cancer? But we might still run diabetes route for completeness. It might also be low risk. Let's decide to run heart and breast_cancer. Confidence accordingly.
+
+Provide primary: heart, since highest. notes: risk moderate-high for heart due to calcium score 4 and chest pain. Breast: moderate risk based on features. Diabetes: low risk. Provide.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["heart", "breast_cancer"],
+  "primary": "heart",
+  "confidence": {
+    "heart": 0.72,
+    "breast_cancer": 0.29,
+    "diabetes": 0.12,
+    "parkinson": 0.05
+  },
+  "notes": "Patient shows classic angina symptoms with elevated total cholesterol, high resting blood pressure and calcium score of 4, indicating moderate‑to‑high coronary artery disease risk. Breast‑tumor markers (large radius and area, moderate smoothness) raise a mild concern that warrants evaluation. Diabetes probability is low given normal fasting glucose, normal insulin, and low pedigree score."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'breast_cancer'], 'primary': 'heart', 'confidence': {'heart': 0.72, 'breast_cancer': 0.29, 'diabetes': 0.12, 'parkinson': 0.05}, 'notes': 'Patient shows classic angina symptoms with elevated total cholesterol, high resting blood pressure and calcium score of 4, indicating moderate‑to‑high coronary artery disease risk. Breast‑tumor markers (large radius and area, moderate smoothness) raise a mild concern that warrants evaluation. Diabetes probability is low given normal fasting glucose, normal insulin, and low pedigree score.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2374. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=57.0, sex=1.0, cp=1.0, trestbps=154.0, chol=232.0,
+fbs=0.0, rest ecg=0.0, thalach=164.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=1.0,
+Pregnancies=6.0, Glucose=125.0, Blood Pressure=76.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=33.8, Diabetes Pedigree Function=0.121.
+Breast features: mean radius=10.600, mean texture=18.950, mean perimeter=69.280, mean area=346.400, mean smoothness=0.097.
+Movement features: 
+MDVP:Fo=120.078, MDVP:Fhi=126.632, MDVP:Flo=105.667,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.001, MDVP:PPQ=0.001, Jitter:DDP=0.003,
+MDVP:Shimmer=0.010, MDVP:Shimmer=0.010,
+Shimmer:APQ3=0.005, Shimmer:APQ5=0.006,
+MDVP:APQ=0.009, Shimmer:DDA=0.014,
+NHR=0.005, HNR=26.369, RPDE=0.491,
+DFA=0.719, spread1=-5.892, spread2=0.196,
+D2=2.109, PPE=0.184.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathways to run: diabetes, breast_cancer, heart. Provide primary recommendation, confidence scores. Must evaluate features. Let's analyze.
+
+Age:57. Sex 1 presumably male? sex=1 likely male. cp=1 chest pain type typical? Maybe 1 indicates typical angina. trestbps 154 hypertension. chol 232 elevated. fbs 0 means fasting blood sugar <100 but might still high? glucose 125 in A1c? Pregnancies 6 indicates female? But sex=1 maybe female? However typical dataset: in diabetes dataset, sex=1 female? In typical: sex: male=1? No, but irrelevant. We see pregnancy=6 indicates yes. But maybe the diabetes data is combined with other features. For diabetes risk: BMI=33.8 high, glucose 125 high; diabetes pedigree function 0.121 low; age 57 high -> diabetic risk moderate.
+
+Heart: chest pain typical, max heart rate 164, low rest ecg 0, slope 2, calcium 1 moderate. oldpeak 0 indicates no ST depression. exang 0. These are typical features; cp=1. In typical dataset, risk moderate. Age 57 male, high blood pressure, chest pain typical, no angina, but risk high.
+
+Breast cancer: features mean radius 10.6, mean texture 18.95, mean perimeter 69.28, mean area 346.4, mean smoothness 0.097. Those values are presumably of malignant? For malignant vs benign: typical malignant radius >14? Actually benign tumors usually lower radius. For malignant, more irregular. 10.6 radius is low. Mean texture 18.95, perimeter 69.28, area 346, smoothness 0.097 (low). These would likely be benign. So low risk.
+
+Need provide routes list. We'll include diabetes and heart. Confidence: Diabetes moderate 0.45, heart 0.55, breast 0.05. Provide primary heart maybe due to chest pain typical and older age.
+
+Also mention notes. Output JSON.
+
+<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.45,
+    "heart": 0.55,
+    "breast_cancer": 0.05,
+    "parkinson": 0.10
+  },
+  "notes": "The patient is 57-year-old with typical angina (cp=1), elevated resting BP, high cholesterol, and moderate risk of cardiac ischemia, hence heart pathway prioritized. Diabetes indicators (BMI 33.8, Glucose 125, age 57) suggest a moderate risk but below primary concern. Breast cancer risk appears low based on imaging features (radius, texture, area), so not prioritized."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.45, 'heart': 0.55, 'breast_cancer': 0.05, 'parkinson': 0.1}, 'notes': 'The patient is 57-year-old with typical angina (cp=1), elevated resting BP, high cholesterol, and moderate risk of cardiac ischemia, hence heart pathway prioritized. Diabetes indicators (BMI 33.8, Glucose 125, age 57) suggest a moderate risk but below primary concern. Breast cancer risk appears low based on imaging features (radius, texture, area), so not prioritized.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1778. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=35.0, sex=0.0, cp=0.0, trestbps=138.0, chol=183.0,
+fbs=0.0, rest ecg=1.0, thalach=182.0, exang=0.0, oldpeak=1.4,
+slope=2.0, ca=0.0,
+Pregnancies=2.0, Glucose=115.0, Blood Pressure=64.0, Skin Thickness=22.0,
+Insulin=0.0, BMI=30.8, Diabetes Pedigree Function=0.421.
+Breast features: mean radius=10.660, mean texture=15.150, mean perimeter=67.490, mean area=349.600, mean smoothness=0.088.
+Movement features: 
+MDVP:Fo=176.824, MDVP:Fhi=215.293, MDVP:Flo=83.961,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.006,
+MDVP:Shimmer=0.012, MDVP:Shimmer=0.012,
+Shimmer:APQ3=0.005, Shimmer:APQ5=0.006,
+MDVP:APQ=0.011, Shimmer:DDA=0.016,
+NHR=0.012, HNR=27.166, RPDE=0.400,
+DFA=0.656, spread1=-4.711, spread2=0.282,
+D2=2.656, PPE=0.235.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We must decide which diagnostic pathway(s) to run: diabetes, breast_cancer, or heart. We are given patient features: age, sex, CP, trestbps, etc. For heart, classic UCI dataset. For diabetes: features like Pregnancies, Glucose, Blood Pressure, Skin thickness, Insulin, BMI, Diabetes Pedigree Function, Age. Breast cancer: mean radius etc features.
+
+We need to estimate risk. Age=35, female (sex=0 maybe female). For diabetes: glucose 115 borderline; BMI 30.8 is high; but insulin 0? Maybe missing. Diabetes pedigree 0.421. Diabetes risk moderate.
+
+Heart: cp 0.0 maybe typical chest pain? Trestbps 138, chol 183, fbs 0, rest ecg 1, thalach 182, exang 0, oldpeak 1.4 slope 2, ca 0.0. That is moderate risk but age 35 is low. However oldpeak >1 indicates ischemia. But overall risk might not be high. Heart score maybe low. Breast cancer: mean radius 10.66, texture 15.15, perimeter 67.49, area 349.6, smoothness 0.088. These values look like borderline malignant? Breast cancer dataset malignant vs benign ranges: mean radius: benign mean 13.0? Actually malignant mean radius ~14? Wait typical: malignant mean radius tends to be larger e.g. 14-20. Benign avg lower ~13? Our 10.66 low. So likely benign. But uncertain. Use heuristics: probability of breast cancer low. Diabetes moderate. Heart low.
+
+We have to output routes array with those that should be run. Which do we choose? Might run diabetes? Let's compute approximate probability. Age 35, BMI 30.8 high. Pregnancies 2, glucose 115 borderline. Blood pressure 64? Wait blood pressure? In diabetes dataset, Blood Pressure is diastolic (BP). Here Blood Pressure 64 mmHg which is low. But high insulin missing. Diabetes predictor: maybe probability moderate-high. Let's choose diabetes and heart? But heart risk maybe low. Yet given oldpeak 1.4, slope 2, thalach 182. But Age low. Could be low risk. Might still do heart because chest pain? cp=0.0 unclear.
+
+We might decide to run diabetes only. But guidelines maybe run both? Provide primary decision. Let's decide routes: ["diabetes", "heart"].
+
+Confidence: for diabetes maybe 0.55, heart 0.30, breast 0.10.
+
+Provide notes.
+
+Let's produce JSON: "routes": ["diabetes", "heart"], "primary": "diabetes". confidence values sum maybe 1. Provide per pathway.
+
+Make sure keys match.
+
+Let's produce.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["diabetes", "heart"],
+  "primary": "diabetes",
+  "confidence": {
+    "diabetes": 0.57,
+    "heart": 0.30,
+    "breast_cancer": 0.10,
+    "parkinson": 0.03
+  },
+  "notes": "Patient is 35‑year‑old female with BMI 30.8 and glucose 115 mg/dL, placing her in the intermediate risk range for type‑2 diabetes. No clear indicators of ischemic heart disease (age, low cholesterol, absence of exertional angina) but the presence of an elevated exercise‑induced ST‑segment drop (oldpeak = 1.4) justifies a heart‑workup to rule out silent ischemia. Breast cancer parameters (mean radius 10.66, texture 15.15, smoothness 0.088) fall on the benign side of the malignant range, so a routine screening pathway is less urgent. Thus, the recommended diagnostic pathways are diabetes and heart, with diabetes as the primary focus."}
+<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'diabetes', 'confidence': {'diabetes': 0.57, 'heart': 0.3, 'breast_cancer': 0.1, 'parkinson': 0.03}, 'notes': 'Patient is 35‑year‑old female with BMI 30.8 and glucose 115\u202fmg/dL, placing her in the intermediate risk range for type‑2 diabetes. No clear indicators of ischemic heart disease (age, low cholesterol, absence of exertional angina) but the presence of an elevated exercise‑induced ST‑segment drop (oldpeak\u202f=\u202f1.4) justifies a heart‑workup to rule out silent ischemia. Breast cancer parameters (mean radius 10.66, texture 15.15, smoothness 0.088) fall on the benign side of the malignant range, so a routine screening pathway is less urgent. Thus, the recommended diagnostic pathways are diabetes and heart, with diabetes as the primary focus.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2160. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=71.0, sex=0.0, cp=2.0, trestbps=110.0, chol=265.0,
+fbs=1.0, rest ecg=0.0, thalach=130.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=1.0,
+Pregnancies=2.0, Glucose=102.0, Blood Pressure=86.0, Skin Thickness=36.0,
+Insulin=120.0, BMI=45.5, Diabetes Pedigree Function=0.127.
+Breast features: mean radius=13.470, mean texture=14.060, mean perimeter=87.320, mean area=546.300, mean smoothness=0.107.
+Movement features: 
+MDVP:Fo=119.056, MDVP:Fhi=125.213, MDVP:Flo=86.795,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.012, MDVP:Shimmer=0.012,
+Shimmer:APQ3=0.006, Shimmer:APQ5=0.007,
+MDVP:APQ=0.009, Shimmer:DDA=0.019,
+NHR=0.009, HNR=23.389, RPDE=0.471,
+DFA=0.721, spread1=-5.436, spread2=0.255,
+D2=2.516, PPE=0.232.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need determine diagnostic pathways. Age 71, sex=0.0 likely female? But sex=0.0 maybe male? In many datasets 1 for male, 0 for female. Actually cp=2, etc. This is heart dataset? cp=2 indicates chest pain type. They also give breast features. So maybe we need evaluate risk for diabetes, breast cancer, heart.
+
+We need compute confidence approximate. Use heuristics: Age 71 high risk heart. Fasting glucose 102 borderline. Insulin high? BMI 45.5 huge risk diabe. Diabetes pedigree small. But FBS=1 indicates high blood sugar? Actually fbs 1.0 > 120? It's a binary variable. So diabetes high. Breast cancer? female with mean radius 13.47, texture 14.06, perimeter 87.32 borderline. But not massive. For breast cancer risk moderate.
+
+So routes probably all: diabetes, heart, breast cancer. But maybe heart has very high. Provide confidences: heart 0.8, diabetes 0.7, breast_cancer 0.3. Primary heart.
+
+Let's craft JSON.<|end|><|start|>assistant<|channel|>final<|message|>```json
+{
+  "routes": ["diabetes", "breast_cancer", "heart"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.69,
+    "heart": 0.82,
+    "breast_cancer": 0.34,
+    "parkinson": 0.10
+  },
+  "notes": "Age 71, high BMI (45.5) and elevated insulin signal strong diabetes risk. Fasting glucose 102 mg/dL and fbs=1 further support diabetes. Chest pain type 2, low resting BP, high heart rate (130) and calcium (ca=1) indicate high cardiovascular risk, making heart disease the primary concern. Breast imaging features are near benign but the radius and perimeter are marginally elevated, giving a moderate breast cancer likelihood. Parkinson-related features are irrelevant here."
+}
+```<|return|>
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'diabetes', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.69, 'heart': 0.82, 'breast_cancer': 0.34, 'parkinson': 0.1}, 'notes': 'Age 71, high BMI (45.5) and elevated insulin signal strong diabetes risk. Fasting glucose 102 mg/dL and fbs=1 further support diabetes. Chest pain type 2, low resting BP, high heart rate (130) and calcium (ca=1) indicate high cardiovascular risk, making heart disease the primary concern. Breast imaging features are near benign but the radius and perimeter are marginally elevated, giving a moderate breast cancer likelihood. Parkinson-related features are irrelevant here.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1855. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=55.0, sex=0.0, cp=1.0, trestbps=132.0, chol=342.0,
+fbs=0.0, rest ecg=1.0, thalach=166.0, exang=0.0, oldpeak=1.2,
+slope=2.0, ca=0.0,
+Pregnancies=4.0, Glucose=115.0, Blood Pressure=72.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=28.9, Diabetes Pedigree Function=0.376.
+Breast features: mean radius=12.540, mean texture=18.070, mean perimeter=79.420, mean area=491.900, mean smoothness=0.074.
+Movement features: 
+MDVP:Fo=171.041, MDVP:Fhi=208.313, MDVP:Flo=75.501,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.002, Jitter:DDP=0.007,
+MDVP:Shimmer=0.020, MDVP:Shimmer=0.020,
+Shimmer:APQ3=0.009, Shimmer:APQ5=0.012,
+MDVP:APQ=0.019, Shimmer:DDA=0.027,
+NHR=0.011, HNR=25.908, RPDE=0.419,
+DFA=0.721, spread1=-6.184, spread2=0.226,
+D2=2.590, PPE=0.147.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need decide diagnostic pathways: diabetes, breast_cancer or heart. Evaluate features.
+
+Age 55, sex female. Breast features: mean radius 12.54, which is normal for malignant? Typical malignant radius >13.5? Not sure. The mean radius is relatively low. For benign, radius ~13ish? I'd think moderate risk. But also texture 18.07 typical benign? Could be benign. Other features: area 491.9, smoothness 0.074. Not high. So likely low risk of breast cancer? Might be borderline? But we need to pick primary route.
+
+Diabetes risk: Glucose 115 borderline high? Fasting? 115 mM maybe >100 is prediabetic. BMI 28.9, 11 high. Diabetes Pedigree Function 0.376 low. FBS 0.0? Fasting? Hmm fbs=0.0 maybe normal. But blood pressure 72 mmHg? Systolic? It's given as blood pressure 72? Actually blood pressure under diabetes section: 72. That's maybe diastolic? It's weird. Insulin 0.0? Suggest no insulin? Not sure. Could be low.
+
+Heart pathway: chest pain type cp=1.0 (typical angina). Trestbps 132, chol 342 high. Rest ECG 1.0 likely shows ST elevation? RestECG=1 indicates typical ST elevation? Thalach 166 high. Exang 0 false. oldpeak 1.2 sublethal. Slope 2.0 (down). Ca 0.0. These features may indicate >70% risk? Let's compute risk roughly: Age 55 high. Male? sex=0.0: 0 indicates female. Female heart disease risk lower.
+
+Diabetes: maybe borderline.
+
+Breast: maybe low but maybe not.
+
+Thus we need to output routes: which ones to run. Possibly "heart" should be priority. Provide primary = "heart".
+
+Confidence values: maybe heart 0.65, diabetes 0.25, breast 0.10. Provide notes.
+
+Make sure JSON only. Let's produce.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["heart", "diabetes", "breast_cancer"],
+  "primary": "heart",
+  "confidence": {
+    "heart": 0.65,
+    "diabetes": 0.25,
+    "breast_cancer": 0.10,
+    "parkinson": 0.00
+  },
+  "notes": "Age 55, typical angina presentation with elevated cholesterol and low‑normal heart rate reserve suggests coronary artery disease risk. Diabetes markers are borderline (glucose 115, BMI 28.9), but insulin/diabetes pedigree function are low, so monitoring is advised. Breast cancer features (mean radius 12.54, texture 18.07) fall within benign ranges; routine screening is recommended rather than immediate diagnostic biopsy."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes', 'breast_cancer'], 'primary': 'heart', 'confidence': {'heart': 0.65, 'diabetes': 0.25, 'breast_cancer': 0.1, 'parkinson': 0.0}, 'notes': 'Age 55, typical angina presentation with elevated cholesterol and low‑normal heart rate reserve suggests coronary artery disease risk. Diabetes markers are borderline (glucose 115, BMI 28.9), but insulin/diabetes pedigree function are low, so monitoring is advised. Breast cancer features (mean radius 12.54, texture 18.07) fall within benign ranges; routine screening is recommended rather than immediate diagnostic biopsy.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1105. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=51.0, sex=0.0, cp=2.0, trestbps=130.0, chol=256.0,
+fbs=0.0, rest ecg=0.0, thalach=149.0, exang=0.0, oldpeak=0.5,
+slope=2.0, ca=0.0,
+Pregnancies=8.0, Glucose=65.0, Blood Pressure=72.0, Skin Thickness=23.0,
+Insulin=0.0, BMI=32.0, Diabetes Pedigree Function=0.6.
+Breast features: mean radius=10.290, mean texture=27.610, mean perimeter=65.670, mean area=321.400, mean smoothness=0.090.
+Movement features: 
+MDVP:Fo=149.689, MDVP:Fhi=160.368, MDVP:Flo=133.608,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.001, MDVP:PPQ=0.001, Jitter:DDP=0.003,
+MDVP:Shimmer=0.013, MDVP:Shimmer=0.013,
+Shimmer:APQ3=0.007, Shimmer:APQ5=0.008,
+MDVP:APQ=0.011, Shimmer:DDA=0.020,
+NHR=0.006, HNR=27.421, RPDE=0.365,
+DFA=0.720, spread1=-6.997, spread2=0.210,
+D2=1.994, PPE=0.113.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to choose diagnostic pathways: diabetes, breast_cancer, heart. Based on patient features.
+
+Patient age 51, sex 0. (assuming 0= female?) Age 51, 8 pregnancies. Blood pressure 72 (maybe diastolic?), Glucose 65, BMI 32, Diabetes Pedigree Function 0.6.
+
+Given low glucose 65, but BMI high. Diabetes risk? Possibly not high.
+
+Heart: chest pain typical CP=2 (typical angina?), trestbps 130, chol 256, exang 0, oldpeak 0.5, slope 2. Slope of 2 indicates moderate. Also thalach 149, no significant risk maybe. But chest pain presence. Could be heart.
+
+Breast cancer: female 51, mammographic features: mean radius 10.29, texture 27.61, perimeter 65.67, area 321.4, smoothness 0.09. These are typical for benign? Actually I know that malignant tumors have higher radius, area, texture, smoother? hmm. In the classic Wisconsin dataset, malignant features: higher radius, higher area, higher smoothness? Actually radius high, perimeter high, area high; texture high. In this case perimeter 65.67 might be moderate? The dataset values maybe; Let's gauge probability. For breast cancer classification logistic regression? Typically radius mean 14.5? So 10.29 maybe small (benign). But smoothing 0.090 maybe low (less smooth). In dataset lower smoothness associated with malignant? The typical malignant dataset radius mean 14-20. So 10.3 is lower. So probably low risk.
+
+Thus primary route likely heart. Provide confidence values. Confidence: heart 0.70, diabetes 0.25, breast 0.05, parkinson maybe not needed? but example shows parkinson but not mandatory. We only compute for the three. Provide notes.
+
+We output JSON.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["heart", "diabetes", "breast_cancer"],
+  "primary": "heart",
+  "confidence": {
+    "heart": 0.71,
+    "diabetes": 0.23,
+    "breast_cancer": 0.06
+  },
+  "notes": "Patient presents with typical angina symptoms (cp=2) and elevated cholesterol, supporting a heart evaluation. Diabetes risk is moderate due to BMI but normal fasting glucose. Breast cancer risk appears low given the benign‑like radiomic parameters."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes', 'breast_cancer'], 'primary': 'heart', 'confidence': {'heart': 0.71, 'diabetes': 0.23, 'breast_cancer': 0.06}, 'notes': 'Patient presents with typical angina symptoms (cp=2) and elevated cholesterol, supporting a heart evaluation. Diabetes risk is moderate due to BMI but normal fasting glucose. Breast cancer risk appears low given the benign‑like radiomic parameters.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3078. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=53.0, sex=1.0, cp=2.0, trestbps=130.0, chol=246.0,
+fbs=1.0, rest ecg=0.0, thalach=173.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=3.0,
+Pregnancies=4.0, Glucose=95.0, Blood Pressure=70.0, Skin Thickness=32.0,
+Insulin=0.0, BMI=32.1, Diabetes Pedigree Function=0.612.
+Breast features: mean radius=15.490, mean texture=19.970, mean perimeter=102.400, mean area=744.700, mean smoothness=0.116.
+Movement features: 
+MDVP:Fo=116.556, MDVP:Fhi=592.030, MDVP:Flo=86.228,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.008,
+MDVP:Shimmer=0.017, MDVP:Shimmer=0.017,
+Shimmer:APQ3=0.008, Shimmer:APQ5=0.010,
+MDVP:APQ=0.015, Shimmer:DDA=0.025,
+NHR=0.014, HNR=23.958, RPDE=0.566,
+DFA=0.668, spread1=-6.431, spread2=0.153,
+D2=2.162, PPE=0.121.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We must decide which diagnostic pathway(s) to run: diabetes, breast_cancer, or heart. The patient features include heart disease attributes (cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca) and also diabetes attributes (Pregnancies, Glucose, BP, Skin Thickness, Insulin, BMI, Diabetes Pedigree Function). Breast cancer features given (mean radius etc). Movement features (vocal? irrelevant). The task: triage assistant chooses route(s). Likely we prioritize heart disease because symptoms CP=2, trestbps 130, cholesterol 246, fbs 1 (fasting blood sugar high?), thalach 173, exang 0, oldpeak 0, slope 2, ca 3. Possibly high risk. Diabetes? Pregnancies 4, Glucose 95 (<126?), BP 70? Skin Thickness 32, Insulin 0 (maybe missing), BMI 32.1 (obese). diabetes pedigree 0.612. HbA1c not given. The glucose of 95 is normal. But BMI high, insulin zero? Could be type 2? So maybe moderate risk but not high.
+
+Breast cancer: mean radius 15.49 (normal 12.1-18.1). texture low etc, perimeter ~102, area 744.7. Smoothness 0.116 (normal 0.1-0.3). These are within normal? Actually malignant tends to >15. So borderline. We don't know.
+
+Thus probably primary: heart. Might also consider diabetes? But maybe not.
+
+Confidence: heart high ~0.75, diabetes ~0.2, breast cancer 0.1.
+
+Return JSON.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["heart", "diabetes"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.22,
+    "heart": 0.78,
+    "breast_cancer": 0.05,
+    "parkinson": 0.10
+  },
+  "notes": "Heart disease pathway is prioritized due to elevated CP, high cholesterol, high thalach, and multiple coronary risk factors (ca=3). Diabetes risk is moderate because of obesity and insulin data, but fasting glucose is normal. Breast cancer features fall within normal ranges, so not prioritized."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.22, 'heart': 0.78, 'breast_cancer': 0.05, 'parkinson': 0.1}, 'notes': 'Heart disease pathway is prioritized due to elevated CP, high cholesterol, high thalach, and multiple coronary risk factors (ca=3). Diabetes risk is moderate because of obesity and insulin data, but fasting glucose is normal. Breast cancer features fall within normal ranges, so not prioritized.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3348. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=55.0, sex=0.0, cp=1.0, trestbps=132.0, chol=342.0,
+fbs=0.0, rest ecg=1.0, thalach=166.0, exang=0.0, oldpeak=1.2,
+slope=2.0, ca=0.0,
+Pregnancies=0.0, Glucose=179.0, Blood Pressure=50.0, Skin Thickness=36.0,
+Insulin=159.0, BMI=37.8, Diabetes Pedigree Function=0.455.
+Breast features: mean radius=19.020, mean texture=24.590, mean perimeter=122.000, mean area=1076.000, mean smoothness=0.090.
+Movement features: 
+MDVP:Fo=125.036, MDVP:Fhi=143.946, MDVP:Flo=116.187,
+MDVP:Jitter=0.013, MDVP:Jitter=0.013,
+MDVP:RAP=0.007, MDVP:PPQ=0.006, Jitter:DDP=0.022,
+MDVP:Shimmer=0.039, MDVP:Shimmer=0.039,
+Shimmer:APQ3=0.021, Shimmer:APQ5=0.022,
+MDVP:APQ=0.031, Shimmer:DDA=0.064,
+NHR=0.082, HNR=15.338, RPDE=0.630,
+DFA=0.714, spread1=-4.020, spread2=0.265,
+D2=2.672, PPE=0.341.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We must decide which diagnostic pathways to run. We have patient features: age 55, sex=0.0 (assuming 0=male? Actually typical Kaggle dataset uses sex 0 female 1 male? need check). cp=1 chest pain type. Trestbps 132, chol 342. fbs 0, rest_ecg=1, thalach 166, exang 0, oldpeak 1.2, slope 2, ca=0.  For diabetes: Pregnancies=0. Glucose=179, Blood Pressure=50? That's odd - BP maybe diastolic? but 50 is low. Skin Thickness=36, Insulin=159, BMI 37.8, diabetes pedigree =0.455.
+
+Blood parameters: high glucose 179, high BMI, high insulin maybe. For diabetes risk high. Age 55.
+
+Breast: mean radius 19, texture 24.6, perimeter 122, area 1076, smoothness 0.09. For malignant may have high radius etc? Normal ranges? Usually malignant have higher radius, area, etc. But these values moderate. Let's not worry.
+
+Heart: features consistent with possible heart disease? Age 55, chest pain type 1; rest bp 132; chol 342 high, thalach 166, oldpeak 1.2, exang=0. slope=2. Risk factors present.
+
+We need output routes with list. We should choose at least diabetes and heart. Breast maybe low. Should we include breast? Provide risk scores. Let's calculate approximate risk or just provide low probability? Provide confidence values.
+
+Confidence values: diabetes 0.85. heart 0.70. breast_cancer 0.10. Others zero.
+
+primary: diabetes (most probable). Provide notes.
+
+Return JSON.<|end|><|start|>assistant<|channel|>final<|message|>```json
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "diabetes",
+  "confidence": {
+    "diabetes": 0.84,
+    "heart": 0.71,
+    "breast_cancer": 0.09
+  },
+  "notes": "The patient shows classic markers of type‑2 diabetes: age over 50, elevated fasting glucose (179 mg/dL), high BMI (37.8), high insulin (159 U/L) indicating insulin resistance, and a diabetes pedigree function above 0.4. The probability of heart disease is also non‑negligible due to hypertension (systolic 132 mmHg), high LDL cholesterol (342 mg/dL), abnormal ECG (value 1), chest pain type 1, and a treadmill exercise test result (oldpeak 1.2, thalach 166). Breast‑cancer‑related breast features are within the normal range for benign tumors (mean radius 19, mean area 1076, smoothness 0.09), leading to a low likelihood. Thus, the diagnostic pathway should prioritize diabetes screening and cardiac evaluation, with breast cancer assessment considered low priority unless additional breast‑specific symptoms arise."
+}
+```<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'diabetes', 'confidence': {'diabetes': 0.84, 'heart': 0.71, 'breast_cancer': 0.09}, 'notes': 'The patient shows classic markers of type‑2 diabetes: age over 50, elevated fasting glucose (179\u202fmg/dL), high BMI (37.8), high insulin (159\u202fU/L) indicating insulin resistance, and a diabetes pedigree function above 0.4. The probability of heart disease is also non‑negligible due to hypertension (systolic 132\u202fmmHg), high LDL cholesterol (342\u202fmg/dL), abnormal ECG (value 1), chest pain type 1, and a treadmill exercise test result (oldpeak 1.2, thalach 166). Breast‑cancer‑related breast features are within the normal range for benign tumors (mean radius 19, mean area 1076, smoothness 0.09), leading to a low likelihood. Thus, the diagnostic pathway should prioritize diabetes screening and cardiac evaluation, with breast cancer assessment considered low priority unless additional breast‑specific symptoms arise.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2900. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=44.0, sex=1.0, cp=0.0, trestbps=110.0, chol=197.0,
+fbs=0.0, rest ecg=0.0, thalach=177.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=1.0,
+Pregnancies=3.0, Glucose=78.0, Blood Pressure=70.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=32.5, Diabetes Pedigree Function=0.27.
+Breast features: mean radius=19.400, mean texture=18.180, mean perimeter=127.200, mean area=1145.000, mean smoothness=0.104.
+Movement features: 
+MDVP:Fo=114.554, MDVP:Fhi=126.778, MDVP:Flo=91.121,
+MDVP:Jitter=0.007, MDVP:Jitter=0.007,
+MDVP:RAP=0.004, MDVP:PPQ=0.003, Jitter:DDP=0.011,
+MDVP:Shimmer=0.037, MDVP:Shimmer=0.037,
+Shimmer:APQ3=0.019, Shimmer:APQ5=0.019,
+MDVP:APQ=0.031, Shimmer:DDA=0.056,
+NHR=0.027, HNR=18.954, RPDE=0.685,
+DFA=0.720, spread1=-5.530, spread2=0.243,
+D2=2.409, PPE=0.221.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathways to run based on patient features. The options: "diabetes", "breast_cancer", "heart". We should consider the data.
+
+Given patient 44-year-old female. Breast cancer data present: mean radius, texture, perimeter, area, smoothness. We have no indication of suspicious features? But maybe. Usually mean radius 19.400 is fairly high? For malignant, mean radius > 15? Actually from breast cancer dataset (Wisconsin). Radius mean ranges from 4.5 to 25.4. 19.4 indicates relatively large cells; high mean radius suggests larger cell size. But we need consider mean smoothness 0.104: in benign average ~0.1; malignant tends to have higher smoothness (0.15?). Also texture 18.18, perimeter 127.2, area 1145.0 - these are also in malignant ranges. But not sure.
+
+Heart disease features: cp=0.0 chest pain type? cp numeric codes: 0 maybe typical angina? But cp value 0 indicates typical? In dataset (UCI), cp=1 typical angina? Actually cp codes: 1 typical angina, 2 atypical, 3 non-anginal, 4 atypical.. Wait. But cp=0 maybe 'NA'? But we have restecg=0.0, thalach 177 (high), exang 0 (no), oldpeak 0, slope 2.0 (upsloping), ca=1 (one major vessel). Risk factors: age 44, hypertension? Trestbps 110, cholesterol 197. fbs 0. But thalach high at 177 suggests good. Maybe low risk.
+
+Diabetes: Pregnancies 3, Glucose 78 (normal), BP 70 (low?), Skin Thickness 0 (unknown), Insulin 0, BMI 32.5 (obese), Diabetes Pedigree 0.27 (lower risk). So maybe moderate risk for diabetes due to BMI and pregnancy.
+
+We need to output routes list and primary diagnosis with confidence scores.
+
+We consider path: heart, breast_cancer, diabetes. Which is most likely? Let's evaluate each.
+
+Breast cancer: Age 44 female. Cancer risk maybe moderate. Need consider benign vs malignant. Data: mean radius 19.4, texture 18.18, perimeter 127.2, area 1145.0, smoothness 0.104. These values might correspond to malignant as mean radius high, mean texture high, perimeter high, area high. However I recall malignant has higher values of these metrics; but we need a quick rule: if mean radius > 12, perimeter > 80, area > 700, etc. Yes malignant values are typically high. So likely malignant? But the dataset's mean radius ranges up to 25; mean of benign maybe <12? Actually mean of benign ~10? Actually I'm not sure. The example 19.4 is high. So likely malignant. So breast cancer pathway. Confidence maybe 0.8.
+
+Heart disease: Age 44, risk low. But some risk factors: high cholesterol, ca=1. But chest pain? cp=0? Let's look quickly: In dataset, cp values: 1 typical angina, 2 atypical angina, 3 non-anginal pain, 4 asymptomatic. 0 might mean missing. But we have restecg=0 indicates normal. Slope=2 (upsloping). Oldpeak 0. Ejection fraction? Not given. Thalach 177 high. So heart disease risk maybe low. Confidence 0.2.
+
+Diabetes: Many risk factors: 3 pregnancies (Gravidity), BMI 32.5 high, glucose normal 78. Insulin 0 maybe missing. Skin thickness 0. Diabetes pedigree 0.27. This indicates moderate risk. Confidence maybe 0.4.
+
+Thus we choose routes: ["breast_cancer", "diabetes"] maybe also heart. But triage assistant may include all relevant risk. But primary maybe breast_cancer. Confidence: breast 0.8, diabetes 0.3, heart 0.2. Provide notes.
+
+Let's produce output JSON.
+
+Also maybe include parkinson: not relevant. The example includes parkinson in confidence. But we only need to include those considered. We list confidence for each of three. Set others to 0.
+
+Let's craft.
+
+<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["breast_cancer", "diabetes"],
+  "primary": "breast_cancer",
+  "confidence": {
+    "breast_cancer": 0.78,
+    "diabetes": 0.32,
+    "heart": 0.18
+  },
+  "notes": "The breast imaging features (high radius, perimeter, area, and texture values with moderate smoothness) strongly suggest malignancy. Heart disease risk is low given normal rest ECG, high exercise max HR, and absence of significant anginal symptoms, but the patient’s cholesterol and minor coronary artery involvement warrant a precautionary heart‑disease screen. Diabetes risk is moderate due to obesity, pregnancy history, and borderline pedigree score, so a glucose tolerance test is advised."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'diabetes'], 'primary': 'breast_cancer', 'confidence': {'breast_cancer': 0.78, 'diabetes': 0.32, 'heart': 0.18}, 'notes': 'The breast imaging features (high radius, perimeter, area, and texture values with moderate smoothness) strongly suggest malignancy. Heart disease risk is low given normal rest ECG, high exercise max HR, and absence of significant anginal symptoms, but the patient’s cholesterol and minor coronary artery involvement warrant a precautionary heart‑disease screen. Diabetes risk is moderate due to obesity, pregnancy history, and borderline pedigree score, so a glucose tolerance test is advised.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2275. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=63.0, sex=0.0, cp=2.0, trestbps=135.0, chol=252.0,
+fbs=0.0, rest ecg=0.0, thalach=172.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=2.0, Glucose=92.0, Blood Pressure=76.0, Skin Thickness=20.0,
+Insulin=0.0, BMI=24.2, Diabetes Pedigree Function=1.698.
+Breast features: mean radius=14.470, mean texture=24.990, mean perimeter=95.810, mean area=656.400, mean smoothness=0.088.
+Movement features: 
+MDVP:Fo=193.030, MDVP:Fhi=208.900, MDVP:Flo=80.297,
+MDVP:Jitter=0.008, MDVP:Jitter=0.008,
+MDVP:RAP=0.004, MDVP:PPQ=0.004, Jitter:DDP=0.014,
+MDVP:Shimmer=0.030, MDVP:Shimmer=0.030,
+Shimmer:APQ3=0.018, Shimmer:APQ5=0.018,
+MDVP:APQ=0.021, Shimmer:DDA=0.053,
+NHR=0.009, HNR=21.934, RPDE=0.498,
+DFA=0.741, spread1=-5.845, spread2=0.279,
+D2=2.609, PPE=0.186.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We must determine which diagnostic pathways: diabetes, breast_cancer or heart, given patient features. The patient features include demographics, medical features, some breast tissue features, and speech movement features. But our options are only three: diabetes, breast_cancer, heart. We must decide which diagnostic pathways to run.
+
+We need to analyze the data.
+
+Patient: age 63, female (sex=0.0 maybe indicates female; but typical dataset: 0 female, 1 male). cp=2 (chest pain type?). Treated baseline 135, cholesterol 252. fbs=0, rest_ecg 0, thalach 172, exang 0, oldpeak 0, slope 2, ca 0.
+
+For diabetes: features include glu = 92, BP 76, skin thickness 20, insulin 0, BMI 24.2, pedigree 1.698. Diabetes predictive risk: 92 is normal fasting, BMI 24 healthy. Insulin 0 indicates missing? But insulin 0 may be 0 indicates not measured but typical dataset uses 0 for 0 baseline. Not sure. Diabetes Pedigree Function 1.7 moderate. Considering risk moderate but no FBS > 126. So not high risk.
+
+Breast cancer: mean radius 14.47, texture 24.99, perimeter 95.81, area 656.40, smoothness 0.088. In dataset "breast cancer dataset" features typical values: radius mean ranges 7 to 20; area 200-4000; but for malignant vs benign, radius bigger? Typically malignant has bigger tumor radius average 14-20 for malignant, 11-13 for benign. Here radius 14.47 slightly high; texture 24.99: malignant tends higher ~30? Smoothness 0.088: higher is malignant? Usually malignant more irregular smoothness ranges 0.2? We need to determine risk. Hard to categorize.
+
+Heart: chest pain, oldpeak zero, slope 2, ca 0. Age 63, chest pain type 2 (typical angina? Possibly typical or atypical). Thalach 172 high. Could be heart disease.
+
+Given limited information, maybe we choose heart and breast cancer due to features.
+
+But we should produce probabilities.
+
+Let's approximate: heart: strong risk sign: age 63, chest pain, high thalach, older, cp=2 typical angina. So high confidence maybe 0.8.
+
+Breast cancer: radius moderate, texture moderate. Hard.
+
+Diabetes: low risk. So lower risk maybe 0.1.
+
+Thus routes: ["heart", "breast_cancer"] maybe.
+
+But the example lists routes: the triage assistant is only for diagnosis; might include all. But we can choose to include all but assign confidence.
+
+Let's produce json with routes all 3 but maybe primary heart.
+
+Confidence: heart 0.8, breast_cancer 0.15, diabetes 0.05.
+
+Notes: summarizing.
+
+Let's craft final output.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["heart", "breast_cancer"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.05,
+    "heart": 0.83,
+    "breast_cancer": 0.12
+  },
+  "notes": "Age 63 with typical angina and high maximum heart rate suggests significant cardiovascular risk. Breast tumor metrics (radius, area) sit near the malignant threshold but are not strongly conclusive; diabetes risk is low based on normal fasting glucose, BMI and absent insulin elevation."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'breast_cancer'], 'primary': 'heart', 'confidence': {'diabetes': 0.05, 'heart': 0.83, 'breast_cancer': 0.12}, 'notes': 'Age 63 with typical angina and high maximum heart rate suggests significant cardiovascular risk. Breast tumor metrics (radius, area) sit near the malignant threshold but are not strongly conclusive; diabetes risk is low based on normal fasting glucose, BMI and absent insulin elevation.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 4043. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=56.0, sex=0.0, cp=1.0, trestbps=140.0, chol=294.0,
+fbs=0.0, rest ecg=0.0, thalach=153.0, exang=0.0, oldpeak=1.3,
+slope=1.0, ca=0.0,
+Pregnancies=3.0, Glucose=82.0, Blood Pressure=70.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=21.1, Diabetes Pedigree Function=0.389.
+Breast features: mean radius=12.780, mean texture=16.490, mean perimeter=81.370, mean area=502.500, mean smoothness=0.098.
+Movement features: 
+MDVP:Fo=162.568, MDVP:Fhi=198.346, MDVP:Flo=77.630,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.008,
+MDVP:Shimmer=0.018, MDVP:Shimmer=0.018,
+Shimmer:APQ3=0.008, Shimmer:APQ5=0.011,
+MDVP:APQ=0.018, Shimmer:DDA=0.024,
+NHR=0.012, HNR=25.678, RPDE=0.428,
+DFA=0.724, spread1=-6.636, spread2=0.210,
+D2=1.958, PPE=0.135.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathway(s) to run: diabetes, breast_cancer, heart. We also may consider Parkinson but not in list. The patient features include heart disease features (chest pain cp, trestbps, chol, fbs, rest ecg, thalach, exang, oldpeak, slope, ca). Also diabetes features: Pregnancies, Glucose, Blood Pressure, Skin Thickness, Insulin, BMI, Diabetes Pedigree Function. Breast features as given. Movement features? They are also something else. But we only choose among the three pathways.
+
+We must decide which of these are indicated based on risk or symptoms.
+
+Patient age 56, male? sex=0.0 maybe female? Wait sex=0.0, maybe male? Usually in heart dataset, sex=1 male, 0 female. But we need to consider. Age 56, cp=1 (typical angina), high trestbps 140, chol 294, fbs 0, thalach 153, oldpeak 1.3, slope 1.0, ca=0.0. This seems suggestive of coronary artery disease risk. So heart pathway high.
+
+Diabetes: Pregnancies 3, Glucose 82 (normal fasting?), blood pressure 70 (but that's lower?). Skin thickness 0, Insulin 0, BMI 21.1 (normal), DD function 0.389 (low). These are all relatively healthy, so diabetes less likely.
+
+Breast_cancer: patient features: age 56 female likely? Wait sex=0.0 maybe female but but. Breast features: mean radius ~12.78, mean texture 16.49, mean perimeter 81.37, area 502.5, smoothness 0.098. Hard to know but typical malignant values higher? Let's consider typical dataset: malignant vs benign. For breast cancer, mean radius ranges maybe 8-14 for malignant? Actually malignant means larger. 12.78 might be borderline. Texture 16.49: malignant has higher texture. So maybe borderline but not strongly high.
+
+Thus primary focus: heart disease. Diabetes low. Breast cancer maybe.
+
+We could include breast_cancer if borderline.
+
+Compute confidence: I'd say heart 0.80, diabetes 0.20, breast_cancer 0.40? Actually we need combined maybe sum more than 1? We give each independent confidence. Could have values: heart 0.85, diabetes 0.15, breast_cancer 0.30. But sum >1 but they are not probabilities exclusive; they are independent confidences.
+
+We must produce JSON with routes array, primary, confidence dict, notes.
+
+Let's choose routes: ["heart","breast_cancer"]. Maybe not include diabetes.
+
+But instructions: "You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart." So we could run multiple. Provide routes list.
+
+Pick heart as primary. Provide confidence for each.
+
+Confidence: heart 0.88, breast_cancer 0.35, diabetes 0.12.
+
+Notes: mention chest pain, risk factors, but diabetes features normal, breast features borderline. Provide triage rationale.
+
+Let's output.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": [
+    "heart",
+    "breast_cancer"
+  ],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.12,
+    "heart": 0.88,
+    "breast_cancer": 0.35
+  },
+  "notes": "The patient shows classic anginal symptoms with elevated resting BP, high cholesterol, and an abnormal stress test result (oldpeak 1.3, slope 1). These findings strongly suggest coronary artery disease, warranting a heart diagnostic pathway. Diabetes risk factors (normal fasting glucose, BMI, and pedigree score) are low, so diabetes testing is of low priority. Breast cancer screening is considered due to borderline imaging features (radius and texture near malignant thresholds) and the patient’s age; however, it is secondary to the cardiac indication."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'breast_cancer'], 'primary': 'heart', 'confidence': {'diabetes': 0.12, 'heart': 0.88, 'breast_cancer': 0.35}, 'notes': 'The patient shows classic anginal symptoms with elevated resting BP, high cholesterol, and an abnormal stress test result (oldpeak 1.3, slope 1). These findings strongly suggest coronary artery disease, warranting a heart diagnostic pathway. Diabetes risk factors (normal fasting glucose, BMI, and pedigree score) are low, so diabetes testing is of low priority. Breast cancer screening is considered due to borderline imaging features (radius and texture near malignant thresholds) and the patient’s age; however, it is secondary to the cardiac indication.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1369. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=48.0, sex=1.0, cp=0.0, trestbps=124.0, chol=274.0,
+fbs=0.0, rest ecg=0.0, thalach=166.0, exang=0.0, oldpeak=0.5,
+slope=1.0, ca=0.0,
+Pregnancies=4.0, Glucose=125.0, Blood Pressure=70.0, Skin Thickness=18.0,
+Insulin=122.0, BMI=28.9, Diabetes Pedigree Function=1.144.
+Breast features: mean radius=15.220, mean texture=30.620, mean perimeter=103.400, mean area=716.900, mean smoothness=0.105.
+Movement features: 
+MDVP:Fo=136.358, MDVP:Fhi=176.595, MDVP:Flo=65.750,
+MDVP:Jitter=0.010, MDVP:Jitter=0.010,
+MDVP:RAP=0.005, MDVP:PPQ=0.005, Jitter:DDP=0.016,
+MDVP:Shimmer=0.050, MDVP:Shimmer=0.050,
+Shimmer:APQ3=0.027, Shimmer:APQ5=0.025,
+MDVP:APQ=0.037, Shimmer:DDA=0.082,
+NHR=0.034, HNR=18.570, RPDE=0.543,
+DFA=0.733, spread1=-5.208, spread2=0.225,
+D2=2.642, PPE=0.243.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart. We have features for diabetes (pima dataset), heart (heart disease dataset), breast cancer dataset (Wisconsin). The patient has features for all three. We need to provide which pathways to run. It's a triage decision. Age 48, female, glucose 125, insulin 122, BMI 28.9, diabetes pedigree function 1.144, pregnant 4, etc. Diabetes risk: moderate. Also has heart disease features: cp=0, trestbps 124, chol 274, fbs 0, rest ecg 0, thalach 166, exang 0, oldpeak 0.5, slope 1, ca 0. Chest pain: cp 0 indicates typical angina? In dataset cp codes: 0? Wait typical dataset has cp 1-4 for chest pain type: 1 typical angina, 2 atypical angina, 3 non-anginal pain, 4 asymptomatic. 0 not used. So cp=0 is unknown. But we could use heart risk. Chol high 274, age 48, low exercise threshold? oldpeak 0.5 mild. Possibly low risk.
+
+Breast cancer: mean radius 15.22, texture 30.62, perimeter 103.4, area 716.9, smoothness 0.105 - these sound like malignant? Typically malignant mean radius >14.75, texture >16.5, perimeter >90, area >600, smoothness >0.07. So borderline malignant. Might be potential malignant.
+
+We need to output routes; might include diabetes and breast_cancer but maybe not heart due to low risk.
+
+Confidence: Provide numeric for each. Give notes.
+
+We need to decide. Considering patient 48 female, high glucose 125 (normal <110?), borderline high, insulin high. BMI 28.9 overweight. Diabetes risk medium-high. Heart risk moderate but not high. Breast cancer risk moderate - borderline malignant. So I'd suggest run diabetes, breast_cancer. Primary could be diabetes or breast_cancer? Which is more urgent? Possibly diabetes. Provide confidence: diabetes 0.66, breast_cancer 0.38, heart 0.12. Or something.
+
+Let's compute approximate risk. For diabetes: For Pima dataset, high risk for elevated glucose, insulin, BMI, etc. Score maybe >0.5.
+
+Breast: we can say moderate-high risk 0.35.
+
+Heart: low risk 0.1.
+
+Ok.
+
+Return JSON.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["diabetes", "breast_cancer"],
+  "primary": "diabetes",
+  "confidence": {
+    "diabetes": 0.68,
+    "breast_cancer": 0.34,
+    "heart": 0.10
+  },
+  "notes": "The patient presents with borderline elevated fasting glucose (125 mg/dL), high insulin (122 µU/mL), BMI 28.9, and a positive diabetes pedigree, indicating medium‐to-high risk for type II diabetes, so diabetes testing is prioritized. Breast‑cancer markers (mean radius ~15.2, area ~717, smoothness 0.105) fall into the malignant range on the Wisconsin dataset, warranting a breast‑cancer screen. Heart disease features are less concerning (normal chest‑pain coding, borderline cholesterol, modest exercise‑induced ST‑depression), so a cardiac eval is lower priority at this stage."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'diabetes'], 'primary': 'diabetes', 'confidence': {'diabetes': 0.68, 'breast_cancer': 0.34, 'heart': 0.1}, 'notes': 'The patient presents with borderline elevated fasting glucose (125 mg/dL), high insulin (122 µU/mL), BMI 28.9, and a positive diabetes pedigree, indicating medium‐to-high risk for type\xa0II diabetes, so diabetes testing is prioritized. Breast‑cancer markers (mean radius ~15.2, area ~717, smoothness 0.105) fall into the malignant range on the Wisconsin dataset, warranting a breast‑cancer screen. Heart disease features are less concerning (normal chest‑pain coding, borderline cholesterol, modest exercise‑induced ST‑depression), so a cardiac eval is lower priority at this stage.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 7222. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=38.0, sex=1.0, cp=3.0, trestbps=120.0, chol=231.0,
+fbs=0.0, rest ecg=1.0, thalach=182.0, exang=1.0, oldpeak=3.8,
+slope=1.0, ca=0.0,
+Pregnancies=4.0, Glucose=99.0, Blood Pressure=76.0, Skin Thickness=15.0,
+Insulin=51.0, BMI=23.2, Diabetes Pedigree Function=0.223.
+Breast features: mean radius=9.667, mean texture=18.490, mean perimeter=61.490, mean area=289.100, mean smoothness=0.089.
+Movement features: 
+MDVP:Fo=100.960, MDVP:Fhi=110.019, MDVP:Flo=95.628,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.004, MDVP:PPQ=0.003, Jitter:DDP=0.011,
+MDVP:Shimmer=0.024, MDVP:Shimmer=0.024,
+Shimmer:APQ3=0.014, Shimmer:APQ5=0.014,
+MDVP:APQ=0.018, Shimmer:DDA=0.041,
+NHR=0.012, HNR=20.536, RPDE=0.555,
+DFA=0.788, spread1=-5.022, spread2=0.147,
+D2=2.428, PPE=0.265.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathways to run: diabetes, breast_cancer, or heart.
+
+We must output JSON only as specified. We need to analyze patient features and decide which tests relevant. Age 38, female. Some heart risk features: typical chest pain? cp=3 (anginal equivalent?), trestbps 120, fbs 0, exang 1, oldpeak 3.8, slope 1, thalach 182 high, etc. This suggests possible heart disease maybe.
+
+Breast cancer: features from breast dataset; but typical risk: age 38 (young) but features: mean radius 9.667 (low? The dataset median maybe 14?). Need to calculate? In Breast Cancer Wisconsin dataset, radius is mean radius of cell nuclei. Typical benign have lower radius. This value seems small - could be benign? Texture 18.49 small, perimeter 61.49 small, area 289.1 small. Smoothness 0.089. These seem typical for benign maybe. But we are to decide if run breast_cancer diagnostic. The patient has 4 pregnancies, which might increase risk? Not as high. But no other risk factors indicated.
+
+Diabetes: features: Pregnancies 4, Glucose 99 normal, Blood Pressure 76? Actually 76 systolic? Or diastolic? Usually blood pressure is 120 mg? This shows 76 mmHg diastolic? They gave 76 in features. BMI 23.2 (normal), insulin 51, Diabetes pedigree 0.223 normal. So not high risk. So not likely run diabetes? But we have diabetic features maybe test for prediabetes? Glucose 99 normal. Not high.
+
+Heart: features highly abnormal: oldpeak 3.8 high, exang 1 indicates exercise induced angina, cp 3 maybe typical angina? Slope 1 indicates steep slope? Thalach 182 high. So heart disease plausible.
+
+Thus maybe choose heart test. Primary: heart. Confidence: give scores: heart high maybe 0.8, diabetes low 0.1, breast low 0.1. Also maybe include parkinson; we don't run, but mention 0.0? They want confidence for all four categories maybe? The format example includes parkinson. We can include for all four. So I'll produce route list containing "heart". Possibly also "breast_cancer"? But risk low. Maybe we still run breast cancer due to features? But I'd decide only heart.
+
+Confidence: heart 0.8, diabetes 0.15, breast_cancer 0.05, parkinson 0.0.
+
+Notes: Provide brief triage rationale for heart test. Provide explanation.
+
+Let's craft JSON accordingly.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["heart"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.15,
+    "heart": 0.80,
+    "breast_cancer": 0.05,
+    "parkinson": 0.00
+  },
+  "notes": "Patient exhibits classic cardiac ischemia markers: high resting ECG abnormality (rest ecg=1), exercise-induced angina (exang=1), significant ST depression (oldpeak=3.8) with a steep slope, and elevated peak heart rate (thalach=182). Age 38 female with mild hypertension but normal glucose and BMI reduces diabetes risk. Breast radiological metrics are within typical benign ranges, making breast cancer testing currently low priority. Hence heart pathway is the primary diagnostic route."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.15, 'heart': 0.8, 'breast_cancer': 0.05, 'parkinson': 0.0}, 'notes': 'Patient exhibits classic cardiac ischemia markers: high resting ECG abnormality (rest ecg=1), exercise-induced angina (exang=1), significant ST depression (oldpeak=3.8) with a steep slope, and elevated peak heart rate (thalach=182). Age 38 female with mild hypertension but normal glucose and BMI reduces diabetes risk. Breast radiological metrics are within typical benign ranges, making breast cancer testing currently low priority. Hence heart pathway is the primary diagnostic route.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1215. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=59.0, sex=1.0, cp=2.0, trestbps=126.0, chol=218.0,
+fbs=1.0, rest ecg=1.0, thalach=134.0, exang=0.0, oldpeak=2.2,
+slope=1.0, ca=1.0,
+Pregnancies=5.0, Glucose=187.0, Blood Pressure=76.0, Skin Thickness=27.0,
+Insulin=207.0, BMI=43.6, Diabetes Pedigree Function=1.034.
+Breast features: mean radius=13.460, mean texture=18.750, mean perimeter=87.440, mean area=551.100, mean smoothness=0.107.
+Movement features: 
+MDVP:Fo=116.014, MDVP:Fhi=141.781, MDVP:Flo=110.655,
+MDVP:Jitter=0.013, MDVP:Jitter=0.013,
+MDVP:RAP=0.007, MDVP:PPQ=0.009, Jitter:DDP=0.020,
+MDVP:Shimmer=0.064, MDVP:Shimmer=0.064,
+Shimmer:APQ3=0.035, Shimmer:APQ5=0.048,
+MDVP:APQ=0.045, Shimmer:DDA=0.105,
+NHR=0.018, HNR=19.649, RPDE=0.417,
+DFA=0.823, spread1=-3.748, spread2=0.235,
+D2=2.332, PPE=0.410.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide diagnostic pathways. Need routes: which tests recommended. Determine risk for heart disease, diabetes, breast cancer. Evaluate criteria: For heart: typical chest pain? For diabetes: FBS, BMI, etc.
+
+We have age 59, female? sex=1.0 likely female? In coronary dataset, 1=male 0=female? If sex=1 indicates male. But we also have pregnancy data indicates female. Could be male=1.0 but they have pregnancy data, so maybe sex indicator for diabetes dataset: 1.0 maybe pregnant? Actually diabetes dataset uses Pregnancies=5. So sex not relevant.
+
+Heart dataset: cp chest pain type; 2=typical angina; thalach max heart rate achieved 134 (low for older); oldpeak 2.2; exercise induced angina 0; slope 1 normal; ca 1. So high risk. Also FBS 1 indicates >120 mg/dl.
+
+Diabetes: glucose 187 >126, BMI 43.6 obesity, insulin high, PD function 1.034. So diabetic.
+
+Breast cancer: mammogram features mean radius 13.460 area 551; we need to decide if malignant. Use typical values: benign mean radius ~14.5; malignant ~16? Actually malignant mean radius often higher. 13.46 borderline but normal. For benign ~13; malignant >16. So likely benign. So low risk.
+
+So routes: diabetes and heart. Primary: heart (more immediate). Confidence: maybe diabetes 0.9, heart 0.8, breast 0.1.
+
+But we need confidence values for all four possible? The example had parkinson. We can include parkinson 0.0 maybe. But we can omit if not relevant. But still need to provide confidence for each category mentioned? Should include all three but also parkinson maybe 0.0.
+
+I'll produce:
+
+{
+  "routes": ["diabetes","heart"],
+  "primary":"heart",
+  "confidence":{"diabetes":0.92,"heart":0.85,"breast_cancer":0.12,"parkinson":0.0},
+  "notes":"Elevated glucose, BMI and insulin indicate diabetes; symptomatic chest pain, high troponin risk and abnormal ECG suggest coronary artery disease. Breast features within benign range."
+}
+
+Make sure JSON only.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.92,
+    "heart": 0.85,
+    "breast_cancer": 0.12,
+    "parkinson": 0.0
+  },
+  "notes": "Patient exhibits classic risk factors for type 2 diabetes (glucose 187 mg/dL, BMI 43.6, insulin 207 µU/mL, pedigree function 1.034). Chest pain type 2, elevated ST‑segment depression (oldpeak 2.2), exercise‑induced angina negative but thalach 134 and abnormal ECG suggest significant coronary artery disease. Breast‑cancer imaging features (mean radius 13.46, mean area 551) are within the typical benign range, so breast‑cancer screening is low priority."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.92, 'heart': 0.85, 'breast_cancer': 0.12, 'parkinson': 0.0}, 'notes': 'Patient exhibits classic risk factors for type\xa02 diabetes (glucose 187\xa0mg/dL, BMI 43.6, insulin 207\xa0µU/mL, pedigree function 1.034). Chest pain type 2, elevated ST‑segment depression (oldpeak\xa02.2), exercise‑induced angina negative but thalach 134 and abnormal ECG suggest significant coronary artery disease. Breast‑cancer imaging features (mean radius 13.46, mean area 551) are within the typical benign range, so breast‑cancer screening is low priority.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2766. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=59.0, sex=1.0, cp=0.0, trestbps=135.0, chol=234.0,
+fbs=0.0, rest ecg=1.0, thalach=161.0, exang=0.0, oldpeak=0.5,
+slope=1.0, ca=0.0,
+Pregnancies=2.0, Glucose=146.0, Blood Pressure=76.0, Skin Thickness=35.0,
+Insulin=194.0, BMI=38.2, Diabetes Pedigree Function=0.329.
+Breast features: mean radius=13.170, mean texture=18.220, mean perimeter=84.280, mean area=537.300, mean smoothness=0.075.
+Movement features: 
+MDVP:Fo=107.332, MDVP:Fhi=113.840, MDVP:Flo=104.315,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.001, MDVP:PPQ=0.002, Jitter:DDP=0.004,
+MDVP:Shimmer=0.016, MDVP:Shimmer=0.016,
+Shimmer:APQ3=0.008, Shimmer:APQ5=0.009,
+MDVP:APQ=0.013, Shimmer:DDA=0.025,
+NHR=0.003, HNR=26.892, RPDE=0.637,
+DFA=0.763, spread1=-6.168, spread2=0.184,
+D2=2.065, PPE=0.164.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need decide which diagnostic pathways to run: diabetes, breast_cancer, heart. Based on features. Age 59, features: heart attack risk. Chest pain features cp=0.0? cp stands for chest pain type maybe? normal. trestbps=135. Chol 234. fbs=0.0 Fasting blood sugar? The values for diabetes: Glucose 146, BP 76, Skin Thickness 35, Insulin 194, BMI 38.2, Diabetes Pedigree 0.329. These indicate borderline high glucose; BMI high => risk. So diabetes likely.
+
+Heart: Using standard heart disease dataset features: cp 0. 0 indicates typical angina? Might be typical. thalach 161, oldpeak=0.5 slope 1.0, ca 0.0 indicates no major vessels -> risk maybe moderate. So heart testing is justified.
+
+Breast cancer: mean radius, texture, perimeter, area, smoothness. Need to estimate malignancy. Usually radius 13.17, texture 18.22, perimeter 84.28, area 537.3, smoothness 0.075. These seem low radius, moderate, smoothness moderate. For benign, radius less than ~14.5. It might be benign. So low risk.
+
+Thus run diabetes and heart. Primary: heart maybe higher. Provide confidence values. Let's estimate: heart 0.7, diabetes 0.5, breast 0.1. But if we only route to those two. Provide confidence dictionary for all three. Primary heart. Notes: explanation.
+
+Let's produce JSON.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.52,
+    "heart": 0.73,
+    "breast_cancer": 0.08
+  },
+  "notes": "Based on age, high BMI, fasting glucose of 146 mg/dL, and high insulin, the patient has moderate risk for diabetes; chest pain indicators, elevated resting blood pressure, high cholesterol, and a typical angina pattern point to a significant heart disease suspicion. Breast‑cancer markers (low radius, texture, and smoothness) suggest low probability of malignancy, so breast cancer screening is deprioritized."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.52, 'heart': 0.73, 'breast_cancer': 0.08}, 'notes': 'Based on age, high BMI, fasting glucose of 146 mg/dL, and high insulin, the patient has moderate risk for diabetes; chest pain indicators, elevated resting blood pressure, high cholesterol, and a typical angina pattern point to a significant heart disease suspicion. Breast‑cancer markers (low radius, texture, and smoothness) suggest low probability of malignancy, so breast cancer screening is deprioritized.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 5572. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=46.0, sex=1.0, cp=0.0, trestbps=140.0, chol=311.0,
+fbs=0.0, rest ecg=1.0, thalach=120.0, exang=1.0, oldpeak=1.8,
+slope=1.0, ca=2.0,
+Pregnancies=0.0, Glucose=111.0, Blood Pressure=65.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=24.6, Diabetes Pedigree Function=0.66.
+Breast features: mean radius=14.580, mean texture=21.530, mean perimeter=97.410, mean area=644.800, mean smoothness=0.105.
+Movement features: 
+MDVP:Fo=128.001, MDVP:Fhi=138.052, MDVP:Flo=122.080,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.001, MDVP:PPQ=0.002, Jitter:DDP=0.004,
+MDVP:Shimmer=0.023, MDVP:Shimmer=0.023,
+Shimmer:APQ3=0.013, Shimmer:APQ5=0.011,
+MDVP:APQ=0.017, Shimmer:DDA=0.040,
+NHR=0.005, HNR=24.692, RPDE=0.460,
+DFA=0.766, spread1=-7.072, spread2=0.220,
+D2=1.972, PPE=0.119.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide diagnostic pathways for diabetes, breast_cancer, heart. We have patient features. Compute risk roughly.
+
+Age 46, sex 1 (male). Heart features: chest pain type cp=0.0? Likely no chest pain? Treated. Trestbps=140 high borderline, chol 311 high, FBS 0? No. Rest ecg 1? Thalach 120, exang 1, oldpeak 1.8, slope 1, ca 2. In heart disease dataset, these are risk factors. Age >45, male. Probably moderate-high risk for heart disease. So heart likely.
+
+Diabetes: Age 46, Glucose 111 (normal borderline slightly high? Fasting glucose normal <=100; >100 hyperglycemia). But FBS=0? Possibly fasting. But glucose 111, insulin 0.0 (maybe missing). BMI 24.6 (normal). Diabetes Pedigree 0.66 (above threshold). So moderate risk for diabetes.
+
+Breast cancer: Only male, but breast cancer possible. features: mean radius 14.58, mean texture 21.53, area 644.8. Typical malignant mean radius >18; 14.6 is low. Usually malignant >20. So likely benign. So likely not needed.
+
+So route list: heart, diabetes. Primary: heart likely higher. Confidence: heart 0.8, diabetes 0.4, breast 0.05. Provide JSON.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["heart", "diabetes"],
+  "primary": "heart",
+  "confidence": {
+    "heart": 0.78,
+    "diabetes": 0.42,
+    "breast_cancer": 0.06,
+    "parkinson": 0.05
+  },
+  "notes": "Heart disease risk is elevated due to male sex, age >45, elevated blood pressure, high cholesterol, evidence of exertional angina and an abnormal exercise treadmill result (exang=1, oldpeak=1.8, slope=1). Diabetes risk is moderate with fasting glucose 111, family history (pedigree 0.66) and normal BMI. Breast cancer likelihood is low in a male patient with benign-appearing radiologic texture metrics."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'heart': 0.78, 'diabetes': 0.42, 'breast_cancer': 0.06, 'parkinson': 0.05}, 'notes': 'Heart disease risk is elevated due to male sex, age >45, elevated blood pressure, high cholesterol, evidence of exertional angina and an abnormal exercise treadmill result (exang=1, oldpeak=1.8, slope=1). Diabetes risk is moderate with fasting glucose 111, family history (pedigree 0.66) and normal BMI. Breast cancer likelihood is low in a male patient with benign-appearing radiologic texture metrics.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1615. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=56.0, sex=0.0, cp=1.0, trestbps=140.0, chol=294.0,
+fbs=0.0, rest ecg=0.0, thalach=153.0, exang=0.0, oldpeak=1.3,
+slope=1.0, ca=0.0,
+Pregnancies=0.0, Glucose=131.0, Blood Pressure=0.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=43.2, Diabetes Pedigree Function=0.27.
+Breast features: mean radius=12.050, mean texture=14.630, mean perimeter=78.040, mean area=449.300, mean smoothness=0.103.
+Movement features: 
+MDVP:Fo=98.804, MDVP:Fhi=102.305, MDVP:Flo=87.804,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.002, MDVP:PPQ=0.003, Jitter:DDP=0.007,
+MDVP:Shimmer=0.022, MDVP:Shimmer=0.022,
+Shimmer:APQ3=0.013, Shimmer:APQ5=0.013,
+MDVP:APQ=0.016, Shimmer:DDA=0.038,
+NHR=0.009, HNR=22.244, RPDE=0.577,
+DFA=0.772, spread1=-6.025, spread2=0.078,
+D2=2.054, PPE=0.177.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide which diagnostic pathways to run: diabetes, breast_cancer, heart. Based on features.
+
+The patient: age 56 male (sex=0 indicates male?), cp=1 chest pain, Tre- etc. Heart disease risk features: age>45, chest pain, high blood pressure, high cholesterol, high resting heart? Actually features: Tre (140), cholesterol 294 high. fbs 0. rest ecg 0. thalach high 153, oldpeak 1.3, slope 1, CA 0. So maybe moderate risk. Diabetes: BMI high 43.2, glucose 131, borderline. Diabetes risk high. Breast cancer: features indicate mean radius 12.05, mean texture 14.63, perimeter 78.04, area 449.30, smoothness .103. Not extremely abnormal. For breast cancer detection, typical malignant radius >14? Actually malignant tumors larger. So probably low risk.
+
+Thus recommended: diabetes and heart pathways. Confidence: high for heart, moderate for diabetes, low for breast_cancer.
+
+Compute approximate confidence: heart 0.8, diabetes 0.55, breast_cancer 0.15.
+
+Make primary as heart. Provide notes.
+
+So JSON:
+
+{
+ "routes": ["diabetes", "heart"],
+ "primary": "heart",
+ "confidence": {"diabetes":0.55,"heart":0.8,"breast_cancer":0.15},
+ "notes":"Patient shows elevated risk for CAD per chest pain, hypertension, hypercholesterol and resting tachycardia; BMI high and glucose borderline suggestive of type2 diabetes. Breast cancer risk low based on imaging biomarkers."
+}
+
+Let's output.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {
+    "diabetes": 0.55,
+    "heart": 0.80,
+    "breast_cancer": 0.15
+  },
+  "notes": "Chest pain type I, elevated blood pressure, high cholesterol, resting tachycardia, and age over 45 strongly suggest CAD. BMI 43.2 and fasting glucose 131 mg/dL raise the likelihood of type‑2 diabetes. Breast cancer biomarkers are within normal range; risk appears low."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.55, 'heart': 0.8, 'breast_cancer': 0.15}, 'notes': 'Chest pain type I, elevated blood pressure, high cholesterol, resting tachycardia, and age over 45 strongly suggest CAD. BMI 43.2 and fasting glucose 131 mg/dL raise the likelihood of type‑2 diabetes. Breast cancer biomarkers are within normal range; risk appears low.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2927. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=55.0, sex=1.0, cp=1.0, trestbps=130.0, chol=262.0,
+fbs=0.0, rest ecg=1.0, thalach=155.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=7.0, Glucose=159.0, Blood Pressure=64.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=27.4, Diabetes Pedigree Function=0.294.
+Breast features: mean radius=14.990, mean texture=25.200, mean perimeter=95.540, mean area=698.800, mean smoothness=0.094.
+Movement features: 
+MDVP:Fo=153.880, MDVP:Fhi=172.860, MDVP:Flo=78.128,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.002, MDVP:PPQ=0.003, Jitter:DDP=0.007,
+MDVP:Shimmer=0.041, MDVP:Shimmer=0.041,
+Shimmer:APQ3=0.020, Shimmer:APQ5=0.026,
+MDVP:APQ=0.045, Shimmer:DDA=0.061,
+NHR=0.018, HNR=19.493, RPDE=0.629,
+DFA=0.699, spread1=-5.187, spread2=0.238,
+D2=2.558, PPE=0.260.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+<|channel|>analysis<|message|>We need to decide the diagnostic pathways for diabetes, breast_cancer, or heart. Based on patient features: age 55 female. Heart indicators: cp (chest pain type) 1 (typical angina) trestbps 130 mild hypertension, chol 262 high chol, fbs 0, rest ecg 1 slightly abnormal, thalach 155 high resting heart rate, exang 0, oldpeak 0, slope 2, ca 0. These features are similar to heart disease data (UCI). They are risk factors for coronary heart disease. Diabetes-related features: Pregnancies 7, Glucose 159 (diabetic threshold in OGTT usually >140), BP 64? This seems like diastolic 64, which is low; but normal. BMI 27.4 overweight. Diabetes Pedigree 0.294 is low. Insulin 0. So maybe diabetes present due to high glucose but normal BMI? Might be borderline.
+
+Breast cancer features: radius 14.99, texture 25.2, perimeter 95.54, area 698.8, smoothness 0.094. These values typical of malignant? In breast cancer dataset (WBCD), malignant radius mean around 20.9? For benign radius ~14.5? Wait typical benign radius mean ~13.1? Actually malignant mean radius ~20.9, benign ~13.1. radius 14.99 may be normal borderline? Other features may give some hint. But we have to pick likely risk. We also have movement features (voice) - not relevant.
+
+We must output JSON with routes (list of chosen diagnoses). Also indicate primary diagnosis (most likely). Confidence values per type. We need to decide reasoning.
+
+We have multiple features; but limited context. It's probably heart disease risk moderate. Diabetes threshold > 140 mg/dl in fasting. They gave glucose 159, so diabetic. But also pregnant? 7 pregnancies (H1N1? Actually 7 pregnancies indicates a woman possibly postpartum). With BMI 27.4, overweight. Diabetes Pedigree 0.294 is low (normally >1 indicates high risk). But actual glucose >200? no it's 159, that's fasting blood glucose >126 indicates diabetes. So yes, diabetic.
+
+Breast cancer: radius ~15, which is higher than benign but still below malignant average. But smoothness 0.094 is near malignant? Actually malignant smoothness mean ~0.118? Hmm uncertain.
+
+Given 55-year-old female with risk for breast cancer; high risk due to age and previous pregnancies? But not sure.
+
+We can compute approximate likelihood manually: For heart disease, maybe moderate. For diabetes, threshold high. Breast cancer risk also high due to age >50.
+
+However we need to produce JSON with routes: likely all three perhaps. But maybe choose heart or diabetes as primary. Let's evaluate:
+
+Heart: cp=1 (typical angina). This indicates heart risk. Trestbps 130 borderline high. Chol 262 high. Rest ECG 1 abnormal. Thalach 155 high. These are risk factors. So high risk. Diabetes: glucose 159 indicates diabetic. Primary perhaps diabetes. For breast cancer: radius 14.99 likely benign; but we may consider breast. However less certain. Probability lower.
+
+Thus I think we will include all three with confidences: heart 0.45, diabetes 0.55, breast_cancer 0.15. Primary: diabetes. Add notes.
+
+Let's produce JSON accordingly.<|end|><|start|>assistant<|channel|>final<|message|>{
+  "routes": ["diabetes", "heart", "breast_cancer"],
+  "primary": "diabetes",
+  "confidence": {
+    "diabetes": 0.58,
+    "heart": 0.42,
+    "breast_cancer": 0.13,
+    "parkinson": 0.01
+  },
+  "notes": "Fasting glucose 159 mg/dL exceeds the diabetic threshold, combined with overweight BMI and normal pedigree score suggests overt diabetes. Heart risk is moderate: typical angina, elevated cholesterol, borderline high blood pressure, abnormal ECG, and high resting heart rate. Breast‑cancer signal is weaker – radius 14.99 and smoothness 0.094 are closer to benign cluster values, so risk is lower but still flagged due to age >50 and female sex."
+}<|return|>
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes', 'breast_cancer'], 'primary': 'diabetes', 'confidence': {'diabetes': 0.58, 'heart': 0.42, 'breast_cancer': 0.13, 'parkinson': 0.01}, 'notes': 'Fasting glucose 159\u202fmg/dL exceeds the diabetic threshold, combined with overweight BMI and normal pedigree score suggests overt diabetes. Heart risk is moderate: typical angina, elevated cholesterol, borderline high blood pressure, abnormal ECG, and high resting heart rate. Breast‑cancer signal is weaker – radius 14.99 and smoothness 0.094 are closer to benign cluster values, so risk is lower but still flagged due to age >50 and female sex.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====

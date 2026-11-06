@@ -1,0 +1,15 @@
+Ignoring corrupted tree cache file /local/.cache/huggingface/hub/models--openai--gpt-oss-20b/trees/6cee5e81ee83917806bbde320786a8fb61efebee.json: [Errno 13] Permission denied: '/local/.cache/huggingface/hub/models--openai--gpt-oss-20b/trees/6cee5e81ee83917806bbde320786a8fb61efebee.json'
+Fetching 44 files:   0%|          | 0/44 [00:00<?, ?it/s]Fetching 44 files: 100%|██████████| 44/44 [00:00<00:00, 1837.88it/s]
+Loading weights:   0%|          | 0/411 [00:00<?, ?it/s]Loading weights:   0%|          | 2/411 [00:00<00:54,  7.57it/s]Loading weights:   1%|          | 5/411 [00:00<00:30, 13.43it/s]Loading weights:  12%|█▏        | 50/411 [00:00<00:02, 145.09it/s]Loading weights:  18%|█▊        | 73/411 [00:00<00:02, 163.56it/s]Loading weights:  23%|██▎       | 94/411 [00:00<00:01, 159.87it/s]Loading weights:  30%|███       | 124/411 [00:00<00:01, 190.41it/s]Loading weights:  36%|███▌      | 146/411 [00:01<00:01, 185.39it/s]Loading weights:  42%|████▏     | 173/411 [00:01<00:01, 202.48it/s]Loading weights:  47%|████▋     | 195/411 [00:01<00:01, 190.97it/s]Loading weights:  55%|█████▍    | 225/411 [00:01<00:00, 213.38it/s]Loading weights:  60%|██████    | 248/411 [00:01<00:00, 202.43it/s]Loading weights:  67%|██████▋   | 276/411 [00:01<00:00, 213.85it/s]Loading weights:  73%|███████▎  | 298/411 [00:01<00:00, 200.99it/s]Loading weights:  80%|███████▉  | 328/411 [00:01<00:00, 214.10it/s]Loading weights:  85%|████████▌ | 350/411 [00:01<00:00, 198.73it/s]Loading weights:  92%|█████████▏| 378/411 [00:02<00:00, 208.46it/s]Loading weights:  97%|█████████▋| 400/411 [00:02<00:00, 197.64it/s]Loading weights: 100%|██████████| 411/411 [00:02<00:00, 183.72it/s]
+Traceback (most recent call last):
+  File "/local/s3692442/multi_agent_sim/2_llm_mcp.py", line 437, in <module>
+    model.step()
+  File "/local/s3692442/multi_agent_sim/2_llm_mcp.py", line 403, in step
+    self.schedule.step()
+  File "/local/s3692442/multi_agent_sim/2_llm_mcp.py", line 113, in step
+    agent.step()
+  File "/local/s3692442/multi_agent_sim/2_llm_mcp.py", line 237, in step
+    response_dict = self._parse_json_text(response_) # parse the text into a dict
+  File "/local/s3692442/multi_agent_sim/2_llm_mcp.py", line 218, in _parse_json_text
+    return {"routes": routes, "primary": primary, "confidence": confidence, "notes": notes}
+UnboundLocalError: local variable 'routes' referenced before assignment
