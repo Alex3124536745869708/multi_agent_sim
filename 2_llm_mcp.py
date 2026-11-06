@@ -180,6 +180,12 @@ class LLMPlannerAgent(BaseAgent):
     def _parse_json_text(self, json_text):
         """parse the json text into a dict with keys: routes, primary, confidence, notes"""
         key_words = self._find_key_words(json_text)
+        # init
+        routes = []
+        primary = None
+        confidence = {}
+        notes = "No notes."
+        
         for idx in range(len(key_words)):
             next_idx = key_words[idx+1].start() if idx+1 < len(key_words) else len(json_text)
             curr = key_words[idx]
@@ -187,7 +193,7 @@ class LLMPlannerAgent(BaseAgent):
             # preprocesses possible variations in keys and values to get a consistent output
             preprocess_domains = lambda x: x.replace(" ", "_").replace("-", "_").lower()
             preprocess_numbers = lambda x: float(x.replace(",", ".") if x.lower() != "none" else 0)
-    
+
             match curr.group().lower():
                 case "routes" | "route":
                     # create a list with the possible domains
