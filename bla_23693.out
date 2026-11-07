@@ -1,0 +1,547 @@
+Running on host: netherite
+GPU Verification:
+Fri Nov  6 20:50:57 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 615.71.09              KMD Version: 615.71.09     CUDA UMD Version: 13.4     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L40S                    Off |   00000000:C9:00.0 Off |                    0 |
+| N/A   30C    P8             32W /  350W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+[llm_planner] Planned task task_heart_2787
+[llm_planner] Planned task task_diabetes_2787
+[llm_planner] Planned task task_breast_cancer_2787
+[llm_planner] Planned task task_heart_2214
+[llm_planner] Planned task task_diabetes_2214
+[llm_planner] Planned task task_heart_1579
+[llm_planner] Planned task task_diabetes_1579
+[llm_planner] Planned task task_heart_1340
+[llm_planner] Planned task task_diabetes_1340
+[llm_planner] Planned task task_heart_3313
+[llm_planner] Planned task task_diabetes_3313
+[llm_planner] Planned task task_heart_2139
+[llm_planner] Planned task task_diabetes_2139
+[llm_planner] Planned task task_heart_3387
+[llm_planner] Planned task task_diabetes_3387
+[llm_planner] Planned task task_heart_9674
+[llm_planner] Planned task task_diabetes_9674
+[llm_planner] Planned task task_breast_cancer_9674
+[llm_planner] Planned task task_heart_2086
+[llm_planner] Planned task task_diabetes_2086
+[llm_planner] Planned task task_heart_3024
+[llm_planner] Planned task task_diabetes_3024
+[llm_planner] Planned task task_breast_cancer_3024
+[llm_planner] Planned task task_heart_5189
+[llm_planner] Planned task task_diabetes_5189
+[llm_planner] Planned task task_heart_2897
+[llm_planner] Planned task task_diabetes_2897
+[llm_planner] Planned task task_heart_3339
+[llm_planner] Planned task task_diabetes_3339
+[llm_planner] Planned task task_heart_1152
+[llm_planner] Planned task task_diabetes_1152
+[llm_planner] Planned task task_heart_2377
+[llm_planner] Planned task task_parkinson_2377
+[llm_planner] Planned task task_diabetes_2377
+[llm_planner] Planned task task_breast_cancer_2377
+[llm_planner] Planned task task_heart_4895
+[llm_planner] Planned task task_diabetes_4895
+[llm_planner] Planned task task_heart_1416
+[llm_planner] Planned task task_diabetes_1416
+[llm_planner] Planned task task_breast_cancer_1416
+[llm_planner] Planned task task_heart_4319
+[llm_planner] Planned task task_diabetes_4319
+[llm_planner] Planned task task_heart_3101
+[llm_planner] Planned task task_diabetes_3101
+[llm_planner] Planned task task_heart_1027
+[llm_planner] Planned task task_diabetes_1027
+[llm_planner] Planned task task_heart_9326
+[llm_planner] Planned task task_diabetes_9326
+[llm_planner] Planned task task_breast_cancer_9326
+[llm_planner] Planned task task_heart_1069
+[llm_planner] Planned task task_diabetes_1069
+[llm_planner] Planned task task_breast_cancer_1069
+[llm_planner] Planned task task_heart_1528
+[llm_planner] Planned task task_diabetes_1528
+[llm_planner] Planned task task_heart_8084
+[llm_planner] Planned task task_diabetes_8084
+[llm_planner] Planned task task_breast_cancer_8084
+[llm_planner] Planned task task_heart_6346
+[llm_planner] Planned task task_diabetes_6346
+[llm_planner] Planned task task_heart_1421
+[llm_planner] Planned task task_diabetes_1421
+[llm_planner] Planned task task_heart_9772
+[llm_planner] Planned task task_diabetes_9772
+[llm_planner] Planned task task_heart_6987
+[llm_planner] Planned task task_diabetes_6987
+[llm_planner] Planned task task_heart_2625
+[llm_planner] Planned task task_diabetes_2625
+[llm_planner] Planned task task_heart_2840
+[llm_planner] Planned task task_diabetes_2840
+[llm_planner] Planned task task_breast_cancer_2840
+[llm_planner] Planned task task_heart_1347
+[llm_planner] Planned task task_diabetes_1347
+[llm_planner] Planned task task_heart_2996
+[llm_planner] Planned task task_diabetes_2996
+[llm_planner] Planned task task_breast_cancer_2996
+[llm_planner] Planned task task_heart_2276
+[llm_planner] Planned task task_diabetes_2276
+[llm_planner] Planned task task_breast_cancer_2276
+[llm_planner] Planned task task_heart_1915
+[llm_planner] Planned task task_diabetes_1915
+[llm_planner] Planned task task_breast_cancer_1915
+[llm_planner] Planned task task_heart_2903
+[llm_planner] Planned task task_diabetes_2903
+[llm_planner] Planned task task_heart_4844
+[llm_planner] Planned task task_diabetes_4844
+[llm_planner] Planned task task_breast_cancer_4844
+[llm_planner] Planned task task_heart_3078
+[llm_planner] Planned task task_diabetes_3078
+[llm_planner] Planned task task_heart_4510
+[llm_planner] Planned task task_diabetes_4510
+[llm_planner] Planned task task_heart_3715
+[llm_planner] Planned task task_diabetes_3715
+[llm_planner] Planned task task_breast_cancer_3715
+[llm_planner] Planned task task_heart_1354
+[llm_planner] Planned task task_diabetes_1354
+[llm_planner] Planned task task_heart_2860
+[llm_planner] Planned task task_diabetes_2860
+[llm_planner] Planned task task_diabetes_2693
+[llm_planner] Planned task task_heart_3209
+[llm_planner] Planned task task_heart_3168
+[llm_planner] Planned task task_diabetes_3168
+[llm_planner] Planned task task_breast_cancer_3168
+[llm_planner] Planned task task_heart_9802
+[llm_planner] Planned task task_diabetes_9802
+[llm_planner] Planned task task_heart_1838
+[llm_planner] Planned task task_diabetes_1838
+[llm_planner] Planned task task_heart_1553
+[llm_planner] Planned task task_heart_2324
+[llm_planner] Planned task task_diabetes_2324
+[llm_planner] Planned task task_breast_cancer_2324
+[llm_planner] Planned task task_heart_5000
+[llm_planner] Planned task task_diabetes_5000
+[llm_planner] Planned task task_heart_5372
+[llm_planner] Planned task task_diabetes_5372
+[llm_planner] Planned task task_breast_cancer_1302
+[llm_planner] Planned task task_heart_2044
+[llm_planner] Planned task task_diabetes_2044
+[llm_planner] Planned task task_breast_cancer_2044
+[llm_planner] Planned task task_heart_1881
+[llm_planner] Planned task task_diabetes_1881
+[llm_planner] Planned task task_heart_1549
+[llm_planner] Planned task task_heart_1052
+[llm_planner] Planned task task_breast_cancer_1052
+[llm_planner] Planned task task_heart_2261
+[llm_planner] Planned task task_heart_4049
+[llm_planner] Planned task task_diabetes_4049
+[llm_planner] Planned task task_heart_3032
+[llm_planner] Planned task task_diabetes_3032
+[llm_planner] Planned task task_breast_cancer_3032
+[llm_planner] Planned task task_heart_2549
+[llm_planner] Planned task task_diabetes_2549
+[llm_planner] Planned task task_heart_2953
+[llm_planner] Planned task task_diabetes_2953
+[llm_planner] Planned task task_heart_2161
+[llm_planner] Planned task task_diabetes_2161
+[llm_planner] Planned task task_breast_cancer_2161
+[llm_planner] Planned task task_heart_2942
+[llm_planner] Planned task task_diabetes_2942
+[llm_planner] Planned task task_breast_cancer_2942
+[llm_planner] Planned task task_heart_2416
+[llm_planner] Planned task task_diabetes_2416
+[llm_planner] Planned task task_breast_cancer_2416
+[llm_planner] Planned task task_heart_1378
+[llm_planner] Planned task task_diabetes_1378
+[llm_planner] Planned task task_breast_cancer_1378
+[llm_planner] Planned task task_heart_2426
+[llm_planner] Planned task task_diabetes_2426
+[llm_planner] Planned task task_heart_1807
+[llm_planner] Planned task task_diabetes_1807
+[llm_planner] Planned task task_breast_cancer_1807
+[llm_planner] Planned task task_heart_1361
+[llm_planner] Planned task task_breast_cancer_1361
+[llm_planner] Planned task task_heart_2452
+[llm_planner] Planned task task_diabetes_2452
+[llm_planner] Planned task task_heart_1234
+[llm_planner] Planned task task_diabetes_1234
+[llm_planner] Planned task task_breast_cancer_1234
+[llm_planner] Planned task task_heart_2063
+[llm_planner] Planned task task_diabetes_2063
+[llm_planner] Planned task task_breast_cancer_2063
+[llm_planner] Planned task task_heart_4234
+[llm_planner] Planned task task_diabetes_4234
+[llm_planner] Planned task task_heart_1339
+[llm_planner] Planned task task_diabetes_1339
+[llm_planner] Planned task task_heart_3052
+[llm_planner] Planned task task_diabetes_3052
+[llm_planner] Planned task task_breast_cancer_3052
+[llm_planner] Planned task task_heart_4615
+[llm_planner] Planned task task_diabetes_4615
+[llm_planner] Planned task task_breast_cancer_4615
+[llm_planner] Planned task task_heart_1351
+[llm_planner] Planned task task_diabetes_1351
+[llm_planner] Planned task task_breast_cancer_1351
+[llm_planner] Planned task task_heart_3003
+[llm_planner] Planned task task_diabetes_3003
+[llm_planner] Planned task task_heart_1524
+[llm_planner] Planned task task_heart_3737
+[llm_planner] Planned task task_diabetes_3737
+[llm_planner] Planned task task_breast_cancer_3737
+[llm_planner] Planned task task_heart_1848
+[llm_planner] Planned task task_diabetes_1848
+[llm_planner] Planned task task_heart_1944
+[llm_planner] Planned task task_diabetes_1944
+[llm_planner] Planned task task_heart_1745
+[llm_planner] Planned task task_diabetes_1745
+[llm_planner] Planned task task_heart_3403
+[llm_planner] Planned task task_diabetes_3403
+[llm_planner] Planned task task_heart_3377
+[llm_planner] Planned task task_diabetes_3377
+[llm_planner] Planned task task_breast_cancer_3377
+[llm_planner] Planned task task_heart_1648
+[llm_planner] Planned task task_diabetes_1648
+[llm_planner] Planned task task_breast_cancer_1980
+[llm_planner] Planned task task_heart_2634
+[llm_planner] Planned task task_diabetes_2634
+[llm_planner] Planned task task_heart_2689
+[llm_planner] Planned task task_diabetes_2689
+[llm_planner] Planned task task_heart_2190
+[llm_planner] Planned task task_diabetes_2190
+[llm_planner] Planned task task_heart_2958
+[llm_planner] Planned task task_diabetes_2958
+[llm_planner] Planned task task_heart_1358
+[llm_planner] Planned task task_diabetes_1358
+[llm_planner] Planned task task_heart_2141
+[llm_planner] Planned task task_diabetes_2141
+[llm_planner] Planned task task_breast_cancer_2141
+[llm_planner] Planned task task_heart_2193
+[llm_planner] Planned task task_diabetes_2193
+[llm_planner] Planned task task_breast_cancer_2193
+[llm_planner] Planned task task_heart_7890
+[llm_planner] Planned task task_diabetes_7890
+[llm_planner] Planned task task_heart_9556
+[llm_planner] Planned task task_diabetes_9556
+[llm_planner] Planned task task_heart_3320
+[llm_planner] Planned task task_diabetes_3320
+[llm_planner] Planned task task_heart_2194
+[llm_planner] Planned task task_diabetes_2194
+[llm_planner] Planned task task_heart_4118
+[llm_planner] Planned task task_diabetes_4118
+[llm_planner] Planned task task_heart_4529
+[llm_planner] Planned task task_diabetes_4529
+[llm_planner] Planned task task_heart_1252
+[llm_planner] Planned task task_diabetes_1252
+[llm_planner] Planned task task_breast_cancer_1252
+[llm_planner] Planned task task_heart_1588
+[llm_planner] Planned task task_breast_cancer_1588
+[executor_diabetes] Executed task 2787 → prediction: 0
+[executor_diabetes] Executed task 2214 → prediction: 0
+[executor_diabetes] Executed task 1579 → prediction: 1
+[executor_diabetes] Executed task 1340 → prediction: 0
+[executor_diabetes] Executed task 3313 → prediction: 0
+[executor_diabetes] Executed task 2139 → prediction: 0
+[executor_diabetes] Executed task 3387 → prediction: 1
+[executor_diabetes] Executed task 9674 → prediction: 1
+[executor_diabetes] Executed task 2086 → prediction: 1
+[executor_diabetes] Executed task 3024 → prediction: 1
+[executor_diabetes] Executed task 5189 → prediction: 0
+[executor_diabetes] Executed task 2897 → prediction: 0
+[executor_diabetes] Executed task 3339 → prediction: 0
+[executor_diabetes] Executed task 1152 → prediction: 0
+[executor_diabetes] Executed task 2377 → prediction: 1
+[executor_diabetes] Executed task 4895 → prediction: 1
+[executor_diabetes] Executed task 1416 → prediction: 1
+[executor_diabetes] Executed task 4319 → prediction: 0
+[executor_diabetes] Executed task 3101 → prediction: 1
+[executor_diabetes] Executed task 1027 → prediction: 0
+[executor_diabetes] Executed task 9326 → prediction: 0
+[executor_diabetes] Executed task 1069 → prediction: 1
+[executor_diabetes] Executed task 1528 → prediction: 0
+[executor_diabetes] Executed task 8084 → prediction: 1
+[executor_diabetes] Executed task 6346 → prediction: 0
+[executor_diabetes] Executed task 1421 → prediction: 0
+[executor_diabetes] Executed task 9772 → prediction: 1
+[executor_diabetes] Executed task 6987 → prediction: 1
+[executor_diabetes] Executed task 2625 → prediction: 0
+[executor_diabetes] Executed task 2840 → prediction: 1
+[executor_diabetes] Executed task 1347 → prediction: 0
+[executor_diabetes] Executed task 2996 → prediction: 0
+[executor_diabetes] Executed task 2276 → prediction: 0
+[executor_diabetes] Executed task 1915 → prediction: 0
+[executor_diabetes] Executed task 2903 → prediction: 1
+[executor_diabetes] Executed task 4844 → prediction: 1
+[executor_diabetes] Executed task 3078 → prediction: 0
+[executor_diabetes] Executed task 4510 → prediction: 0
+[executor_diabetes] Executed task 3715 → prediction: 0
+[executor_diabetes] Executed task 1354 → prediction: 0
+[executor_diabetes] Executed task 2860 → prediction: 0
+[executor_diabetes] Executed task 2693 → prediction: 0
+[executor_diabetes] Executed task 3168 → prediction: 1
+[executor_diabetes] Executed task 9802 → prediction: 0
+[executor_diabetes] Executed task 1838 → prediction: 0
+[executor_diabetes] Executed task 2324 → prediction: 0
+[executor_diabetes] Executed task 5000 → prediction: 1
+[executor_diabetes] Executed task 5372 → prediction: 0
+[executor_diabetes] Executed task 2044 → prediction: 1
+[executor_diabetes] Executed task 1881 → prediction: 1
+[executor_diabetes] Executed task 4049 → prediction: 1
+[executor_diabetes] Executed task 3032 → prediction: 0
+[executor_diabetes] Executed task 2549 → prediction: 0
+[executor_diabetes] Executed task 2953 → prediction: 0
+[executor_diabetes] Executed task 2161 → prediction: 0
+[executor_diabetes] Executed task 2942 → prediction: 1
+[executor_diabetes] Executed task 2416 → prediction: 1
+[executor_diabetes] Executed task 1378 → prediction: 0
+[executor_diabetes] Executed task 2426 → prediction: 1
+[executor_diabetes] Executed task 1807 → prediction: 0
+[executor_diabetes] Executed task 2452 → prediction: 1
+[executor_diabetes] Executed task 1234 → prediction: 0
+[executor_diabetes] Executed task 2063 → prediction: 0
+[executor_diabetes] Executed task 4234 → prediction: 1
+[executor_diabetes] Executed task 1339 → prediction: 0
+[executor_diabetes] Executed task 3052 → prediction: 0
+[executor_diabetes] Executed task 4615 → prediction: 0
+[executor_diabetes] Executed task 1351 → prediction: 0
+[executor_diabetes] Executed task 3003 → prediction: 0
+[executor_diabetes] Executed task 3737 → prediction: 0
+[executor_diabetes] Executed task 1848 → prediction: 0
+[executor_diabetes] Executed task 1944 → prediction: 0
+[executor_diabetes] Executed task 1745 → prediction: 1
+[executor_diabetes] Executed task 3403 → prediction: 0
+[executor_diabetes] Executed task 3377 → prediction: 1
+[executor_diabetes] Executed task 1648 → prediction: 0
+[executor_diabetes] Executed task 2634 → prediction: 1
+[executor_diabetes] Executed task 2689 → prediction: 0
+[executor_diabetes] Executed task 2190 → prediction: 0
+[executor_diabetes] Executed task 2958 → prediction: 1
+[executor_diabetes] Executed task 1358 → prediction: 0
+[executor_diabetes] Executed task 2141 → prediction: 0
+[executor_diabetes] Executed task 2193 → prediction: 0
+[executor_diabetes] Executed task 7890 → prediction: 0
+[executor_diabetes] Executed task 9556 → prediction: 0
+[executor_diabetes] Executed task 3320 → prediction: 1
+[executor_diabetes] Executed task 2194 → prediction: 1
+[executor_diabetes] Executed task 4118 → prediction: 1
+[executor_diabetes] Executed task 4529 → prediction: 1
+[executor_diabetes] Executed task 1252 → prediction: 0
+[executor_breast_cancer] Executed task 2787 → prediction: 0
+[executor_breast_cancer] Executed task 9674 → prediction: 1
+[executor_breast_cancer] Executed task 3024 → prediction: 1
+[executor_breast_cancer] Executed task 2377 → prediction: 1
+[executor_breast_cancer] Executed task 1416 → prediction: 0
+[executor_breast_cancer] Executed task 9326 → prediction: 1
+[executor_breast_cancer] Executed task 1069 → prediction: 1
+[executor_breast_cancer] Executed task 8084 → prediction: 1
+[executor_breast_cancer] Executed task 2840 → prediction: 0
+[executor_breast_cancer] Executed task 2996 → prediction: 1
+[executor_breast_cancer] Executed task 2276 → prediction: 0
+[executor_breast_cancer] Executed task 1915 → prediction: 0
+[executor_breast_cancer] Executed task 4844 → prediction: 1
+[executor_breast_cancer] Executed task 3715 → prediction: 0
+[executor_breast_cancer] Executed task 3168 → prediction: 1
+[executor_breast_cancer] Executed task 2324 → prediction: 0
+[executor_breast_cancer] Executed task 1302 → prediction: 0
+[executor_breast_cancer] Executed task 2044 → prediction: 1
+[executor_breast_cancer] Executed task 1052 → prediction: 0
+[executor_breast_cancer] Executed task 3032 → prediction: 0
+[executor_breast_cancer] Executed task 2161 → prediction: 1
+[executor_breast_cancer] Executed task 2942 → prediction: 1
+[executor_breast_cancer] Executed task 2416 → prediction: 1
+[executor_breast_cancer] Executed task 1378 → prediction: 1
+[executor_breast_cancer] Executed task 1807 → prediction: 1
+[executor_breast_cancer] Executed task 1361 → prediction: 0
+[executor_breast_cancer] Executed task 1234 → prediction: 0
+[executor_breast_cancer] Executed task 2063 → prediction: 0
+[executor_breast_cancer] Executed task 3052 → prediction: 0
+[executor_breast_cancer] Executed task 4615 → prediction: 1
+[executor_breast_cancer] Executed task 1351 → prediction: 1
+[executor_breast_cancer] Executed task 3737 → prediction: 1
+[executor_breast_cancer] Executed task 3377 → prediction: 0
+[executor_breast_cancer] Executed task 1980 → prediction: 0
+[executor_breast_cancer] Executed task 2141 → prediction: 0
+[executor_breast_cancer] Executed task 2193 → prediction: 0
+[executor_breast_cancer] Executed task 1252 → prediction: 0
+[executor_breast_cancer] Executed task 1588 → prediction: 0
+[executor_heart] Executed task 2787 → prediction: 0
+[executor_heart] Executed task 2214 → prediction: 0
+[executor_heart] Executed task 1579 → prediction: 1
+[executor_heart] Executed task 1340 → prediction: 1
+[executor_heart] Executed task 3313 → prediction: 1
+[executor_heart] Executed task 2139 → prediction: 0
+[executor_heart] Executed task 3387 → prediction: 0
+[executor_heart] Executed task 9674 → prediction: 1
+[executor_heart] Executed task 2086 → prediction: 1
+[executor_heart] Executed task 3024 → prediction: 0
+[executor_heart] Executed task 5189 → prediction: 1
+[executor_heart] Executed task 2897 → prediction: 1
+[executor_heart] Executed task 3339 → prediction: 0
+[executor_heart] Executed task 1152 → prediction: 0
+[executor_heart] Executed task 2377 → prediction: 0
+[executor_heart] Executed task 4895 → prediction: 1
+[executor_heart] Executed task 1416 → prediction: 0
+[executor_heart] Executed task 4319 → prediction: 1
+[executor_heart] Executed task 3101 → prediction: 1
+[executor_heart] Executed task 1027 → prediction: 0
+[executor_heart] Executed task 9326 → prediction: 1
+[executor_heart] Executed task 1069 → prediction: 1
+[executor_heart] Executed task 1528 → prediction: 0
+[executor_heart] Executed task 8084 → prediction: 0
+[executor_heart] Executed task 6346 → prediction: 0
+[executor_heart] Executed task 1421 → prediction: 0
+[executor_heart] Executed task 9772 → prediction: 1
+[executor_heart] Executed task 6987 → prediction: 1
+[executor_heart] Executed task 2625 → prediction: 0
+[executor_heart] Executed task 2840 → prediction: 0
+[executor_heart] Executed task 1347 → prediction: 0
+[executor_heart] Executed task 2996 → prediction: 1
+[executor_heart] Executed task 2276 → prediction: 1
+[executor_heart] Executed task 1915 → prediction: 0
+[executor_heart] Executed task 2903 → prediction: 0
+[executor_heart] Executed task 4844 → prediction: 1
+[executor_heart] Executed task 3078 → prediction: 0
+[executor_heart] Executed task 4510 → prediction: 0
+[executor_heart] Executed task 3715 → prediction: 1
+[executor_heart] Executed task 1354 → prediction: 0
+[executor_heart] Executed task 2860 → prediction: 0
+[executor_heart] Executed task 3209 → prediction: 1
+[executor_heart] Executed task 3168 → prediction: 0
+[executor_heart] Executed task 9802 → prediction: 1
+[executor_heart] Executed task 1838 → prediction: 0
+[executor_heart] Executed task 1553 → prediction: 0
+[executor_heart] Executed task 2324 → prediction: 0
+[executor_heart] Executed task 5000 → prediction: 1
+[executor_heart] Executed task 5372 → prediction: 0
+[executor_heart] Executed task 2044 → prediction: 0
+[executor_heart] Executed task 1881 → prediction: 1
+[executor_heart] Executed task 1549 → prediction: 0
+[executor_heart] Executed task 1052 → prediction: 1
+[executor_heart] Executed task 2261 → prediction: 0
+[executor_heart] Executed task 4049 → prediction: 0
+[executor_heart] Executed task 3032 → prediction: 0
+[executor_heart] Executed task 2549 → prediction: 0
+[executor_heart] Executed task 2953 → prediction: 1
+[executor_heart] Executed task 2161 → prediction: 1
+[executor_heart] Executed task 2942 → prediction: 1
+[executor_heart] Executed task 2416 → prediction: 0
+[executor_heart] Executed task 1378 → prediction: 0
+[executor_heart] Executed task 2426 → prediction: 0
+[executor_heart] Executed task 1807 → prediction: 1
+[executor_heart] Executed task 1361 → prediction: 1
+[executor_heart] Executed task 2452 → prediction: 1
+[executor_heart] Executed task 1234 → prediction: 1
+[executor_heart] Executed task 2063 → prediction: 0
+[executor_heart] Executed task 4234 → prediction: 1
+[executor_heart] Executed task 1339 → prediction: 1
+[executor_heart] Executed task 3052 → prediction: 1
+[executor_heart] Executed task 4615 → prediction: 1
+[executor_heart] Executed task 1351 → prediction: 0
+[executor_heart] Executed task 3003 → prediction: 0
+[executor_heart] Executed task 1524 → prediction: 1
+[executor_heart] Executed task 3737 → prediction: 1
+[executor_heart] Executed task 1848 → prediction: 0
+[executor_heart] Executed task 1944 → prediction: 0
+[executor_heart] Executed task 1745 → prediction: 0
+[executor_heart] Executed task 3403 → prediction: 0
+[executor_heart] Executed task 3377 → prediction: 0
+[executor_heart] Executed task 1648 → prediction: 0
+[executor_heart] Executed task 2634 → prediction: 1
+[executor_heart] Executed task 2689 → prediction: 0
+[executor_heart] Executed task 2190 → prediction: 1
+[executor_heart] Executed task 2958 → prediction: 1
+[executor_heart] Executed task 1358 → prediction: 0
+[executor_heart] Executed task 2141 → prediction: 1
+[executor_heart] Executed task 2193 → prediction: 1
+[executor_heart] Executed task 7890 → prediction: 1
+[executor_heart] Executed task 9556 → prediction: 0
+[executor_heart] Executed task 3320 → prediction: 0
+[executor_heart] Executed task 2194 → prediction: 1
+[executor_heart] Executed task 4118 → prediction: 0
+[executor_heart] Executed task 4529 → prediction: 1
+[executor_heart] Executed task 1252 → prediction: 1
+[executor_heart] Executed task 1588 → prediction: 0
+[executor_parkinson] Executed task 2377 → prediction: 1
+======== Done with scheduling and execution ==========
+
+Triage Collected: 100
+  PatientID  ...                                             labels
+0      2787  ...  {'diabetes': 0, 'breast_cancer': 0, 'heart': 0...
+1      2214  ...  {'diabetes': 0, 'breast_cancer': 1, 'heart': 0...
+2      1579  ...  {'diabetes': 1, 'breast_cancer': 1, 'heart': 1...
+3      1340  ...  {'diabetes': 0, 'breast_cancer': 1, 'heart': 1...
+4      3313  ...  {'diabetes': 0, 'breast_cancer': 0, 'heart': 1...
+
+[5 rows x 4 columns]
+
+====== Triage performance: =====
+TP: 98
+FP: 128
+TN: 55
+FN: 119
+Precision: 0.4336283185840708
+Recall: 0.45161290322580644
+Results Collected: 226
+  PatientID   Disease  y_true  y_pred triage_primary
+0      2787  diabetes       0       0           None
+1      2214  diabetes       0       0           None
+2      1579  diabetes       1       1           None
+3      1340  diabetes       0       0           None
+4      3313  diabetes       0       0           None
+
+
+=== diabetes ===
+              precision    recall  f1-score   support
+
+           0      1.000     1.000     1.000        56
+           1      1.000     1.000     1.000        34
+
+    accuracy                          1.000        90
+   macro avg      1.000     1.000     1.000        90
+weighted avg      1.000     1.000     1.000        90
+
+
+=== breast_cancer ===
+              precision    recall  f1-score   support
+
+           0      1.000     1.000     1.000        20
+           1      1.000     1.000     1.000        18
+
+    accuracy                          1.000        38
+   macro avg      1.000     1.000     1.000        38
+weighted avg      1.000     1.000     1.000        38
+
+
+=== heart ===
+              precision    recall  f1-score   support
+
+           0      1.000     1.000     1.000        52
+           1      1.000     1.000     1.000        45
+
+    accuracy                          1.000        97
+   macro avg      1.000     1.000     1.000        97
+weighted avg      1.000     1.000     1.000        97
+
+
+=== parkinson ===
+              precision    recall  f1-score   support
+
+           1      1.000     1.000     1.000         1
+
+    accuracy                          1.000         1
+   macro avg      1.000     1.000     1.000         1
+weighted avg      1.000     1.000     1.000         1
+
+========================================
+All benchmarks finished.
+========================================
