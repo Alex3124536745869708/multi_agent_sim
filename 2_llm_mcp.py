@@ -36,14 +36,16 @@ LLM = AutoModelForCausalLM.from_pretrained(
 warnings.filterwarnings("ignore")
 
 def call_llm_fn(prompt: str) -> str:
-    """Call LLM and return raw text output."""
-    # return """{
-    #   "routes": ["diabetes", "heart"],
-    #   "primary": "heart",
-    #   "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05},
-    #   "notes": "Brief triage rationale."
-    # }"""
-
+    """Call LLM and return raw text output.
+    
+    Example output: return '''{
+          "routes": ["diabetes", "heart"],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05},
+          "notes": "Brief triage rationale."
+        }'''
+    """
+    
     messages = [
         {"role": "user", "content": prompt},
     ]
@@ -57,7 +59,7 @@ def call_llm_fn(prompt: str) -> str:
     generated = LLM.generate(**inputs, max_new_tokens=5000)
     return tokenizer.decode(generated[0][inputs["input_ids"].shape[-1]:])
 
-def make_case_text(pid, d_row, b_row, h_row):
+def make_case_text(pid, d_row, b_row, h_row, p_row):
     # d_row, b_row, h_row are 1D arrays (same as you pass to models)
     # Keep it short; it’s triage, not a full report.
     return f"""
@@ -155,26 +157,39 @@ class LLMPlannerAgent(BaseAgent):
 
     @staticmethod
     def _find_key_words(json_text):
-        """finds the keys in the json text and returns a list of match objects"""
-        return list(re.finditer(r"routes?|primary|confidence|notes?", json_text, re.IGNORECASE))
+        """finds the keys in the json text and returns a list of match objects. Only the first key occurence is saved."""
+        keys = [r"routes?",r"primary",r"confidence",r"notes?"]
+        matches = []
+        for key in keys:
+            for match in re.finditer(key, json_text, re.IGNORECASE):
+                matches.append(match)
+                break
+        return matches
 
     def _parse_json_text(self, json_text):
         """parse the json text into a dict with keys: routes, primary, confidence, notes"""
         key_words = self._find_key_words(json_text)
+        # init
+        routes = []
+        primary = None
+        confidence = {}
+        notes = "No notes."
+        
         for idx in range(len(key_words)):
             next_idx = key_words[idx+1].start() if idx+1 < len(key_words) else len(json_text)
             curr = key_words[idx]
 
             # preprocesses possible variations in keys and values to get a consistent output
-            preprocess_domains = lambda x: x.replace(" ", "_").replace("-", "_")
+            preprocess_domains = lambda x: x.replace(" ", "_").replace("-", "_").lower()
             preprocess_numbers = lambda x: float(x.replace(",", ".") if x.lower() != "none" else 0)
-    
-            match curr.group():
+
+            match curr.group().lower():
                 case "routes" | "route":
                     # create a list with the possible domains
                     between_text = json_text[curr.end()+1:next_idx].strip()
                     routes = re.findall(r"diabetes|heart|breast[_ -]cancer", between_text, re.IGNORECASE)
                     routes = list(map(preprocess_domains, routes))
+                    routes = list(set(routes)) # remove duplicates if they exist
                 case "primary":
                     # find the first domain mentioned after the primary key
                     between_text = json_text[curr.end()+1:next_idx].strip()
@@ -220,7 +235,7 @@ class LLMPlannerAgent(BaseAgent):
 
                 # check confidence
                 # if no confidence: prompt again!
-                if len(response_dict["confidence"]) == 0: # if no confidence key present: we make the confidence 0
+                if len(response_dict["confidence"]) == 0:
                     if reps < max_reps:
                         verdict = "Missing confidence values. Prompting again."
                     else:
@@ -253,15 +268,7 @@ class LLMPlannerAgent(BaseAgent):
                 
                 break
                 
-           
-           
             # store triage decision in model context
-            # self.model.triage_log.append({
-            #         "PatientID": pid,
-            #         "routes": routes,
-            #         "primary": primary_decision,
-            #         "labels": payload["labels"]
-            #     })
             self.model.triage_log.append({
                     "PatientID": pid,
                     "routes": response_dict["routes"],
@@ -403,11 +410,11 @@ y_b = breast.target  # 0 = malignant, 1 = benign
 heart = pd.read_csv("data/heart.csv")
 X_h, y_h = heart.drop("target", axis=1), heart["target"]
 
+
 # load models from files
 clf_diabetes = joblib.load("model/diabetes.pkl")
 clf_breast = joblib.load("model/breast.pkl")
 clf_heart = joblib.load("model/heart.pkl")
-
 
 model = MCPMesaModel(X_d, X_b, X_h, clf_diabetes, clf_breast, clf_heart)
 model.step()
@@ -415,17 +422,6 @@ model.step()
 # ==========================================
 # STEP 5: Visualize Results with Seaborn
 # ==========================================
-
-# TODO: make it work on netherite, 
-# MAKE SURE TO RUN 0_train_models.py first on the machine before 2_llm_mcp.py !!!
-
-# TODO (Extra):
-# - Add another disease from the UCI repository
-# - Simulate human-in-the-loop decision making 
-# - Add uncertainty thresholds and abstention logic (we already have this a little bit)
-# - Add an evaluator or verifier agent (maybe, lets see the rest first)
-
-# TODO: implement the analysis and visualization of results yourself. Below is just a starting point.
 
 # Analyse the triage performance
 print("======== Done with scheduling and execution ==========\n")
@@ -450,12 +446,23 @@ for index, row in triage_df.iterrows():
             FN += 1
         else:
             TN += 1
+# print precision and recall
 precision = TP/(TP+FP)
 recall = TP/(TP+FN)
-print(f"\n====== Triage performance: =====\nTP: {TP}\nFP: {FP}\nFN: {FN}\nPrecision: {precision}\nRecall: {recall}")
+print(f"\n====== Triage performance: =====\nTP: {TP}\nFP: {FP}\nTN: {TN}\nFN: {FN}\nPrecision: {precision}\nRecall: {recall}")
+
+# plot confussion matrix
+cm = np.array([[TN, FP],[FN, TP]])
+sns.heatmap(cm, annot=True, fmt="d", cmap= "viridis",
+            xticklabels=['0', '1'],
+            yticklabels=['0', '1'])
+plt.xlabel("Predicted label")
+plt.ylabel("True label")
+plt.title("Confusion Matrix: triage performance")
+plt.savefig("results/confusion_triage.png")
 
 
-# show first 5 results
+# show first 5 results of diseases
 results_df = pd.DataFrame(model.results)
 print("Results Collected:", len(results_df))
 print(results_df.head())
