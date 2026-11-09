@@ -9,6 +9,10 @@ The following programs are present:
 
 The confusion matrices for 2_llm_mcp.py are saved in the results folder. The console output is in normal_rollout.out. For 2_llm_mcp_random.py, they are in the results_random_rollout folder and in random_roullout.out. For 2_llm_mcp_basic.py, they exist on the basic branch on github.
 
+The log files are saved in the logs folder named after the date of execution.
+
+
+
 The files can be run using: uv run "filename"
 
 
