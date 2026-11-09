@@ -1,0 +1,9 @@
+Ignoring corrupted tree cache file /local/.cache/huggingface/hub/models--openai--gpt-oss-20b/trees/6cee5e81ee83917806bbde320786a8fb61efebee.json: [Errno 13] Permission denied: '/local/.cache/huggingface/hub/models--openai--gpt-oss-20b/trees/6cee5e81ee83917806bbde320786a8fb61efebee.json'
+Fetching 44 files:   0%|          | 0/44 [00:00<?, ?it/s]Fetching 44 files: 100%|██████████| 44/44 [00:00<00:00, 2041.48it/s]
+Loading weights:   0%|          | 0/411 [00:00<?, ?it/s]Loading weights:   0%|          | 1/411 [00:00<01:59,  3.44it/s]Loading weights:   1%|          | 5/411 [00:00<00:34, 11.77it/s]Loading weights:  18%|█▊        | 72/411 [00:00<00:01, 180.01it/s]Loading weights:  25%|██▍       | 101/411 [00:00<00:01, 200.01it/s]Loading weights:  31%|███       | 128/411 [00:00<00:01, 198.21it/s]Loading weights:  39%|███▊      | 159/411 [00:00<00:01, 208.01it/s]Loading weights:  47%|████▋     | 194/411 [00:01<00:00, 224.33it/s]Loading weights:  55%|█████▍    | 226/411 [00:01<00:00, 233.50it/s]Loading weights:  64%|██████▎   | 261/411 [00:01<00:00, 243.02it/s]Loading weights:  71%|███████▏  | 293/411 [00:01<00:00, 257.15it/s]Loading weights:  78%|███████▊  | 320/411 [00:01<00:00, 246.89it/s]Loading weights:  84%|████████▍ | 346/411 [00:01<00:00, 228.67it/s]Loading weights:  92%|█████████▏| 378/411 [00:01<00:00, 249.21it/s]Loading weights:  98%|█████████▊| 404/411 [00:01<00:00, 250.32it/s]Loading weights: 100%|██████████| 411/411 [00:01<00:00, 209.72it/s]
+Traceback (most recent call last):
+  File "/local/s3692442/multi_agent_sim/2_llm_mcp.py", line 419, in <module>
+    model = MCPMesaModel(X_d, X_b, X_h, clf_diabetes, clf_breast, clf_heart)
+  File "/local/s3692442/multi_agent_sim/2_llm_mcp.py", line 367, in __init__
+    "text": make_case_text(pid, d_row, b_row, h_row),
+TypeError: make_case_text() missing 1 required positional argument: 'p_row'
