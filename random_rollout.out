@@ -1,0 +1,68 @@
+======== Done with scheduling and execution ==========
+
+Triage Collected: 100
+  PatientID                                routes primary                                             labels
+0      1266  [breast_cancer, parkinson, diabetes]   heart  {'diabetes': 0, 'breast_cancer': 0, 'heart': 1...
+1      3022             [breast_cancer, diabetes]   heart  {'diabetes': 1, 'breast_cancer': 1, 'heart': 0...
+2      2041                    [parkinson, heart]   heart  {'diabetes': 0, 'breast_cancer': 1, 'heart': 1...
+3      1772     [breast_cancer, parkinson, heart]   heart  {'diabetes': 0, 'breast_cancer': 0, 'heart': 0...
+4      3059                [breast_cancer, heart]   heart  {'diabetes': 1, 'breast_cancer': 1, 'heart': 1...
+
+====== Triage performance: =====
+TP: 130
+FP: 92
+TN: 66
+FN: 112
+Precision: 0.5855855855855856
+Recall: 0.5371900826446281
+Results Collected: 221
+  PatientID   Disease  y_true  y_pred triage_primary
+0      1266  diabetes       0       0           None
+1      3022  diabetes       1       1           None
+2      5736  diabetes       0       0           None
+3      1409  diabetes       0       0           None
+4      2233  diabetes       0       0           None
+
+
+=== diabetes ===
+              precision    recall  f1-score   support
+
+           0      1.000     1.000     1.000        39
+           1      1.000     1.000     1.000        19
+
+    accuracy                          1.000        58
+   macro avg      1.000     1.000     1.000        58
+weighted avg      1.000     1.000     1.000        58
+
+
+=== breast_cancer ===
+              precision    recall  f1-score   support
+
+           0      1.000     1.000     1.000        19
+           1      1.000     1.000     1.000        37
+
+    accuracy                          1.000        56
+   macro avg      1.000     1.000     1.000        56
+weighted avg      1.000     1.000     1.000        56
+
+
+=== heart ===
+              precision    recall  f1-score   support
+
+           0      1.000     1.000     1.000        20
+           1      1.000     1.000     1.000        34
+
+    accuracy                          1.000        54
+   macro avg      1.000     1.000     1.000        54
+weighted avg      1.000     1.000     1.000        54
+
+
+=== parkinson ===
+              precision    recall  f1-score   support
+
+           0      1.000     1.000     1.000        14
+           1      1.000     1.000     1.000        39
+
+    accuracy                          1.000        53
+   macro avg      1.000     1.000     1.000        53
+weighted avg      1.000     1.000     1.000        53

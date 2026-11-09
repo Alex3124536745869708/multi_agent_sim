@@ -1,0 +1,4303 @@
+=====START=====
+- INPUT:
+Patient 1266. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=62.0, sex=1.0, cp=2.0, trestbps=130.0, chol=231.0,
+fbs=0.0, rest ecg=1.0, thalach=146.0, exang=0.0, oldpeak=1.8,
+slope=1.0, ca=3.0,
+Pregnancies=1.0, Glucose=86.0, Blood Pressure=66.0, Skin Thickness=52.0,
+Insulin=65.0, BMI=41.3, Diabetes Pedigree Function=0.917.
+Breast features: mean radius=15.700, mean texture=20.310, mean perimeter=101.200, mean area=766.600, mean smoothness=0.096.
+Movement features: 
+MDVP:Fo=115.380, MDVP:Fhi=123.109, MDVP:Flo=108.634,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.015, MDVP:Shimmer=0.015,
+Shimmer:APQ3=0.008, Shimmer:APQ5=0.009,
+MDVP:APQ=0.011, Shimmer:DDA=0.024,
+NHR=0.004, HNR=26.005, RPDE=0.406,
+DFA=0.761, spread1=-5.967, spread2=0.198,
+D2=1.975, PPE=0.184.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3022. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=58.0, sex=1.0, cp=0.0, trestbps=128.0, chol=216.0,
+fbs=0.0, rest ecg=0.0, thalach=131.0, exang=1.0, oldpeak=2.2,
+slope=1.0, ca=3.0,
+Pregnancies=1.0, Glucose=128.0, Blood Pressure=88.0, Skin Thickness=39.0,
+Insulin=110.0, BMI=36.5, Diabetes Pedigree Function=1.057.
+Breast features: mean radius=11.340, mean texture=18.610, mean perimeter=72.760, mean area=391.200, mean smoothness=0.105.
+Movement features: 
+MDVP:Fo=208.519, MDVP:Fhi=220.315, MDVP:Flo=199.020,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.004, MDVP:PPQ=0.003, Jitter:DDP=0.011,
+MDVP:Shimmer=0.018, MDVP:Shimmer=0.018,
+Shimmer:APQ3=0.010, Shimmer:APQ5=0.011,
+MDVP:APQ=0.013, Shimmer:DDA=0.029,
+NHR=0.008, HNR=22.407, RPDE=0.338,
+DFA=0.712, spread1=-6.471, spread2=0.184,
+D2=2.502, PPE=0.136.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2041. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=52.0, sex=0.0, cp=2.0, trestbps=136.0, chol=196.0,
+fbs=0.0, rest ecg=0.0, thalach=169.0, exang=0.0, oldpeak=0.1,
+slope=1.0, ca=0.0,
+Pregnancies=4.0, Glucose=85.0, Blood Pressure=58.0, Skin Thickness=22.0,
+Insulin=49.0, BMI=27.8, Diabetes Pedigree Function=0.306.
+Breast features: mean radius=10.750, mean texture=14.970, mean perimeter=68.260, mean area=355.300, mean smoothness=0.078.
+Movement features: 
+MDVP:Fo=197.569, MDVP:Fhi=217.627, MDVP:Flo=90.794,
+MDVP:Jitter=0.008, MDVP:Jitter=0.008,
+MDVP:RAP=0.005, MDVP:PPQ=0.004, Jitter:DDP=0.015,
+MDVP:Shimmer=0.022, MDVP:Shimmer=0.022,
+Shimmer:APQ3=0.013, Shimmer:APQ5=0.013,
+MDVP:APQ=0.014, Shimmer:DDA=0.038,
+NHR=0.013, HNR=19.269, RPDE=0.372,
+DFA=0.725, spread1=-5.737, spread2=0.165,
+D2=2.882, PPE=0.203.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['parkinson', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1772. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=59.0, sex=1.0, cp=3.0, trestbps=134.0, chol=204.0,
+fbs=0.0, rest ecg=1.0, thalach=162.0, exang=0.0, oldpeak=0.8,
+slope=2.0, ca=2.0,
+Pregnancies=4.0, Glucose=110.0, Blood Pressure=92.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=37.6, Diabetes Pedigree Function=0.191.
+Breast features: mean radius=13.770, mean texture=22.290, mean perimeter=90.630, mean area=588.900, mean smoothness=0.120.
+Movement features: 
+MDVP:Fo=157.821, MDVP:Fhi=172.975, MDVP:Flo=68.401,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.006,
+MDVP:Shimmer=0.037, MDVP:Shimmer=0.037,
+Shimmer:APQ3=0.021, Shimmer:APQ5=0.023,
+MDVP:APQ=0.028, Shimmer:DDA=0.062,
+NHR=0.009, HNR=22.219, RPDE=0.502,
+DFA=0.712, spread1=-6.251, spread2=0.188,
+D2=2.144, PPE=0.161.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3059. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=51.0, sex=1.0, cp=2.0, trestbps=125.0, chol=245.0,
+fbs=1.0, rest ecg=0.0, thalach=166.0, exang=0.0, oldpeak=2.4,
+slope=1.0, ca=0.0,
+Pregnancies=4.0, Glucose=171.0, Blood Pressure=72.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=43.6, Diabetes Pedigree Function=0.479.
+Breast features: mean radius=11.140, mean texture=14.070, mean perimeter=71.240, mean area=384.600, mean smoothness=0.073.
+Movement features: 
+MDVP:Fo=179.711, MDVP:Fhi=225.930, MDVP:Flo=144.878,
+MDVP:Jitter=0.007, MDVP:Jitter=0.007,
+MDVP:RAP=0.004, MDVP:PPQ=0.004, Jitter:DDP=0.012,
+MDVP:Shimmer=0.043, MDVP:Shimmer=0.043,
+Shimmer:APQ3=0.023, Shimmer:APQ5=0.028,
+MDVP:APQ=0.035, Shimmer:DDA=0.069,
+NHR=0.072, HNR=11.866, RPDE=0.591,
+DFA=0.746, spread1=-4.379, spread2=0.376,
+D2=3.671, PPE=0.332.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1072. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=60.0, sex=1.0, cp=0.0, trestbps=145.0, chol=282.0,
+fbs=0.0, rest ecg=0.0, thalach=142.0, exang=1.0, oldpeak=2.8,
+slope=1.0, ca=2.0,
+Pregnancies=7.0, Glucose=179.0, Blood Pressure=95.0, Skin Thickness=31.0,
+Insulin=0.0, BMI=34.2, Diabetes Pedigree Function=0.164.
+Breast features: mean radius=12.340, mean texture=14.950, mean perimeter=78.290, mean area=469.100, mean smoothness=0.087.
+Movement features: 
+MDVP:Fo=95.605, MDVP:Fhi=107.715, MDVP:Flo=87.549,
+MDVP:Jitter=0.007, MDVP:Jitter=0.007,
+MDVP:RAP=0.004, MDVP:PPQ=0.004, Jitter:DDP=0.013,
+MDVP:Shimmer=0.032, MDVP:Shimmer=0.032,
+Shimmer:APQ3=0.018, Shimmer:APQ5=0.018,
+MDVP:APQ=0.022, Shimmer:DDA=0.054,
+NHR=0.018, HNR=19.659, RPDE=0.576,
+DFA=0.779, spread1=-5.132, spread2=0.210,
+D2=2.233, PPE=0.261.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['parkinson', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2442. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=44.0, sex=1.0, cp=0.0, trestbps=120.0, chol=169.0,
+fbs=0.0, rest ecg=1.0, thalach=144.0, exang=1.0, oldpeak=2.8,
+slope=0.0, ca=0.0,
+Pregnancies=1.0, Glucose=85.0, Blood Pressure=66.0, Skin Thickness=29.0,
+Insulin=0.0, BMI=26.6, Diabetes Pedigree Function=0.351.
+Breast features: mean radius=14.960, mean texture=19.100, mean perimeter=97.030, mean area=687.300, mean smoothness=0.090.
+Movement features: 
+MDVP:Fo=95.385, MDVP:Fhi=102.145, MDVP:Flo=90.264,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.010,
+MDVP:Shimmer=0.032, MDVP:Shimmer=0.032,
+Shimmer:APQ3=0.018, Shimmer:APQ5=0.019,
+MDVP:APQ=0.025, Shimmer:DDA=0.054,
+NHR=0.011, HNR=21.875, RPDE=0.645,
+DFA=0.780, spread1=-5.115, spread2=0.249,
+D2=2.018, PPE=0.260.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 5736. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=68.0, sex=0.0, cp=2.0, trestbps=120.0, chol=211.0,
+fbs=0.0, rest ecg=0.0, thalach=115.0, exang=0.0, oldpeak=1.5,
+slope=1.0, ca=0.0,
+Pregnancies=2.0, Glucose=105.0, Blood Pressure=58.0, Skin Thickness=40.0,
+Insulin=94.0, BMI=34.9, Diabetes Pedigree Function=0.225.
+Breast features: mean radius=10.860, mean texture=21.480, mean perimeter=68.510, mean area=360.500, mean smoothness=0.074.
+Movement features: 
+MDVP:Fo=95.385, MDVP:Fhi=102.145, MDVP:Flo=90.264,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.010,
+MDVP:Shimmer=0.032, MDVP:Shimmer=0.032,
+Shimmer:APQ3=0.018, Shimmer:APQ5=0.019,
+MDVP:APQ=0.025, Shimmer:DDA=0.054,
+NHR=0.011, HNR=21.875, RPDE=0.645,
+DFA=0.780, spread1=-5.115, spread2=0.249,
+D2=2.018, PPE=0.260.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1409. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=51.0, sex=0.0, cp=2.0, trestbps=130.0, chol=256.0,
+fbs=0.0, rest ecg=0.0, thalach=149.0, exang=0.0, oldpeak=0.5,
+slope=2.0, ca=0.0,
+Pregnancies=10.0, Glucose=133.0, Blood Pressure=68.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=27.0, Diabetes Pedigree Function=0.245.
+Breast features: mean radius=18.660, mean texture=17.120, mean perimeter=121.400, mean area=1077.000, mean smoothness=0.105.
+Movement features: 
+MDVP:Fo=126.144, MDVP:Fhi=154.284, MDVP:Flo=97.543,
+MDVP:Jitter=0.010, MDVP:Jitter=0.010,
+MDVP:RAP=0.006, MDVP:PPQ=0.005, Jitter:DDP=0.018,
+MDVP:Shimmer=0.029, MDVP:Shimmer=0.029,
+Shimmer:APQ3=0.015, Shimmer:APQ5=0.016,
+MDVP:APQ=0.022, Shimmer:DDA=0.045,
+NHR=0.038, HNR=21.534, RPDE=0.635,
+DFA=0.627, spread1=-5.070, spread2=0.280,
+D2=2.892, PPE=0.250.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2233. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=53.0, sex=1.0, cp=2.0, trestbps=130.0, chol=197.0,
+fbs=1.0, rest ecg=0.0, thalach=152.0, exang=0.0, oldpeak=1.2,
+slope=0.0, ca=0.0,
+Pregnancies=0.0, Glucose=120.0, Blood Pressure=74.0, Skin Thickness=18.0,
+Insulin=63.0, BMI=30.5, Diabetes Pedigree Function=0.285.
+Breast features: mean radius=21.710, mean texture=17.250, mean perimeter=140.900, mean area=1546.000, mean smoothness=0.094.
+Movement features: 
+MDVP:Fo=126.344, MDVP:Fhi=134.231, MDVP:Flo=112.773,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.001, MDVP:PPQ=0.002, Jitter:DDP=0.004,
+MDVP:Shimmer=0.020, MDVP:Shimmer=0.020,
+Shimmer:APQ3=0.011, Shimmer:APQ5=0.010,
+MDVP:APQ=0.016, Shimmer:DDA=0.034,
+NHR=0.005, HNR=25.030, RPDE=0.508,
+DFA=0.760, spread1=-6.689, spread2=0.292,
+D2=2.432, PPE=0.106.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1675. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=68.0, sex=1.0, cp=2.0, trestbps=180.0, chol=274.0,
+fbs=1.0, rest ecg=0.0, thalach=150.0, exang=1.0, oldpeak=1.6,
+slope=1.0, ca=0.0,
+Pregnancies=13.0, Glucose=106.0, Blood Pressure=72.0, Skin Thickness=54.0,
+Insulin=0.0, BMI=36.6, Diabetes Pedigree Function=0.178.
+Breast features: mean radius=14.110, mean texture=12.880, mean perimeter=90.030, mean area=616.500, mean smoothness=0.093.
+Movement features: 
+MDVP:Fo=116.342, MDVP:Fhi=581.289, MDVP:Flo=94.246,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.001, MDVP:PPQ=0.001, Jitter:DDP=0.003,
+MDVP:Shimmer=0.013, MDVP:Shimmer=0.013,
+Shimmer:APQ3=0.006, Shimmer:APQ5=0.008,
+MDVP:APQ=0.011, Shimmer:DDA=0.019,
+NHR=0.007, HNR=25.023, RPDE=0.528,
+DFA=0.664, spread1=-6.359, spread2=0.117,
+D2=2.152, PPE=0.139.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2602. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=58.0, sex=1.0, cp=2.0, trestbps=112.0, chol=230.0,
+fbs=0.0, rest ecg=0.0, thalach=165.0, exang=0.0, oldpeak=2.5,
+slope=1.0, ca=1.0,
+Pregnancies=4.0, Glucose=99.0, Blood Pressure=72.0, Skin Thickness=17.0,
+Insulin=0.0, BMI=25.6, Diabetes Pedigree Function=0.294.
+Breast features: mean radius=14.870, mean texture=20.210, mean perimeter=96.120, mean area=680.900, mean smoothness=0.096.
+Movement features: 
+MDVP:Fo=119.100, MDVP:Fhi=128.442, MDVP:Flo=88.833,
+MDVP:Jitter=0.007, MDVP:Jitter=0.007,
+MDVP:RAP=0.004, MDVP:PPQ=0.003, Jitter:DDP=0.012,
+MDVP:Shimmer=0.027, MDVP:Shimmer=0.027,
+Shimmer:APQ3=0.015, Shimmer:APQ5=0.014,
+MDVP:APQ=0.020, Shimmer:DDA=0.045,
+NHR=0.046, HNR=21.824, RPDE=0.652,
+DFA=0.659, spread1=-4.239, spread2=0.176,
+D2=2.451, PPE=0.247.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1906. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=39.0, sex=1.0, cp=2.0, trestbps=140.0, chol=321.0,
+fbs=0.0, rest ecg=0.0, thalach=182.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=4.0, Glucose=146.0, Blood Pressure=92.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=31.2, Diabetes Pedigree Function=0.539.
+Breast features: mean radius=15.050, mean texture=19.070, mean perimeter=97.260, mean area=701.900, mean smoothness=0.092.
+Movement features: 
+MDVP:Fo=110.707, MDVP:Fhi=122.611, MDVP:Flo=105.007,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.008,
+MDVP:Shimmer=0.022, MDVP:Shimmer=0.022,
+Shimmer:APQ3=0.013, Shimmer:APQ5=0.012,
+MDVP:APQ=0.017, Shimmer:DDA=0.039,
+NHR=0.005, HNR=25.197, RPDE=0.464,
+DFA=0.807, spread1=-5.478, spread2=0.315,
+D2=1.862, PPE=0.229.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['parkinson', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2082. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=51.0, sex=1.0, cp=2.0, trestbps=125.0, chol=245.0,
+fbs=1.0, rest ecg=0.0, thalach=166.0, exang=0.0, oldpeak=2.4,
+slope=1.0, ca=0.0,
+Pregnancies=1.0, Glucose=97.0, Blood Pressure=70.0, Skin Thickness=40.0,
+Insulin=0.0, BMI=38.1, Diabetes Pedigree Function=0.218.
+Breast features: mean radius=12.750, mean texture=16.700, mean perimeter=82.510, mean area=493.800, mean smoothness=0.113.
+Movement features: 
+MDVP:Fo=152.125, MDVP:Fhi=161.469, MDVP:Flo=76.596,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.006,
+MDVP:Shimmer=0.059, MDVP:Shimmer=0.059,
+Shimmer:APQ3=0.033, Shimmer:APQ5=0.038,
+MDVP:APQ=0.044, Shimmer:DDA=0.100,
+NHR=0.012, HNR=20.969, RPDE=0.447,
+DFA=0.698, spread1=-6.153, spread2=0.174,
+D2=2.080, PPE=0.161.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1877. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=49.0, sex=1.0, cp=1.0, trestbps=130.0, chol=266.0,
+fbs=0.0, rest ecg=1.0, thalach=171.0, exang=0.0, oldpeak=0.6,
+slope=2.0, ca=0.0,
+Pregnancies=4.0, Glucose=189.0, Blood Pressure=110.0, Skin Thickness=31.0,
+Insulin=0.0, BMI=28.5, Diabetes Pedigree Function=0.68.
+Breast features: mean radius=13.000, mean texture=20.780, mean perimeter=83.510, mean area=519.400, mean smoothness=0.114.
+Movement features: 
+MDVP:Fo=119.056, MDVP:Fhi=125.213, MDVP:Flo=86.795,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.012, MDVP:Shimmer=0.012,
+Shimmer:APQ3=0.006, Shimmer:APQ5=0.007,
+MDVP:APQ=0.009, Shimmer:DDA=0.019,
+NHR=0.009, HNR=23.389, RPDE=0.471,
+DFA=0.721, spread1=-5.436, spread2=0.255,
+D2=2.516, PPE=0.232.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1755. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=55.0, sex=1.0, cp=0.0, trestbps=132.0, chol=353.0,
+fbs=0.0, rest ecg=1.0, thalach=132.0, exang=1.0, oldpeak=1.2,
+slope=1.0, ca=1.0,
+Pregnancies=8.0, Glucose=126.0, Blood Pressure=74.0, Skin Thickness=38.0,
+Insulin=75.0, BMI=25.9, Diabetes Pedigree Function=0.162.
+Breast features: mean radius=12.650, mean texture=18.170, mean perimeter=82.690, mean area=485.600, mean smoothness=0.108.
+Movement features: 
+MDVP:Fo=237.226, MDVP:Fhi=247.326, MDVP:Flo=225.227,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.018, MDVP:Shimmer=0.018,
+Shimmer:APQ3=0.010, Shimmer:APQ5=0.010,
+MDVP:APQ=0.011, Shimmer:DDA=0.031,
+NHR=0.007, HNR=22.736, RPDE=0.305,
+DFA=0.654, spread1=-7.311, spread2=0.099,
+D2=2.417, PPE=0.095.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1782. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=51.0, sex=1.0, cp=0.0, trestbps=140.0, chol=299.0,
+fbs=0.0, rest ecg=1.0, thalach=173.0, exang=1.0, oldpeak=1.6,
+slope=2.0, ca=0.0,
+Pregnancies=5.0, Glucose=88.0, Blood Pressure=66.0, Skin Thickness=21.0,
+Insulin=23.0, BMI=24.4, Diabetes Pedigree Function=0.342.
+Breast features: mean radius=11.040, mean texture=14.930, mean perimeter=70.670, mean area=372.700, mean smoothness=0.080.
+Movement features: 
+MDVP:Fo=95.730, MDVP:Fhi=132.068, MDVP:Flo=91.754,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.009,
+MDVP:Shimmer=0.021, MDVP:Shimmer=0.021,
+Shimmer:APQ3=0.011, Shimmer:APQ5=0.013,
+MDVP:APQ=0.017, Shimmer:DDA=0.032,
+NHR=0.011, HNR=21.812, RPDE=0.616,
+DFA=0.774, spread1=-5.499, spread2=0.328,
+D2=2.323, PPE=0.232.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1186. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=45.0, sex=0.0, cp=1.0, trestbps=112.0, chol=160.0,
+fbs=0.0, rest ecg=1.0, thalach=138.0, exang=0.0, oldpeak=0.0,
+slope=1.0, ca=0.0,
+Pregnancies=4.0, Glucose=173.0, Blood Pressure=70.0, Skin Thickness=14.0,
+Insulin=168.0, BMI=29.7, Diabetes Pedigree Function=0.361.
+Breast features: mean radius=10.600, mean texture=18.950, mean perimeter=69.280, mean area=346.400, mean smoothness=0.097.
+Movement features: 
+MDVP:Fo=192.818, MDVP:Fhi=224.429, MDVP:Flo=168.793,
+MDVP:Jitter=0.031, MDVP:Jitter=0.031,
+MDVP:RAP=0.018, MDVP:PPQ=0.020, Jitter:DDP=0.054,
+MDVP:Shimmer=0.119, MDVP:Shimmer=0.119,
+Shimmer:APQ3=0.056, Shimmer:APQ5=0.079,
+MDVP:APQ=0.138, Shimmer:DDA=0.169,
+NHR=0.217, HNR=8.441, RPDE=0.626,
+DFA=0.768, spread1=-2.434, spread2=0.450,
+D2=3.079, PPE=0.527.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3230. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=40.0, sex=1.0, cp=0.0, trestbps=152.0, chol=223.0,
+fbs=0.0, rest ecg=1.0, thalach=181.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=0.0, Glucose=106.0, Blood Pressure=70.0, Skin Thickness=37.0,
+Insulin=148.0, BMI=39.4, Diabetes Pedigree Function=0.605.
+Breast features: mean radius=15.000, mean texture=15.510, mean perimeter=97.450, mean area=684.500, mean smoothness=0.084.
+Movement features: 
+MDVP:Fo=183.520, MDVP:Fhi=216.814, MDVP:Flo=161.340,
+MDVP:Jitter=0.015, MDVP:Jitter=0.015,
+MDVP:RAP=0.008, MDVP:PPQ=0.008, Jitter:DDP=0.025,
+MDVP:Shimmer=0.060, MDVP:Shimmer=0.060,
+Shimmer:APQ3=0.029, Shimmer:APQ5=0.041,
+MDVP:APQ=0.064, Shimmer:DDA=0.086,
+NHR=0.061, HNR=14.367, RPDE=0.478,
+DFA=0.769, spread1=-4.277, spread2=0.356,
+D2=3.142, PPE=0.336.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1404. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=49.0, sex=1.0, cp=2.0, trestbps=120.0, chol=188.0,
+fbs=0.0, rest ecg=1.0, thalach=139.0, exang=0.0, oldpeak=2.0,
+slope=1.0, ca=3.0,
+Pregnancies=11.0, Glucose=136.0, Blood Pressure=84.0, Skin Thickness=35.0,
+Insulin=130.0, BMI=28.3, Diabetes Pedigree Function=0.26.
+Breast features: mean radius=14.990, mean texture=22.110, mean perimeter=97.530, mean area=693.700, mean smoothness=0.085.
+Movement features: 
+MDVP:Fo=109.860, MDVP:Fhi=126.358, MDVP:Flo=104.437,
+MDVP:Jitter=0.009, MDVP:Jitter=0.009,
+MDVP:RAP=0.004, MDVP:PPQ=0.005, Jitter:DDP=0.012,
+MDVP:Shimmer=0.032, MDVP:Shimmer=0.032,
+Shimmer:APQ3=0.018, Shimmer:APQ5=0.020,
+MDVP:APQ=0.025, Shimmer:DDA=0.054,
+NHR=0.012, HNR=20.767, RPDE=0.559,
+DFA=0.812, spread1=-4.334, spread2=0.222,
+D2=2.015, PPE=0.345.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 5430. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=63.0, sex=0.0, cp=0.0, trestbps=150.0, chol=407.0,
+fbs=0.0, rest ecg=0.0, thalach=154.0, exang=0.0, oldpeak=4.0,
+slope=1.0, ca=3.0,
+Pregnancies=1.0, Glucose=0.0, Blood Pressure=48.0, Skin Thickness=20.0,
+Insulin=0.0, BMI=24.7, Diabetes Pedigree Function=0.14.
+Breast features: mean radius=13.900, mean texture=19.240, mean perimeter=88.730, mean area=602.900, mean smoothness=0.080.
+Movement features: 
+MDVP:Fo=157.821, MDVP:Fhi=172.975, MDVP:Flo=68.401,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.006,
+MDVP:Shimmer=0.037, MDVP:Shimmer=0.037,
+Shimmer:APQ3=0.021, Shimmer:APQ5=0.023,
+MDVP:APQ=0.028, Shimmer:DDA=0.062,
+NHR=0.009, HNR=22.219, RPDE=0.502,
+DFA=0.712, spread1=-6.251, spread2=0.188,
+D2=2.144, PPE=0.161.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1337. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=60.0, sex=1.0, cp=0.0, trestbps=145.0, chol=282.0,
+fbs=0.0, rest ecg=0.0, thalach=142.0, exang=1.0, oldpeak=2.8,
+slope=1.0, ca=2.0,
+Pregnancies=2.0, Glucose=128.0, Blood Pressure=78.0, Skin Thickness=37.0,
+Insulin=182.0, BMI=43.3, Diabetes Pedigree Function=1.224.
+Breast features: mean radius=10.250, mean texture=16.180, mean perimeter=66.520, mean area=324.200, mean smoothness=0.106.
+Movement features: 
+MDVP:Fo=116.879, MDVP:Fhi=131.897, MDVP:Flo=108.153,
+MDVP:Jitter=0.008, MDVP:Jitter=0.008,
+MDVP:RAP=0.003, MDVP:PPQ=0.005, Jitter:DDP=0.010,
+MDVP:Shimmer=0.026, MDVP:Shimmer=0.026,
+Shimmer:APQ3=0.014, Shimmer:APQ5=0.016,
+MDVP:APQ=0.021, Shimmer:DDA=0.042,
+NHR=0.008, HNR=22.603, RPDE=0.540,
+DFA=0.813, spread1=-4.477, spread2=0.263,
+D2=1.827, PPE=0.326.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1143. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=59.0, sex=1.0, cp=3.0, trestbps=170.0, chol=288.0,
+fbs=0.0, rest ecg=0.0, thalach=159.0, exang=0.0, oldpeak=0.2,
+slope=1.0, ca=0.0,
+Pregnancies=15.0, Glucose=136.0, Blood Pressure=70.0, Skin Thickness=32.0,
+Insulin=110.0, BMI=37.1, Diabetes Pedigree Function=0.153.
+Breast features: mean radius=18.820, mean texture=21.970, mean perimeter=123.700, mean area=1110.000, mean smoothness=0.102.
+Movement features: 
+MDVP:Fo=88.333, MDVP:Fhi=112.240, MDVP:Flo=84.072,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.008,
+MDVP:Shimmer=0.021, MDVP:Shimmer=0.021,
+Shimmer:APQ3=0.011, Shimmer:APQ5=0.013,
+MDVP:APQ=0.019, Shimmer:DDA=0.032,
+NHR=0.012, HNR=21.118, RPDE=0.611,
+DFA=0.776, spread1=-5.250, spread2=0.391,
+D2=2.407, PPE=0.250.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1284. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=63.0, sex=0.0, cp=2.0, trestbps=135.0, chol=252.0,
+fbs=0.0, rest ecg=0.0, thalach=172.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=11.0, Glucose=138.0, Blood Pressure=76.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=33.2, Diabetes Pedigree Function=0.42.
+Breast features: mean radius=20.340, mean texture=21.510, mean perimeter=135.900, mean area=1264.000, mean smoothness=0.117.
+Movement features: 
+MDVP:Fo=116.682, MDVP:Fhi=131.111, MDVP:Flo=111.555,
+MDVP:Jitter=0.011, MDVP:Jitter=0.011,
+MDVP:RAP=0.005, MDVP:PPQ=0.008, Jitter:DDP=0.016,
+MDVP:Shimmer=0.052, MDVP:Shimmer=0.052,
+Shimmer:APQ3=0.028, Shimmer:APQ5=0.039,
+MDVP:APQ=0.036, Shimmer:DDA=0.083,
+NHR=0.013, HNR=20.651, RPDE=0.430,
+DFA=0.825, spread1=-4.443, spread2=0.311,
+D2=2.342, PPE=0.333.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2273. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=61.0, sex=0.0, cp=0.0, trestbps=145.0, chol=307.0,
+fbs=0.0, rest ecg=0.0, thalach=146.0, exang=1.0, oldpeak=1.0,
+slope=1.0, ca=0.0,
+Pregnancies=7.0, Glucose=161.0, Blood Pressure=86.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=30.4, Diabetes Pedigree Function=0.165.
+Breast features: mean radius=15.660, mean texture=23.200, mean perimeter=110.200, mean area=773.500, mean smoothness=0.111.
+Movement features: 
+MDVP:Fo=229.401, MDVP:Fhi=252.221, MDVP:Flo=221.156,
+MDVP:Jitter=0.002, MDVP:Jitter=0.002,
+MDVP:RAP=0.001, MDVP:PPQ=0.001, Jitter:DDP=0.003,
+MDVP:Shimmer=0.015, MDVP:Shimmer=0.015,
+Shimmer:APQ3=0.008, Shimmer:APQ5=0.010,
+MDVP:APQ=0.010, Shimmer:DDA=0.023,
+NHR=0.003, HNR=26.415, RPDE=0.277,
+DFA=0.674, spread1=-7.496, spread2=0.057,
+D2=2.003, PPE=0.074.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2988. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=58.0, sex=0.0, cp=3.0, trestbps=150.0, chol=283.0,
+fbs=1.0, rest ecg=0.0, thalach=162.0, exang=0.0, oldpeak=1.0,
+slope=2.0, ca=0.0,
+Pregnancies=7.0, Glucose=161.0, Blood Pressure=86.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=30.4, Diabetes Pedigree Function=0.165.
+Breast features: mean radius=19.530, mean texture=18.900, mean perimeter=129.500, mean area=1217.000, mean smoothness=0.115.
+Movement features: 
+MDVP:Fo=116.676, MDVP:Fhi=137.871, MDVP:Flo=111.366,
+MDVP:Jitter=0.010, MDVP:Jitter=0.010,
+MDVP:RAP=0.005, MDVP:PPQ=0.007, Jitter:DDP=0.015,
+MDVP:Shimmer=0.055, MDVP:Shimmer=0.055,
+Shimmer:APQ3=0.029, Shimmer:APQ5=0.040,
+MDVP:APQ=0.038, Shimmer:DDA=0.088,
+NHR=0.014, HNR=20.644, RPDE=0.435,
+DFA=0.819, spread1=-4.118, spread2=0.334,
+D2=2.406, PPE=0.369.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": [],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+
+Missing routes. Set to domains with confidence >= 0.5.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2626. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=58.0, sex=1.0, cp=0.0, trestbps=100.0, chol=234.0,
+fbs=0.0, rest ecg=1.0, thalach=156.0, exang=0.0, oldpeak=0.1,
+slope=2.0, ca=1.0,
+Pregnancies=0.0, Glucose=145.0, Blood Pressure=0.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=44.2, Diabetes Pedigree Function=0.63.
+Breast features: mean radius=11.740, mean texture=14.690, mean perimeter=76.310, mean area=426.000, mean smoothness=0.081.
+Movement features: 
+MDVP:Fo=115.322, MDVP:Fhi=135.738, MDVP:Flo=107.802,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.004, MDVP:PPQ=0.003, Jitter:DDP=0.011,
+MDVP:Shimmer=0.033, MDVP:Shimmer=0.033,
+Shimmer:APQ3=0.016, Shimmer:APQ5=0.017,
+MDVP:APQ=0.029, Shimmer:DDA=0.049,
+NHR=0.028, HNR=19.388, RPDE=0.578,
+DFA=0.684, spread1=-5.283, spread2=0.227,
+D2=2.443, PPE=0.238.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1202. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=61.0, sex=1.0, cp=0.0, trestbps=120.0, chol=260.0,
+fbs=0.0, rest ecg=1.0, thalach=140.0, exang=1.0, oldpeak=3.6,
+slope=1.0, ca=1.0,
+Pregnancies=2.0, Glucose=95.0, Blood Pressure=54.0, Skin Thickness=14.0,
+Insulin=88.0, BMI=26.1, Diabetes Pedigree Function=0.748.
+Breast features: mean radius=8.597, mean texture=18.600, mean perimeter=54.090, mean area=221.200, mean smoothness=0.107.
+Movement features: 
+MDVP:Fo=114.554, MDVP:Fhi=126.778, MDVP:Flo=91.121,
+MDVP:Jitter=0.007, MDVP:Jitter=0.007,
+MDVP:RAP=0.004, MDVP:PPQ=0.003, Jitter:DDP=0.011,
+MDVP:Shimmer=0.037, MDVP:Shimmer=0.037,
+Shimmer:APQ3=0.019, Shimmer:APQ5=0.019,
+MDVP:APQ=0.031, Shimmer:DDA=0.056,
+NHR=0.027, HNR=18.954, RPDE=0.685,
+DFA=0.720, spread1=-5.530, spread2=0.243,
+D2=2.409, PPE=0.221.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2248. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=47.0, sex=1.0, cp=2.0, trestbps=138.0, chol=257.0,
+fbs=0.0, rest ecg=0.0, thalach=156.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=8.0, Glucose=99.0, Blood Pressure=84.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=35.4, Diabetes Pedigree Function=0.388.
+Breast features: mean radius=10.710, mean texture=20.390, mean perimeter=69.500, mean area=344.900, mean smoothness=0.108.
+Movement features: 
+MDVP:Fo=106.516, MDVP:Fhi=112.777, MDVP:Flo=93.105,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.009,
+MDVP:Shimmer=0.049, MDVP:Shimmer=0.049,
+Shimmer:APQ3=0.027, Shimmer:APQ5=0.031,
+MDVP:APQ=0.037, Shimmer:DDA=0.081,
+NHR=0.030, HNR=17.060, RPDE=0.638,
+DFA=0.744, spread1=-5.301, spread2=0.320,
+D2=2.375, PPE=0.243.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1188. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=42.0, sex=1.0, cp=1.0, trestbps=120.0, chol=295.0,
+fbs=0.0, rest ecg=1.0, thalach=162.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=1.0, Glucose=126.0, Blood Pressure=56.0, Skin Thickness=29.0,
+Insulin=152.0, BMI=28.7, Diabetes Pedigree Function=0.801.
+Breast features: mean radius=10.650, mean texture=25.220, mean perimeter=68.010, mean area=347.000, mean smoothness=0.097.
+Movement features: 
+MDVP:Fo=118.747, MDVP:Fhi=123.723, MDVP:Flo=109.836,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.010, MDVP:Shimmer=0.010,
+Shimmer:APQ3=0.005, Shimmer:APQ5=0.006,
+MDVP:APQ=0.009, Shimmer:DDA=0.015,
+NHR=0.005, HNR=25.619, RPDE=0.482,
+DFA=0.723, spread1=-6.448, spread2=0.179,
+D2=2.035, PPE=0.141.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3030. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=41.0, sex=1.0, cp=1.0, trestbps=110.0, chol=235.0,
+fbs=0.0, rest ecg=1.0, thalach=153.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=1.0, Glucose=90.0, Blood Pressure=68.0, Skin Thickness=8.0,
+Insulin=0.0, BMI=24.5, Diabetes Pedigree Function=1.138.
+Breast features: mean radius=22.010, mean texture=21.900, mean perimeter=147.200, mean area=1482.000, mean smoothness=0.106.
+Movement features: 
+MDVP:Fo=110.707, MDVP:Fhi=122.611, MDVP:Flo=105.007,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.008,
+MDVP:Shimmer=0.022, MDVP:Shimmer=0.022,
+Shimmer:APQ3=0.013, Shimmer:APQ5=0.012,
+MDVP:APQ=0.017, Shimmer:DDA=0.039,
+NHR=0.005, HNR=25.197, RPDE=0.464,
+DFA=0.807, spread1=-5.478, spread2=0.315,
+D2=1.862, PPE=0.229.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['parkinson', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 6457. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=42.0, sex=0.0, cp=2.0, trestbps=120.0, chol=209.0,
+fbs=0.0, rest ecg=1.0, thalach=173.0, exang=0.0, oldpeak=0.0,
+slope=1.0, ca=0.0,
+Pregnancies=4.0, Glucose=84.0, Blood Pressure=90.0, Skin Thickness=23.0,
+Insulin=56.0, BMI=39.5, Diabetes Pedigree Function=0.159.
+Breast features: mean radius=11.900, mean texture=14.650, mean perimeter=78.110, mean area=432.800, mean smoothness=0.115.
+Movement features: 
+MDVP:Fo=110.739, MDVP:Fhi=113.597, MDVP:Flo=100.139,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.015, MDVP:Shimmer=0.015,
+Shimmer:APQ3=0.008, Shimmer:APQ5=0.009,
+MDVP:APQ=0.013, Shimmer:DDA=0.023,
+NHR=0.004, HNR=26.550, RPDE=0.369,
+DFA=0.776, spread1=-6.086, spread2=0.192,
+D2=1.889, PPE=0.174.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3006. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=58.0, sex=0.0, cp=2.0, trestbps=120.0, chol=340.0,
+fbs=0.0, rest ecg=1.0, thalach=172.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=8.0, Glucose=167.0, Blood Pressure=106.0, Skin Thickness=46.0,
+Insulin=231.0, BMI=37.6, Diabetes Pedigree Function=0.165.
+Breast features: mean radius=11.810, mean texture=17.390, mean perimeter=75.270, mean area=428.900, mean smoothness=0.101.
+Movement features: 
+MDVP:Fo=162.568, MDVP:Fhi=198.346, MDVP:Flo=77.630,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.008,
+MDVP:Shimmer=0.018, MDVP:Shimmer=0.018,
+Shimmer:APQ3=0.008, Shimmer:APQ5=0.011,
+MDVP:APQ=0.018, Shimmer:DDA=0.024,
+NHR=0.012, HNR=25.678, RPDE=0.428,
+DFA=0.724, spread1=-6.636, spread2=0.210,
+D2=1.958, PPE=0.135.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1847. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=29.0, sex=1.0, cp=1.0, trestbps=130.0, chol=204.0,
+fbs=0.0, rest ecg=0.0, thalach=202.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=3.0, Glucose=121.0, Blood Pressure=52.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=36.0, Diabetes Pedigree Function=0.127.
+Breast features: mean radius=8.734, mean texture=16.840, mean perimeter=55.270, mean area=234.300, mean smoothness=0.104.
+Movement features: 
+MDVP:Fo=209.144, MDVP:Fhi=237.494, MDVP:Flo=109.379,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.001, MDVP:PPQ=0.002, Jitter:DDP=0.004,
+MDVP:Shimmer=0.019, MDVP:Shimmer=0.019,
+Shimmer:APQ3=0.010, Shimmer:APQ5=0.013,
+MDVP:APQ=0.014, Shimmer:DDA=0.029,
+NHR=0.009, HNR=25.554, RPDE=0.342,
+DFA=0.679, spread1=-7.041, spread2=0.067,
+D2=2.461, PPE=0.102.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 4640. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=41.0, sex=0.0, cp=2.0, trestbps=112.0, chol=268.0,
+fbs=0.0, rest ecg=0.0, thalach=172.0, exang=1.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=0.0, Glucose=117.0, Blood Pressure=0.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=33.8, Diabetes Pedigree Function=0.932.
+Breast features: mean radius=14.220, mean texture=27.850, mean perimeter=92.550, mean area=623.900, mean smoothness=0.082.
+Movement features: 
+MDVP:Fo=95.730, MDVP:Fhi=132.068, MDVP:Flo=91.754,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.009,
+MDVP:Shimmer=0.021, MDVP:Shimmer=0.021,
+Shimmer:APQ3=0.011, Shimmer:APQ5=0.013,
+MDVP:APQ=0.017, Shimmer:DDA=0.032,
+NHR=0.011, HNR=21.812, RPDE=0.616,
+DFA=0.774, spread1=-5.499, spread2=0.328,
+D2=2.323, PPE=0.232.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3093. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=49.0, sex=1.0, cp=2.0, trestbps=120.0, chol=188.0,
+fbs=0.0, rest ecg=1.0, thalach=139.0, exang=0.0, oldpeak=2.0,
+slope=1.0, ca=3.0,
+Pregnancies=5.0, Glucose=121.0, Blood Pressure=72.0, Skin Thickness=23.0,
+Insulin=112.0, BMI=26.2, Diabetes Pedigree Function=0.245.
+Breast features: mean radius=18.660, mean texture=17.120, mean perimeter=121.400, mean area=1077.000, mean smoothness=0.105.
+Movement features: 
+MDVP:Fo=96.106, MDVP:Fhi=108.664, MDVP:Flo=84.510,
+MDVP:Jitter=0.007, MDVP:Jitter=0.007,
+MDVP:RAP=0.004, MDVP:PPQ=0.004, Jitter:DDP=0.012,
+MDVP:Shimmer=0.040, MDVP:Shimmer=0.040,
+Shimmer:APQ3=0.023, Shimmer:APQ5=0.025,
+MDVP:APQ=0.029, Shimmer:DDA=0.068,
+NHR=0.018, HNR=19.055, RPDE=0.545,
+DFA=0.770, spread1=-4.442, spread2=0.155,
+D2=2.646, PPE=0.328.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1196. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=66.0, sex=1.0, cp=0.0, trestbps=120.0, chol=302.0,
+fbs=0.0, rest ecg=0.0, thalach=151.0, exang=0.0, oldpeak=0.4,
+slope=1.0, ca=0.0,
+Pregnancies=9.0, Glucose=145.0, Blood Pressure=80.0, Skin Thickness=46.0,
+Insulin=130.0, BMI=37.9, Diabetes Pedigree Function=0.637.
+Breast features: mean radius=13.870, mean texture=16.210, mean perimeter=88.520, mean area=593.700, mean smoothness=0.087.
+Movement features: 
+MDVP:Fo=228.832, MDVP:Fhi=234.619, MDVP:Flo=223.634,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.016, MDVP:Shimmer=0.016,
+Shimmer:APQ3=0.009, Shimmer:APQ5=0.011,
+MDVP:APQ=0.012, Shimmer:DDA=0.026,
+NHR=0.004, HNR=25.964, RPDE=0.257,
+DFA=0.683, spread1=-7.246, spread2=0.019,
+D2=2.498, PPE=0.094.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 8614. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=41.0, sex=1.0, cp=2.0, trestbps=112.0, chol=250.0,
+fbs=0.0, rest ecg=1.0, thalach=179.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=6.0, Glucose=165.0, Blood Pressure=68.0, Skin Thickness=26.0,
+Insulin=168.0, BMI=33.6, Diabetes Pedigree Function=0.631.
+Breast features: mean radius=11.750, mean texture=20.180, mean perimeter=76.100, mean area=419.800, mean smoothness=0.109.
+Movement features: 
+MDVP:Fo=95.605, MDVP:Fhi=107.715, MDVP:Flo=87.549,
+MDVP:Jitter=0.007, MDVP:Jitter=0.007,
+MDVP:RAP=0.004, MDVP:PPQ=0.004, Jitter:DDP=0.013,
+MDVP:Shimmer=0.032, MDVP:Shimmer=0.032,
+Shimmer:APQ3=0.018, Shimmer:APQ5=0.018,
+MDVP:APQ=0.022, Shimmer:DDA=0.054,
+NHR=0.018, HNR=19.659, RPDE=0.576,
+DFA=0.779, spread1=-5.132, spread2=0.210,
+D2=2.233, PPE=0.261.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2483. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=74.0, sex=0.0, cp=1.0, trestbps=120.0, chol=269.0,
+fbs=0.0, rest ecg=0.0, thalach=121.0, exang=1.0, oldpeak=0.2,
+slope=2.0, ca=1.0,
+Pregnancies=6.0, Glucose=109.0, Blood Pressure=60.0, Skin Thickness=27.0,
+Insulin=0.0, BMI=25.0, Diabetes Pedigree Function=0.206.
+Breast features: mean radius=13.200, mean texture=15.820, mean perimeter=84.070, mean area=537.300, mean smoothness=0.085.
+Movement features: 
+MDVP:Fo=197.076, MDVP:Fhi=206.896, MDVP:Flo=192.055,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.011, MDVP:Shimmer=0.011,
+Shimmer:APQ3=0.006, Shimmer:APQ5=0.007,
+MDVP:APQ=0.008, Shimmer:DDA=0.017,
+NHR=0.003, HNR=26.775, RPDE=0.422,
+DFA=0.741, spread1=-7.348, spread2=0.178,
+D2=1.744, PPE=0.086.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2569. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=51.0, sex=0.0, cp=2.0, trestbps=120.0, chol=295.0,
+fbs=0.0, rest ecg=0.0, thalach=157.0, exang=0.0, oldpeak=0.6,
+slope=2.0, ca=0.0,
+Pregnancies=2.0, Glucose=90.0, Blood Pressure=80.0, Skin Thickness=14.0,
+Insulin=55.0, BMI=24.4, Diabetes Pedigree Function=0.249.
+Breast features: mean radius=15.080, mean texture=25.740, mean perimeter=98.000, mean area=716.600, mean smoothness=0.102.
+Movement features: 
+MDVP:Fo=151.737, MDVP:Fhi=190.204, MDVP:Flo=129.859,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.001, MDVP:PPQ=0.002, Jitter:DDP=0.004,
+MDVP:Shimmer=0.015, MDVP:Shimmer=0.015,
+Shimmer:APQ3=0.007, Shimmer:APQ5=0.009,
+MDVP:APQ=0.012, Shimmer:DDA=0.022,
+NHR=0.006, HNR=24.151, RPDE=0.397,
+DFA=0.746, spread1=-6.487, spread2=0.198,
+D2=2.450, PPE=0.133.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 6748. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=45.0, sex=0.0, cp=0.0, trestbps=138.0, chol=236.0,
+fbs=0.0, rest ecg=0.0, thalach=152.0, exang=1.0, oldpeak=0.2,
+slope=1.0, ca=0.0,
+Pregnancies=5.0, Glucose=136.0, Blood Pressure=82.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=0.0, Diabetes Pedigree Function=0.64.
+Breast features: mean radius=18.010, mean texture=20.560, mean perimeter=118.400, mean area=1007.000, mean smoothness=0.100.
+Movement features: 
+MDVP:Fo=117.963, MDVP:Fhi=134.209, MDVP:Flo=100.757,
+MDVP:Jitter=0.018, MDVP:Jitter=0.018,
+MDVP:RAP=0.011, MDVP:PPQ=0.007, Jitter:DDP=0.034,
+MDVP:Shimmer=0.049, MDVP:Shimmer=0.049,
+Shimmer:APQ3=0.026, Shimmer:APQ5=0.022,
+MDVP:APQ=0.029, Shimmer:DDA=0.078,
+NHR=0.107, HNR=19.075, RPDE=0.631,
+DFA=0.647, spread1=-3.444, spread2=0.303,
+D2=2.965, PPE=0.261.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1083. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=29.0, sex=1.0, cp=1.0, trestbps=130.0, chol=204.0,
+fbs=0.0, rest ecg=0.0, thalach=202.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=3.0, Glucose=169.0, Blood Pressure=74.0, Skin Thickness=19.0,
+Insulin=125.0, BMI=29.9, Diabetes Pedigree Function=0.268.
+Breast features: mean radius=17.850, mean texture=13.230, mean perimeter=114.600, mean area=992.100, mean smoothness=0.078.
+Movement features: 
+MDVP:Fo=126.512, MDVP:Fhi=141.756, MDVP:Flo=99.770,
+MDVP:Jitter=0.019, MDVP:Jitter=0.019,
+MDVP:RAP=0.012, MDVP:PPQ=0.010, Jitter:DDP=0.035,
+MDVP:Shimmer=0.067, MDVP:Shimmer=0.067,
+Shimmer:APQ3=0.036, Shimmer:APQ5=0.040,
+MDVP:APQ=0.058, Shimmer:DDA=0.108,
+NHR=0.167, HNR=12.435, RPDE=0.639,
+DFA=0.675, spread1=-3.760, spread2=0.243,
+D2=2.635, PPE=0.378.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2657. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=58.0, sex=1.0, cp=1.0, trestbps=120.0, chol=284.0,
+fbs=0.0, rest ecg=0.0, thalach=160.0, exang=0.0, oldpeak=1.8,
+slope=1.0, ca=0.0,
+Pregnancies=1.0, Glucose=97.0, Blood Pressure=68.0, Skin Thickness=21.0,
+Insulin=0.0, BMI=27.2, Diabetes Pedigree Function=1.095.
+Breast features: mean radius=11.710, mean texture=15.450, mean perimeter=75.030, mean area=420.300, mean smoothness=0.115.
+Movement features: 
+MDVP:Fo=114.554, MDVP:Fhi=126.778, MDVP:Flo=91.121,
+MDVP:Jitter=0.007, MDVP:Jitter=0.007,
+MDVP:RAP=0.004, MDVP:PPQ=0.003, Jitter:DDP=0.011,
+MDVP:Shimmer=0.037, MDVP:Shimmer=0.037,
+Shimmer:APQ3=0.019, Shimmer:APQ5=0.019,
+MDVP:APQ=0.031, Shimmer:DDA=0.056,
+NHR=0.027, HNR=18.954, RPDE=0.685,
+DFA=0.720, spread1=-5.530, spread2=0.243,
+D2=2.409, PPE=0.221.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1377. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=54.0, sex=1.0, cp=0.0, trestbps=120.0, chol=188.0,
+fbs=0.0, rest ecg=1.0, thalach=113.0, exang=0.0, oldpeak=1.4,
+slope=1.0, ca=1.0,
+Pregnancies=1.0, Glucose=157.0, Blood Pressure=72.0, Skin Thickness=21.0,
+Insulin=168.0, BMI=25.6, Diabetes Pedigree Function=0.123.
+Breast features: mean radius=9.904, mean texture=18.060, mean perimeter=64.600, mean area=302.400, mean smoothness=0.097.
+Movement features: 
+MDVP:Fo=117.004, MDVP:Fhi=144.466, MDVP:Flo=99.923,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.017, MDVP:Shimmer=0.017,
+Shimmer:APQ3=0.009, Shimmer:APQ5=0.011,
+MDVP:APQ=0.013, Shimmer:DDA=0.026,
+NHR=0.006, HNR=25.445, RPDE=0.387,
+DFA=0.756, spread1=-6.013, spread2=0.229,
+D2=1.873, PPE=0.163.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2619. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=58.0, sex=1.0, cp=2.0, trestbps=140.0, chol=211.0,
+fbs=1.0, rest ecg=0.0, thalach=165.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=8.0, Glucose=109.0, Blood Pressure=76.0, Skin Thickness=39.0,
+Insulin=114.0, BMI=27.9, Diabetes Pedigree Function=0.64.
+Breast features: mean radius=12.680, mean texture=23.840, mean perimeter=82.690, mean area=499.000, mean smoothness=0.112.
+Movement features: 
+MDVP:Fo=176.858, MDVP:Fhi=205.560, MDVP:Flo=75.344,
+MDVP:Jitter=0.007, MDVP:Jitter=0.007,
+MDVP:RAP=0.004, MDVP:PPQ=0.004, Jitter:DDP=0.013,
+MDVP:Shimmer=0.048, MDVP:Shimmer=0.048,
+Shimmer:APQ3=0.027, Shimmer:APQ5=0.030,
+MDVP:APQ=0.035, Shimmer:DDA=0.080,
+NHR=0.055, HNR=13.893, RPDE=0.556,
+DFA=0.730, spread1=-5.289, spread2=0.343,
+D2=3.099, PPE=0.242.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3167. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=58.0, sex=1.0, cp=2.0, trestbps=132.0, chol=224.0,
+fbs=0.0, rest ecg=0.0, thalach=173.0, exang=0.0, oldpeak=3.2,
+slope=2.0, ca=2.0,
+Pregnancies=2.0, Glucose=90.0, Blood Pressure=68.0, Skin Thickness=42.0,
+Insulin=0.0, BMI=38.2, Diabetes Pedigree Function=0.503.
+Breast features: mean radius=8.598, mean texture=20.980, mean perimeter=54.660, mean area=221.800, mean smoothness=0.124.
+Movement features: 
+MDVP:Fo=201.774, MDVP:Fhi=262.707, MDVP:Flo=78.228,
+MDVP:Jitter=0.007, MDVP:Jitter=0.007,
+MDVP:RAP=0.004, MDVP:PPQ=0.004, Jitter:DDP=0.012,
+MDVP:Shimmer=0.026, MDVP:Shimmer=0.026,
+Shimmer:APQ3=0.015, Shimmer:APQ5=0.016,
+MDVP:APQ=0.018, Shimmer:DDA=0.044,
+NHR=0.044, HNR=19.368, RPDE=0.508,
+DFA=0.684, spread1=-6.934, spread2=0.160,
+D2=2.316, PPE=0.113.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2988. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=37.0, sex=0.0, cp=2.0, trestbps=120.0, chol=215.0,
+fbs=0.0, rest ecg=1.0, thalach=170.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=8.0, Glucose=120.0, Blood Pressure=78.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=25.0, Diabetes Pedigree Function=0.409.
+Breast features: mean radius=14.400, mean texture=26.990, mean perimeter=92.250, mean area=646.100, mean smoothness=0.070.
+Movement features: 
+MDVP:Fo=200.714, MDVP:Fhi=223.982, MDVP:Flo=89.686,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.004, MDVP:PPQ=0.003, Jitter:DDP=0.011,
+MDVP:Shimmer=0.023, MDVP:Shimmer=0.023,
+Shimmer:APQ3=0.012, Shimmer:APQ5=0.014,
+MDVP:APQ=0.019, Shimmer:DDA=0.036,
+NHR=0.007, HNR=23.239, RPDE=0.436,
+DFA=0.728, spread1=-5.258, spread2=0.256,
+D2=2.551, PPE=0.233.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1691. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=44.0, sex=0.0, cp=2.0, trestbps=118.0, chol=242.0,
+fbs=0.0, rest ecg=1.0, thalach=149.0, exang=0.0, oldpeak=0.3,
+slope=1.0, ca=1.0,
+Pregnancies=4.0, Glucose=99.0, Blood Pressure=72.0, Skin Thickness=17.0,
+Insulin=0.0, BMI=25.6, Diabetes Pedigree Function=0.294.
+Breast features: mean radius=13.380, mean texture=30.720, mean perimeter=86.340, mean area=557.200, mean smoothness=0.092.
+Movement features: 
+MDVP:Fo=184.055, MDVP:Fhi=196.537, MDVP:Flo=166.977,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.001, MDVP:PPQ=0.001, Jitter:DDP=0.004,
+MDVP:Shimmer=0.015, MDVP:Shimmer=0.015,
+Shimmer:APQ3=0.007, Shimmer:APQ5=0.009,
+MDVP:APQ=0.012, Shimmer:DDA=0.022,
+NHR=0.003, HNR=26.453, RPDE=0.306,
+DFA=0.759, spread1=-7.044, spread2=0.063,
+D2=2.362, PPE=0.116.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2669. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=47.0, sex=1.0, cp=0.0, trestbps=112.0, chol=204.0,
+fbs=0.0, rest ecg=1.0, thalach=143.0, exang=0.0, oldpeak=0.1,
+slope=2.0, ca=0.0,
+Pregnancies=4.0, Glucose=110.0, Blood Pressure=92.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=37.6, Diabetes Pedigree Function=0.191.
+Breast features: mean radius=17.300, mean texture=17.080, mean perimeter=113.000, mean area=928.200, mean smoothness=0.101.
+Movement features: 
+MDVP:Fo=112.150, MDVP:Fhi=131.669, MDVP:Flo=97.527,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.009,
+MDVP:Shimmer=0.018, MDVP:Shimmer=0.018,
+Shimmer:APQ3=0.010, Shimmer:APQ5=0.010,
+MDVP:APQ=0.014, Shimmer:DDA=0.029,
+NHR=0.014, HNR=21.219, RPDE=0.557,
+DFA=0.673, spread1=-5.617, spread2=0.185,
+D2=1.872, PPE=0.212.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1814. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=46.0, sex=0.0, cp=0.0, trestbps=138.0, chol=243.0,
+fbs=0.0, rest ecg=0.0, thalach=152.0, exang=1.0, oldpeak=0.0,
+slope=1.0, ca=0.0,
+Pregnancies=3.0, Glucose=99.0, Blood Pressure=62.0, Skin Thickness=19.0,
+Insulin=74.0, BMI=21.8, Diabetes Pedigree Function=0.279.
+Breast features: mean radius=13.710, mean texture=18.680, mean perimeter=88.730, mean area=571.000, mean smoothness=0.099.
+Movement features: 
+MDVP:Fo=157.447, MDVP:Fhi=163.267, MDVP:Flo=149.605,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.006,
+MDVP:Shimmer=0.033, MDVP:Shimmer=0.033,
+Shimmer:APQ3=0.018, Shimmer:APQ5=0.019,
+MDVP:APQ=0.026, Shimmer:DDA=0.054,
+NHR=0.010, HNR=21.693, RPDE=0.447,
+DFA=0.706, spread1=-6.247, spread2=0.181,
+D2=2.344, PPE=0.165.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1541. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=53.0, sex=1.0, cp=2.0, trestbps=130.0, chol=246.0,
+fbs=1.0, rest ecg=0.0, thalach=173.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=3.0,
+Pregnancies=0.0, Glucose=102.0, Blood Pressure=64.0, Skin Thickness=46.0,
+Insulin=78.0, BMI=40.6, Diabetes Pedigree Function=0.496.
+Breast features: mean radius=13.450, mean texture=18.300, mean perimeter=86.600, mean area=555.100, mean smoothness=0.102.
+Movement features: 
+MDVP:Fo=116.342, MDVP:Fhi=581.289, MDVP:Flo=94.246,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.001, MDVP:PPQ=0.001, Jitter:DDP=0.003,
+MDVP:Shimmer=0.013, MDVP:Shimmer=0.013,
+Shimmer:APQ3=0.006, Shimmer:APQ5=0.008,
+MDVP:APQ=0.011, Shimmer:DDA=0.019,
+NHR=0.007, HNR=25.023, RPDE=0.528,
+DFA=0.664, spread1=-6.359, spread2=0.117,
+D2=2.152, PPE=0.139.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1370. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=69.0, sex=1.0, cp=3.0, trestbps=160.0, chol=234.0,
+fbs=1.0, rest ecg=0.0, thalach=131.0, exang=0.0, oldpeak=0.1,
+slope=1.0, ca=1.0,
+Pregnancies=3.0, Glucose=129.0, Blood Pressure=64.0, Skin Thickness=29.0,
+Insulin=115.0, BMI=26.4, Diabetes Pedigree Function=0.219.
+Breast features: mean radius=12.770, mean texture=29.430, mean perimeter=81.350, mean area=507.900, mean smoothness=0.083.
+Movement features: 
+MDVP:Fo=125.641, MDVP:Fhi=141.068, MDVP:Flo=116.346,
+MDVP:Jitter=0.033, MDVP:Jitter=0.033,
+MDVP:RAP=0.021, MDVP:PPQ=0.015, Jitter:DDP=0.064,
+MDVP:Shimmer=0.092, MDVP:Shimmer=0.092,
+Shimmer:APQ3=0.054, Shimmer:APQ5=0.048,
+MDVP:APQ=0.062, Shimmer:DDA=0.161,
+NHR=0.315, HNR=8.867, RPDE=0.671,
+DFA=0.657, spread1=-3.701, spread2=0.260,
+D2=2.991, PPE=0.371.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3320. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=65.0, sex=1.0, cp=0.0, trestbps=120.0, chol=177.0,
+fbs=0.0, rest ecg=1.0, thalach=140.0, exang=0.0, oldpeak=0.4,
+slope=2.0, ca=0.0,
+Pregnancies=6.0, Glucose=166.0, Blood Pressure=74.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=26.6, Diabetes Pedigree Function=0.304.
+Breast features: mean radius=14.610, mean texture=15.690, mean perimeter=92.680, mean area=664.900, mean smoothness=0.076.
+Movement features: 
+MDVP:Fo=116.676, MDVP:Fhi=137.871, MDVP:Flo=111.366,
+MDVP:Jitter=0.010, MDVP:Jitter=0.010,
+MDVP:RAP=0.005, MDVP:PPQ=0.007, Jitter:DDP=0.015,
+MDVP:Shimmer=0.055, MDVP:Shimmer=0.055,
+Shimmer:APQ3=0.029, Shimmer:APQ5=0.040,
+MDVP:APQ=0.038, Shimmer:DDA=0.088,
+NHR=0.014, HNR=20.644, RPDE=0.435,
+DFA=0.819, spread1=-4.118, spread2=0.334,
+D2=2.406, PPE=0.369.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1895. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=62.0, sex=0.0, cp=0.0, trestbps=140.0, chol=394.0,
+fbs=0.0, rest ecg=0.0, thalach=157.0, exang=0.0, oldpeak=1.2,
+slope=1.0, ca=0.0,
+Pregnancies=6.0, Glucose=129.0, Blood Pressure=90.0, Skin Thickness=7.0,
+Insulin=326.0, BMI=19.6, Diabetes Pedigree Function=0.582.
+Breast features: mean radius=15.270, mean texture=12.910, mean perimeter=98.170, mean area=725.500, mean smoothness=0.082.
+Movement features: 
+MDVP:Fo=128.001, MDVP:Fhi=138.052, MDVP:Flo=122.080,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.001, MDVP:PPQ=0.002, Jitter:DDP=0.004,
+MDVP:Shimmer=0.023, MDVP:Shimmer=0.023,
+Shimmer:APQ3=0.013, Shimmer:APQ5=0.011,
+MDVP:APQ=0.017, Shimmer:DDA=0.040,
+NHR=0.005, HNR=24.692, RPDE=0.460,
+DFA=0.766, spread1=-7.072, spread2=0.220,
+D2=1.972, PPE=0.119.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['parkinson'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1160. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=58.0, sex=0.0, cp=3.0, trestbps=150.0, chol=283.0,
+fbs=1.0, rest ecg=0.0, thalach=162.0, exang=0.0, oldpeak=1.0,
+slope=2.0, ca=0.0,
+Pregnancies=3.0, Glucose=180.0, Blood Pressure=64.0, Skin Thickness=25.0,
+Insulin=70.0, BMI=34.0, Diabetes Pedigree Function=0.271.
+Breast features: mean radius=14.740, mean texture=25.420, mean perimeter=94.700, mean area=668.600, mean smoothness=0.083.
+Movement features: 
+MDVP:Fo=157.821, MDVP:Fhi=172.975, MDVP:Flo=68.401,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.006,
+MDVP:Shimmer=0.037, MDVP:Shimmer=0.037,
+Shimmer:APQ3=0.021, Shimmer:APQ5=0.023,
+MDVP:APQ=0.028, Shimmer:DDA=0.062,
+NHR=0.009, HNR=22.219, RPDE=0.502,
+DFA=0.712, spread1=-6.251, spread2=0.188,
+D2=2.144, PPE=0.161.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['parkinson'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 4437. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=44.0, sex=0.0, cp=2.0, trestbps=118.0, chol=242.0,
+fbs=0.0, rest ecg=1.0, thalach=149.0, exang=0.0, oldpeak=0.3,
+slope=1.0, ca=1.0,
+Pregnancies=2.0, Glucose=120.0, Blood Pressure=54.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=26.8, Diabetes Pedigree Function=0.455.
+Breast features: mean radius=12.050, mean texture=22.720, mean perimeter=78.750, mean area=447.800, mean smoothness=0.069.
+Movement features: 
+MDVP:Fo=202.544, MDVP:Fhi=241.350, MDVP:Flo=164.168,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.001, MDVP:PPQ=0.001, Jitter:DDP=0.003,
+MDVP:Shimmer=0.027, MDVP:Shimmer=0.027,
+Shimmer:APQ3=0.015, Shimmer:APQ5=0.016,
+MDVP:APQ=0.020, Shimmer:DDA=0.044,
+NHR=0.010, HNR=20.680, RPDE=0.497,
+DFA=0.630, spread1=-6.133, spread2=0.221,
+D2=2.577, PPE=0.160.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1788. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=54.0, sex=1.0, cp=2.0, trestbps=125.0, chol=273.0,
+fbs=0.0, rest ecg=0.0, thalach=152.0, exang=0.0, oldpeak=0.5,
+slope=0.0, ca=1.0,
+Pregnancies=7.0, Glucose=136.0, Blood Pressure=90.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=29.9, Diabetes Pedigree Function=0.21.
+Breast features: mean radius=13.010, mean texture=22.220, mean perimeter=82.010, mean area=526.400, mean smoothness=0.063.
+Movement features: 
+MDVP:Fo=197.076, MDVP:Fhi=206.896, MDVP:Flo=192.055,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.011, MDVP:Shimmer=0.011,
+Shimmer:APQ3=0.006, Shimmer:APQ5=0.007,
+MDVP:APQ=0.008, Shimmer:DDA=0.017,
+NHR=0.003, HNR=26.775, RPDE=0.422,
+DFA=0.741, spread1=-7.348, spread2=0.178,
+D2=1.744, PPE=0.086.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3262. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=53.0, sex=1.0, cp=2.0, trestbps=130.0, chol=197.0,
+fbs=1.0, rest ecg=0.0, thalach=152.0, exang=0.0, oldpeak=1.2,
+slope=0.0, ca=0.0,
+Pregnancies=9.0, Glucose=124.0, Blood Pressure=70.0, Skin Thickness=33.0,
+Insulin=402.0, BMI=35.4, Diabetes Pedigree Function=0.282.
+Breast features: mean radius=20.260, mean texture=23.030, mean perimeter=132.400, mean area=1264.000, mean smoothness=0.091.
+Movement features: 
+MDVP:Fo=204.664, MDVP:Fhi=221.300, MDVP:Flo=189.621,
+MDVP:Jitter=0.008, MDVP:Jitter=0.008,
+MDVP:RAP=0.005, MDVP:PPQ=0.005, Jitter:DDP=0.015,
+MDVP:Shimmer=0.024, MDVP:Shimmer=0.024,
+Shimmer:APQ3=0.013, Shimmer:APQ5=0.015,
+MDVP:APQ=0.018, Shimmer:DDA=0.038,
+NHR=0.013, HNR=21.305, RPDE=0.499,
+DFA=0.722, spread1=-4.876, spread2=0.212,
+D2=2.377, PPE=0.268.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 4528. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=48.0, sex=1.0, cp=0.0, trestbps=122.0, chol=222.0,
+fbs=0.0, rest ecg=0.0, thalach=186.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=2.0, Glucose=105.0, Blood Pressure=80.0, Skin Thickness=45.0,
+Insulin=191.0, BMI=33.7, Diabetes Pedigree Function=0.711.
+Breast features: mean radius=13.490, mean texture=22.300, mean perimeter=86.910, mean area=561.000, mean smoothness=0.088.
+Movement features: 
+MDVP:Fo=125.791, MDVP:Fhi=140.557, MDVP:Flo=96.206,
+MDVP:Jitter=0.014, MDVP:Jitter=0.014,
+MDVP:RAP=0.008, MDVP:PPQ=0.007, Jitter:DDP=0.025,
+MDVP:Shimmer=0.047, MDVP:Shimmer=0.047,
+Shimmer:APQ3=0.025, Shimmer:APQ5=0.026,
+MDVP:APQ=0.039, Shimmer:DDA=0.076,
+NHR=0.103, HNR=15.433, RPDE=0.571,
+DFA=0.691, spread1=-5.159, spread2=0.202,
+D2=2.442, PPE=0.260.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 7720. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=52.0, sex=1.0, cp=0.0, trestbps=128.0, chol=255.0,
+fbs=0.0, rest ecg=1.0, thalach=161.0, exang=1.0, oldpeak=0.0,
+slope=2.0, ca=1.0,
+Pregnancies=0.0, Glucose=131.0, Blood Pressure=66.0, Skin Thickness=40.0,
+Insulin=0.0, BMI=34.3, Diabetes Pedigree Function=0.196.
+Breast features: mean radius=13.030, mean texture=18.420, mean perimeter=82.610, mean area=523.800, mean smoothness=0.090.
+Movement features: 
+MDVP:Fo=153.880, MDVP:Fhi=172.860, MDVP:Flo=78.128,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.002, MDVP:PPQ=0.003, Jitter:DDP=0.007,
+MDVP:Shimmer=0.041, MDVP:Shimmer=0.041,
+Shimmer:APQ3=0.020, Shimmer:APQ5=0.026,
+MDVP:APQ=0.045, Shimmer:DDA=0.061,
+NHR=0.018, HNR=19.493, RPDE=0.629,
+DFA=0.699, spread1=-5.187, spread2=0.238,
+D2=2.558, PPE=0.260.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3379. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=45.0, sex=1.0, cp=1.0, trestbps=128.0, chol=308.0,
+fbs=0.0, rest ecg=0.0, thalach=170.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=8.0, Glucose=155.0, Blood Pressure=62.0, Skin Thickness=26.0,
+Insulin=495.0, BMI=34.0, Diabetes Pedigree Function=0.543.
+Breast features: mean radius=10.940, mean texture=18.590, mean perimeter=70.390, mean area=370.000, mean smoothness=0.100.
+Movement features: 
+MDVP:Fo=144.188, MDVP:Fhi=349.259, MDVP:Flo=82.764,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.002, MDVP:PPQ=0.003, Jitter:DDP=0.006,
+MDVP:Shimmer=0.020, MDVP:Shimmer=0.020,
+Shimmer:APQ3=0.010, Shimmer:APQ5=0.012,
+MDVP:APQ=0.021, Shimmer:DDA=0.029,
+NHR=0.019, HNR=22.333, RPDE=0.567,
+DFA=0.645, spread1=-5.440, spread2=0.240,
+D2=2.265, PPE=0.218.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2081. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=53.0, sex=0.0, cp=2.0, trestbps=128.0, chol=216.0,
+fbs=0.0, rest ecg=0.0, thalach=115.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=2.0, Glucose=89.0, Blood Pressure=90.0, Skin Thickness=30.0,
+Insulin=0.0, BMI=33.5, Diabetes Pedigree Function=0.292.
+Breast features: mean radius=14.270, mean texture=22.550, mean perimeter=93.770, mean area=629.800, mean smoothness=0.104.
+Movement features: 
+MDVP:Fo=192.818, MDVP:Fhi=224.429, MDVP:Flo=168.793,
+MDVP:Jitter=0.031, MDVP:Jitter=0.031,
+MDVP:RAP=0.018, MDVP:PPQ=0.020, Jitter:DDP=0.054,
+MDVP:Shimmer=0.119, MDVP:Shimmer=0.119,
+Shimmer:APQ3=0.056, Shimmer:APQ5=0.079,
+MDVP:APQ=0.138, Shimmer:DDA=0.169,
+NHR=0.217, HNR=8.441, RPDE=0.626,
+DFA=0.768, spread1=-2.434, spread2=0.450,
+D2=3.079, PPE=0.527.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3290. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=42.0, sex=1.0, cp=2.0, trestbps=120.0, chol=240.0,
+fbs=1.0, rest ecg=1.0, thalach=194.0, exang=0.0, oldpeak=0.8,
+slope=0.0, ca=0.0,
+Pregnancies=8.0, Glucose=197.0, Blood Pressure=74.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=25.9, Diabetes Pedigree Function=1.191.
+Breast features: mean radius=12.940, mean texture=16.170, mean perimeter=83.180, mean area=507.600, mean smoothness=0.099.
+Movement features: 
+MDVP:Fo=139.173, MDVP:Fhi=179.139, MDVP:Flo=76.556,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.016, MDVP:Shimmer=0.016,
+Shimmer:APQ3=0.007, Shimmer:APQ5=0.009,
+MDVP:APQ=0.018, Shimmer:DDA=0.022,
+NHR=0.010, HNR=24.889, RPDE=0.430,
+DFA=0.666, spread1=-5.660, spread2=0.255,
+D2=2.519, PPE=0.200.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": [],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+
+Missing routes. Set to domains with confidence >= 0.5.
+=====END=====
+=====START=====
+- INPUT:
+Patient 9317. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=54.0, sex=0.0, cp=2.0, trestbps=108.0, chol=267.0,
+fbs=0.0, rest ecg=0.0, thalach=167.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=1.0, Glucose=189.0, Blood Pressure=60.0, Skin Thickness=23.0,
+Insulin=846.0, BMI=30.1, Diabetes Pedigree Function=0.398.
+Breast features: mean radius=12.180, mean texture=17.840, mean perimeter=77.790, mean area=451.100, mean smoothness=0.104.
+Movement features: 
+MDVP:Fo=116.556, MDVP:Fhi=592.030, MDVP:Flo=86.228,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.008,
+MDVP:Shimmer=0.017, MDVP:Shimmer=0.017,
+Shimmer:APQ3=0.008, Shimmer:APQ5=0.010,
+MDVP:APQ=0.015, Shimmer:DDA=0.025,
+NHR=0.014, HNR=23.958, RPDE=0.566,
+DFA=0.668, spread1=-6.431, spread2=0.153,
+D2=2.162, PPE=0.121.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2526. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=54.0, sex=0.0, cp=2.0, trestbps=108.0, chol=267.0,
+fbs=0.0, rest ecg=0.0, thalach=167.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=9.0, Glucose=154.0, Blood Pressure=78.0, Skin Thickness=30.0,
+Insulin=100.0, BMI=30.9, Diabetes Pedigree Function=0.164.
+Breast features: mean radius=11.850, mean texture=17.460, mean perimeter=75.540, mean area=432.700, mean smoothness=0.084.
+Movement features: 
+MDVP:Fo=95.605, MDVP:Fhi=107.715, MDVP:Flo=87.549,
+MDVP:Jitter=0.007, MDVP:Jitter=0.007,
+MDVP:RAP=0.004, MDVP:PPQ=0.004, Jitter:DDP=0.013,
+MDVP:Shimmer=0.032, MDVP:Shimmer=0.032,
+Shimmer:APQ3=0.018, Shimmer:APQ5=0.018,
+MDVP:APQ=0.022, Shimmer:DDA=0.054,
+NHR=0.018, HNR=19.659, RPDE=0.576,
+DFA=0.779, spread1=-5.132, spread2=0.210,
+D2=2.233, PPE=0.261.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 6288. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=57.0, sex=1.0, cp=1.0, trestbps=124.0, chol=261.0,
+fbs=0.0, rest ecg=1.0, thalach=141.0, exang=0.0, oldpeak=0.3,
+slope=2.0, ca=0.0,
+Pregnancies=2.0, Glucose=100.0, Blood Pressure=54.0, Skin Thickness=28.0,
+Insulin=105.0, BMI=37.8, Diabetes Pedigree Function=0.498.
+Breast features: mean radius=14.870, mean texture=16.670, mean perimeter=98.640, mean area=682.500, mean smoothness=0.116.
+Movement features: 
+MDVP:Fo=153.880, MDVP:Fhi=172.860, MDVP:Flo=78.128,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.002, MDVP:PPQ=0.003, Jitter:DDP=0.007,
+MDVP:Shimmer=0.041, MDVP:Shimmer=0.041,
+Shimmer:APQ3=0.020, Shimmer:APQ5=0.026,
+MDVP:APQ=0.045, Shimmer:DDA=0.061,
+NHR=0.018, HNR=19.493, RPDE=0.629,
+DFA=0.699, spread1=-5.187, spread2=0.238,
+D2=2.558, PPE=0.260.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1769. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=46.0, sex=0.0, cp=0.0, trestbps=138.0, chol=243.0,
+fbs=0.0, rest ecg=0.0, thalach=152.0, exang=1.0, oldpeak=0.0,
+slope=1.0, ca=0.0,
+Pregnancies=9.0, Glucose=123.0, Blood Pressure=70.0, Skin Thickness=44.0,
+Insulin=94.0, BMI=33.1, Diabetes Pedigree Function=0.374.
+Breast features: mean radius=14.870, mean texture=20.210, mean perimeter=96.120, mean area=680.900, mean smoothness=0.096.
+Movement features: 
+MDVP:Fo=162.568, MDVP:Fhi=198.346, MDVP:Flo=77.630,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.008,
+MDVP:Shimmer=0.018, MDVP:Shimmer=0.018,
+Shimmer:APQ3=0.008, Shimmer:APQ5=0.011,
+MDVP:APQ=0.018, Shimmer:DDA=0.024,
+NHR=0.012, HNR=25.678, RPDE=0.428,
+DFA=0.724, spread1=-6.636, spread2=0.210,
+D2=1.958, PPE=0.135.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1072. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=52.0, sex=1.0, cp=1.0, trestbps=128.0, chol=205.0,
+fbs=1.0, rest ecg=1.0, thalach=184.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=2.0, Glucose=119.0, Blood Pressure=0.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=19.6, Diabetes Pedigree Function=0.832.
+Breast features: mean radius=9.755, mean texture=28.200, mean perimeter=61.680, mean area=290.900, mean smoothness=0.080.
+Movement features: 
+MDVP:Fo=120.289, MDVP:Fhi=128.143, MDVP:Flo=100.209,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.002, Jitter:DDP=0.008,
+MDVP:Shimmer=0.014, MDVP:Shimmer=0.014,
+Shimmer:APQ3=0.007, Shimmer:APQ5=0.008,
+MDVP:APQ=0.012, Shimmer:DDA=0.021,
+NHR=0.016, HNR=23.949, RPDE=0.467,
+DFA=0.724, spread1=-6.135, spread2=0.204,
+D2=2.540, PPE=0.170.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2767. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=42.0, sex=0.0, cp=0.0, trestbps=102.0, chol=265.0,
+fbs=0.0, rest ecg=0.0, thalach=122.0, exang=0.0, oldpeak=0.6,
+slope=1.0, ca=0.0,
+Pregnancies=3.0, Glucose=150.0, Blood Pressure=76.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=21.0, Diabetes Pedigree Function=0.207.
+Breast features: mean radius=11.140, mean texture=14.070, mean perimeter=71.240, mean area=384.600, mean smoothness=0.073.
+Movement features: 
+MDVP:Fo=176.858, MDVP:Fhi=205.560, MDVP:Flo=75.344,
+MDVP:Jitter=0.007, MDVP:Jitter=0.007,
+MDVP:RAP=0.004, MDVP:PPQ=0.004, Jitter:DDP=0.013,
+MDVP:Shimmer=0.048, MDVP:Shimmer=0.048,
+Shimmer:APQ3=0.027, Shimmer:APQ5=0.030,
+MDVP:APQ=0.035, Shimmer:DDA=0.080,
+NHR=0.055, HNR=13.893, RPDE=0.556,
+DFA=0.730, spread1=-5.289, spread2=0.343,
+D2=3.099, PPE=0.242.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2306. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=57.0, sex=1.0, cp=2.0, trestbps=150.0, chol=168.0,
+fbs=0.0, rest ecg=1.0, thalach=174.0, exang=0.0, oldpeak=1.6,
+slope=2.0, ca=0.0,
+Pregnancies=1.0, Glucose=95.0, Blood Pressure=82.0, Skin Thickness=25.0,
+Insulin=180.0, BMI=35.0, Diabetes Pedigree Function=0.233.
+Breast features: mean radius=19.070, mean texture=24.810, mean perimeter=128.300, mean area=1104.000, mean smoothness=0.091.
+Movement features: 
+MDVP:Fo=245.510, MDVP:Fhi=262.090, MDVP:Flo=231.848,
+MDVP:Jitter=0.002, MDVP:Jitter=0.002,
+MDVP:RAP=0.001, MDVP:PPQ=0.001, Jitter:DDP=0.004,
+MDVP:Shimmer=0.016, MDVP:Shimmer=0.016,
+Shimmer:APQ3=0.009, Shimmer:APQ5=0.010,
+MDVP:APQ=0.011, Shimmer:DDA=0.027,
+NHR=0.005, HNR=24.602, RPDE=0.467,
+DFA=0.632, spread1=-7.156, spread2=0.128,
+D2=2.392, PPE=0.097.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1538. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=51.0, sex=1.0, cp=0.0, trestbps=140.0, chol=261.0,
+fbs=0.0, rest ecg=0.0, thalach=186.0, exang=1.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=3.0, Glucose=150.0, Blood Pressure=76.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=21.0, Diabetes Pedigree Function=0.207.
+Breast features: mean radius=11.430, mean texture=15.390, mean perimeter=73.060, mean area=399.800, mean smoothness=0.096.
+Movement features: 
+MDVP:Fo=236.200, MDVP:Fhi=244.663, MDVP:Flo=102.137,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.024, MDVP:Shimmer=0.024,
+Shimmer:APQ3=0.014, Shimmer:APQ5=0.014,
+MDVP:APQ=0.016, Shimmer:DDA=0.042,
+NHR=0.006, HNR=24.078, RPDE=0.470,
+DFA=0.628, spread1=-6.816, spread2=0.172,
+D2=2.235, PPE=0.120.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2092. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=42.0, sex=1.0, cp=2.0, trestbps=130.0, chol=180.0,
+fbs=0.0, rest ecg=1.0, thalach=150.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=0.0, Glucose=151.0, Blood Pressure=90.0, Skin Thickness=46.0,
+Insulin=0.0, BMI=42.1, Diabetes Pedigree Function=0.371.
+Breast features: mean radius=16.460, mean texture=20.110, mean perimeter=109.300, mean area=832.900, mean smoothness=0.098.
+Movement features: 
+MDVP:Fo=100.960, MDVP:Fhi=110.019, MDVP:Flo=95.628,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.004, MDVP:PPQ=0.003, Jitter:DDP=0.011,
+MDVP:Shimmer=0.024, MDVP:Shimmer=0.024,
+Shimmer:APQ3=0.014, Shimmer:APQ5=0.014,
+MDVP:APQ=0.018, Shimmer:DDA=0.041,
+NHR=0.012, HNR=20.536, RPDE=0.555,
+DFA=0.788, spread1=-5.022, spread2=0.147,
+D2=2.428, PPE=0.265.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2450. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=55.0, sex=1.0, cp=0.0, trestbps=160.0, chol=289.0,
+fbs=0.0, rest ecg=0.0, thalach=145.0, exang=1.0, oldpeak=0.8,
+slope=1.0, ca=1.0,
+Pregnancies=6.0, Glucose=194.0, Blood Pressure=78.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=23.5, Diabetes Pedigree Function=0.129.
+Breast features: mean radius=11.260, mean texture=19.830, mean perimeter=71.300, mean area=388.100, mean smoothness=0.085.
+Movement features: 
+MDVP:Fo=243.439, MDVP:Fhi=250.912, MDVP:Flo=232.435,
+MDVP:Jitter=0.002, MDVP:Jitter=0.002,
+MDVP:RAP=0.001, MDVP:PPQ=0.001, Jitter:DDP=0.003,
+MDVP:Shimmer=0.014, MDVP:Shimmer=0.014,
+Shimmer:APQ3=0.008, Shimmer:APQ5=0.009,
+MDVP:APQ=0.010, Shimmer:DDA=0.023,
+NHR=0.005, HNR=25.368, RPDE=0.438,
+DFA=0.635, spread1=-7.058, spread2=0.092,
+D2=2.331, PPE=0.091.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2075. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=54.0, sex=1.0, cp=2.0, trestbps=150.0, chol=232.0,
+fbs=0.0, rest ecg=0.0, thalach=165.0, exang=0.0, oldpeak=1.6,
+slope=2.0, ca=0.0,
+Pregnancies=4.0, Glucose=110.0, Blood Pressure=76.0, Skin Thickness=20.0,
+Insulin=100.0, BMI=28.4, Diabetes Pedigree Function=0.118.
+Breast features: mean radius=12.180, mean texture=14.080, mean perimeter=77.250, mean area=461.400, mean smoothness=0.077.
+Movement features: 
+MDVP:Fo=113.166, MDVP:Fhi=130.270, MDVP:Flo=100.673,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.008,
+MDVP:Shimmer=0.053, MDVP:Shimmer=0.053,
+Shimmer:APQ3=0.029, Shimmer:APQ5=0.033,
+MDVP:APQ=0.041, Shimmer:DDA=0.087,
+NHR=0.037, HNR=16.747, RPDE=0.625,
+DFA=0.709, spread1=-4.655, spread2=0.304,
+D2=2.672, PPE=0.274.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2547. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=67.0, sex=1.0, cp=2.0, trestbps=152.0, chol=212.0,
+fbs=0.0, rest ecg=0.0, thalach=150.0, exang=0.0, oldpeak=0.8,
+slope=1.0, ca=0.0,
+Pregnancies=0.0, Glucose=119.0, Blood Pressure=0.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=32.4, Diabetes Pedigree Function=0.141.
+Breast features: mean radius=19.070, mean texture=24.810, mean perimeter=128.300, mean area=1104.000, mean smoothness=0.091.
+Movement features: 
+MDVP:Fo=244.990, MDVP:Fhi=272.210, MDVP:Flo=239.170,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.002, Jitter:DDP=0.008,
+MDVP:Shimmer=0.019, MDVP:Shimmer=0.019,
+Shimmer:APQ3=0.011, Shimmer:APQ5=0.011,
+MDVP:APQ=0.013, Shimmer:DDA=0.033,
+NHR=0.010, HNR=21.528, RPDE=0.523,
+DFA=0.647, spread1=-7.304, spread2=0.171,
+D2=2.095, PPE=0.096.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 9904. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=58.0, sex=1.0, cp=2.0, trestbps=132.0, chol=224.0,
+fbs=0.0, rest ecg=0.0, thalach=173.0, exang=0.0, oldpeak=3.2,
+slope=2.0, ca=2.0,
+Pregnancies=7.0, Glucose=196.0, Blood Pressure=90.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=39.8, Diabetes Pedigree Function=0.451.
+Breast features: mean radius=11.660, mean texture=17.070, mean perimeter=73.700, mean area=421.000, mean smoothness=0.076.
+Movement features: 
+MDVP:Fo=198.116, MDVP:Fhi=233.099, MDVP:Flo=174.478,
+MDVP:Jitter=0.027, MDVP:Jitter=0.027,
+MDVP:RAP=0.016, MDVP:PPQ=0.017, Jitter:DDP=0.047,
+MDVP:Shimmer=0.087, MDVP:Shimmer=0.087,
+Shimmer:APQ3=0.043, Shimmer:APQ5=0.056,
+MDVP:APQ=0.083, Shimmer:DDA=0.129,
+NHR=0.163, HNR=9.449, RPDE=0.584,
+DFA=0.754, spread1=-2.840, spread2=0.356,
+D2=3.184, PPE=0.455.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 9752. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=43.0, sex=1.0, cp=2.0, trestbps=130.0, chol=315.0,
+fbs=0.0, rest ecg=1.0, thalach=162.0, exang=0.0, oldpeak=1.9,
+slope=2.0, ca=1.0,
+Pregnancies=0.0, Glucose=94.0, Blood Pressure=0.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=0.0, Diabetes Pedigree Function=0.256.
+Breast features: mean radius=19.590, mean texture=25.000, mean perimeter=127.700, mean area=1191.000, mean smoothness=0.103.
+Movement features: 
+MDVP:Fo=127.930, MDVP:Fhi=138.752, MDVP:Flo=112.173,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.010,
+MDVP:Shimmer=0.032, MDVP:Shimmer=0.032,
+Shimmer:APQ3=0.014, Shimmer:APQ5=0.017,
+MDVP:APQ=0.031, Shimmer:DDA=0.041,
+NHR=0.027, HNR=19.651, RPDE=0.655,
+DFA=0.676, spread1=-5.498, spread2=0.234,
+D2=2.103, PPE=0.217.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['parkinson', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2792. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=62.0, sex=1.0, cp=1.0, trestbps=128.0, chol=208.0,
+fbs=1.0, rest ecg=0.0, thalach=140.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=1.0, Glucose=181.0, Blood Pressure=64.0, Skin Thickness=30.0,
+Insulin=180.0, BMI=34.1, Diabetes Pedigree Function=0.328.
+Breast features: mean radius=17.750, mean texture=28.030, mean perimeter=117.300, mean area=981.600, mean smoothness=0.100.
+Movement features: 
+MDVP:Fo=199.228, MDVP:Fhi=209.512, MDVP:Flo=192.091,
+MDVP:Jitter=0.002, MDVP:Jitter=0.002,
+MDVP:RAP=0.001, MDVP:PPQ=0.001, Jitter:DDP=0.004,
+MDVP:Shimmer=0.010, MDVP:Shimmer=0.010,
+Shimmer:APQ3=0.005, Shimmer:APQ5=0.006,
+MDVP:APQ=0.008, Shimmer:DDA=0.015,
+NHR=0.002, HNR=30.940, RPDE=0.432,
+DFA=0.742, spread1=-7.683, spread2=0.173,
+D2=2.103, PPE=0.069.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3260. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=44.0, sex=1.0, cp=1.0, trestbps=120.0, chol=263.0,
+fbs=0.0, rest ecg=1.0, thalach=173.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=2.0, Glucose=117.0, Blood Pressure=90.0, Skin Thickness=19.0,
+Insulin=71.0, BMI=25.2, Diabetes Pedigree Function=0.313.
+Breast features: mean radius=12.070, mean texture=13.440, mean perimeter=77.830, mean area=445.200, mean smoothness=0.110.
+Movement features: 
+MDVP:Fo=179.711, MDVP:Fhi=225.930, MDVP:Flo=144.878,
+MDVP:Jitter=0.007, MDVP:Jitter=0.007,
+MDVP:RAP=0.004, MDVP:PPQ=0.004, Jitter:DDP=0.012,
+MDVP:Shimmer=0.043, MDVP:Shimmer=0.043,
+Shimmer:APQ3=0.023, Shimmer:APQ5=0.028,
+MDVP:APQ=0.035, Shimmer:DDA=0.069,
+NHR=0.072, HNR=11.866, RPDE=0.591,
+DFA=0.746, spread1=-4.379, spread2=0.376,
+D2=3.671, PPE=0.332.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 8902. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=40.0, sex=1.0, cp=0.0, trestbps=110.0, chol=167.0,
+fbs=0.0, rest ecg=0.0, thalach=114.0, exang=1.0, oldpeak=2.0,
+slope=1.0, ca=0.0,
+Pregnancies=1.0, Glucose=77.0, Blood Pressure=56.0, Skin Thickness=30.0,
+Insulin=56.0, BMI=33.3, Diabetes Pedigree Function=1.251.
+Breast features: mean radius=13.590, mean texture=21.840, mean perimeter=87.160, mean area=561.000, mean smoothness=0.080.
+Movement features: 
+MDVP:Fo=171.041, MDVP:Fhi=208.313, MDVP:Flo=75.501,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.002, Jitter:DDP=0.007,
+MDVP:Shimmer=0.020, MDVP:Shimmer=0.020,
+Shimmer:APQ3=0.009, Shimmer:APQ5=0.012,
+MDVP:APQ=0.019, Shimmer:DDA=0.027,
+NHR=0.011, HNR=25.908, RPDE=0.419,
+DFA=0.721, spread1=-6.184, spread2=0.226,
+D2=2.590, PPE=0.147.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2556. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=52.0, sex=1.0, cp=1.0, trestbps=134.0, chol=201.0,
+fbs=0.0, rest ecg=1.0, thalach=158.0, exang=0.0, oldpeak=0.8,
+slope=2.0, ca=1.0,
+Pregnancies=0.0, Glucose=117.0, Blood Pressure=80.0, Skin Thickness=31.0,
+Insulin=53.0, BMI=45.2, Diabetes Pedigree Function=0.089.
+Breast features: mean radius=12.220, mean texture=20.040, mean perimeter=79.470, mean area=453.100, mean smoothness=0.110.
+Movement features: 
+MDVP:Fo=151.884, MDVP:Fhi=157.765, MDVP:Flo=133.751,
+MDVP:Jitter=0.003, MDVP:Jitter=0.003,
+MDVP:RAP=0.001, MDVP:PPQ=0.001, Jitter:DDP=0.003,
+MDVP:Shimmer=0.015, MDVP:Shimmer=0.015,
+Shimmer:APQ3=0.006, Shimmer:APQ5=0.008,
+MDVP:APQ=0.013, Shimmer:DDA=0.019,
+NHR=0.007, HNR=26.833, RPDE=0.394,
+DFA=0.700, spread1=-6.600, spread2=0.249,
+D2=2.499, PPE=0.105.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1008. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=35.0, sex=0.0, cp=0.0, trestbps=138.0, chol=183.0,
+fbs=0.0, rest ecg=1.0, thalach=182.0, exang=0.0, oldpeak=1.4,
+slope=2.0, ca=0.0,
+Pregnancies=1.0, Glucose=138.0, Blood Pressure=82.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=40.1, Diabetes Pedigree Function=0.236.
+Breast features: mean radius=17.570, mean texture=15.050, mean perimeter=115.000, mean area=955.100, mean smoothness=0.098.
+Movement features: 
+MDVP:Fo=112.239, MDVP:Fhi=126.609, MDVP:Flo=104.095,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.002, MDVP:PPQ=0.003, Jitter:DDP=0.007,
+MDVP:Shimmer=0.056, MDVP:Shimmer=0.056,
+Shimmer:APQ3=0.031, Shimmer:APQ5=0.035,
+MDVP:APQ=0.045, Shimmer:DDA=0.092,
+NHR=0.026, HNR=17.366, RPDE=0.641,
+DFA=0.701, spread1=-5.635, spread2=0.306,
+D2=2.419, PPE=0.209.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['parkinson'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3061. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=58.0, sex=1.0, cp=0.0, trestbps=100.0, chol=234.0,
+fbs=0.0, rest ecg=1.0, thalach=156.0, exang=0.0, oldpeak=0.1,
+slope=2.0, ca=1.0,
+Pregnancies=3.0, Glucose=99.0, Blood Pressure=80.0, Skin Thickness=11.0,
+Insulin=64.0, BMI=19.3, Diabetes Pedigree Function=0.284.
+Breast features: mean radius=18.450, mean texture=21.910, mean perimeter=120.200, mean area=1075.000, mean smoothness=0.094.
+Movement features: 
+MDVP:Fo=95.385, MDVP:Fhi=102.145, MDVP:Flo=90.264,
+MDVP:Jitter=0.006, MDVP:Jitter=0.006,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.010,
+MDVP:Shimmer=0.032, MDVP:Shimmer=0.032,
+Shimmer:APQ3=0.018, Shimmer:APQ5=0.019,
+MDVP:APQ=0.025, Shimmer:DDA=0.054,
+NHR=0.011, HNR=21.875, RPDE=0.645,
+DFA=0.780, spread1=-5.115, spread2=0.249,
+D2=2.018, PPE=0.260.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['parkinson', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2756. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=62.0, sex=0.0, cp=2.0, trestbps=130.0, chol=263.0,
+fbs=0.0, rest ecg=1.0, thalach=97.0, exang=0.0, oldpeak=1.2,
+slope=1.0, ca=1.0,
+Pregnancies=8.0, Glucose=74.0, Blood Pressure=70.0, Skin Thickness=40.0,
+Insulin=49.0, BMI=35.3, Diabetes Pedigree Function=0.705.
+Breast features: mean radius=16.690, mean texture=20.200, mean perimeter=107.100, mean area=857.600, mean smoothness=0.075.
+Movement features: 
+MDVP:Fo=117.004, MDVP:Fhi=144.466, MDVP:Flo=99.923,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.017, MDVP:Shimmer=0.017,
+Shimmer:APQ3=0.009, Shimmer:APQ5=0.011,
+MDVP:APQ=0.013, Shimmer:DDA=0.026,
+NHR=0.006, HNR=25.445, RPDE=0.387,
+DFA=0.756, spread1=-6.013, spread2=0.229,
+D2=1.873, PPE=0.163.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1094. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=39.0, sex=1.0, cp=0.0, trestbps=118.0, chol=219.0,
+fbs=0.0, rest ecg=1.0, thalach=140.0, exang=0.0, oldpeak=1.2,
+slope=1.0, ca=0.0,
+Pregnancies=1.0, Glucose=79.0, Blood Pressure=80.0, Skin Thickness=25.0,
+Insulin=37.0, BMI=25.4, Diabetes Pedigree Function=0.583.
+Breast features: mean radius=14.060, mean texture=17.180, mean perimeter=89.750, mean area=609.100, mean smoothness=0.080.
+Movement features: 
+MDVP:Fo=153.880, MDVP:Fhi=172.860, MDVP:Flo=78.128,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.002, MDVP:PPQ=0.003, Jitter:DDP=0.007,
+MDVP:Shimmer=0.041, MDVP:Shimmer=0.041,
+Shimmer:APQ3=0.020, Shimmer:APQ5=0.026,
+MDVP:APQ=0.045, Shimmer:DDA=0.061,
+NHR=0.018, HNR=19.493, RPDE=0.629,
+DFA=0.699, spread1=-5.187, spread2=0.238,
+D2=2.558, PPE=0.260.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1602. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=59.0, sex=1.0, cp=0.0, trestbps=164.0, chol=176.0,
+fbs=1.0, rest ecg=0.0, thalach=90.0, exang=0.0, oldpeak=1.0,
+slope=1.0, ca=2.0,
+Pregnancies=0.0, Glucose=137.0, Blood Pressure=70.0, Skin Thickness=38.0,
+Insulin=0.0, BMI=33.2, Diabetes Pedigree Function=0.17.
+Breast features: mean radius=10.480, mean texture=14.980, mean perimeter=67.490, mean area=333.600, mean smoothness=0.098.
+Movement features: 
+MDVP:Fo=125.036, MDVP:Fhi=143.946, MDVP:Flo=116.187,
+MDVP:Jitter=0.013, MDVP:Jitter=0.013,
+MDVP:RAP=0.007, MDVP:PPQ=0.006, Jitter:DDP=0.022,
+MDVP:Shimmer=0.039, MDVP:Shimmer=0.039,
+Shimmer:APQ3=0.021, Shimmer:APQ5=0.022,
+MDVP:APQ=0.031, Shimmer:DDA=0.064,
+NHR=0.082, HNR=15.338, RPDE=0.630,
+DFA=0.714, spread1=-4.020, spread2=0.265,
+D2=2.672, PPE=0.341.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1518. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=67.0, sex=1.0, cp=2.0, trestbps=152.0, chol=212.0,
+fbs=0.0, rest ecg=0.0, thalach=150.0, exang=0.0, oldpeak=0.8,
+slope=1.0, ca=0.0,
+Pregnancies=3.0, Glucose=130.0, Blood Pressure=78.0, Skin Thickness=23.0,
+Insulin=79.0, BMI=28.4, Diabetes Pedigree Function=0.323.
+Breast features: mean radius=13.280, mean texture=13.720, mean perimeter=85.790, mean area=541.800, mean smoothness=0.084.
+Movement features: 
+MDVP:Fo=143.533, MDVP:Fhi=162.215, MDVP:Flo=65.809,
+MDVP:Jitter=0.011, MDVP:Jitter=0.011,
+MDVP:RAP=0.006, MDVP:PPQ=0.005, Jitter:DDP=0.019,
+MDVP:Shimmer=0.054, MDVP:Shimmer=0.054,
+Shimmer:APQ3=0.032, Shimmer:APQ5=0.024,
+MDVP:APQ=0.034, Shimmer:DDA=0.095,
+NHR=0.049, HNR=20.338, RPDE=0.513,
+DFA=0.731, spread1=-5.870, spread2=0.152,
+D2=2.118, PPE=0.186.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1396. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=46.0, sex=0.0, cp=2.0, trestbps=142.0, chol=177.0,
+fbs=0.0, rest ecg=0.0, thalach=160.0, exang=1.0, oldpeak=1.4,
+slope=0.0, ca=0.0,
+Pregnancies=1.0, Glucose=71.0, Blood Pressure=48.0, Skin Thickness=18.0,
+Insulin=76.0, BMI=20.4, Diabetes Pedigree Function=0.323.
+Breast features: mean radius=15.000, mean texture=15.510, mean perimeter=97.450, mean area=684.500, mean smoothness=0.084.
+Movement features: 
+MDVP:Fo=210.141, MDVP:Fhi=232.706, MDVP:Flo=185.258,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.003, Jitter:DDP=0.010,
+MDVP:Shimmer=0.017, MDVP:Shimmer=0.017,
+Shimmer:APQ3=0.009, Shimmer:APQ5=0.010,
+MDVP:APQ=0.013, Shimmer:DDA=0.026,
+NHR=0.006, HNR=23.671, RPDE=0.441,
+DFA=0.722, spread1=-5.963, spread2=0.250,
+D2=2.489, PPE=0.178.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1330. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=48.0, sex=1.0, cp=0.0, trestbps=124.0, chol=274.0,
+fbs=0.0, rest ecg=0.0, thalach=166.0, exang=0.0, oldpeak=0.5,
+slope=1.0, ca=0.0,
+Pregnancies=3.0, Glucose=174.0, Blood Pressure=58.0, Skin Thickness=22.0,
+Insulin=194.0, BMI=32.9, Diabetes Pedigree Function=0.593.
+Breast features: mean radius=14.220, mean texture=23.120, mean perimeter=94.370, mean area=609.900, mean smoothness=0.107.
+Movement features: 
+MDVP:Fo=119.992, MDVP:Fhi=157.302, MDVP:Flo=74.997,
+MDVP:Jitter=0.008, MDVP:Jitter=0.008,
+MDVP:RAP=0.004, MDVP:PPQ=0.006, Jitter:DDP=0.011,
+MDVP:Shimmer=0.044, MDVP:Shimmer=0.044,
+Shimmer:APQ3=0.022, Shimmer:APQ5=0.031,
+MDVP:APQ=0.030, Shimmer:DDA=0.065,
+NHR=0.022, HNR=21.033, RPDE=0.415,
+DFA=0.815, spread1=-4.813, spread2=0.266,
+D2=2.301, PPE=0.285.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1962. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=41.0, sex=1.0, cp=1.0, trestbps=110.0, chol=235.0,
+fbs=0.0, rest ecg=1.0, thalach=153.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=3.0, Glucose=84.0, Blood Pressure=68.0, Skin Thickness=30.0,
+Insulin=106.0, BMI=31.9, Diabetes Pedigree Function=0.591.
+Breast features: mean radius=16.160, mean texture=21.540, mean perimeter=106.200, mean area=809.800, mean smoothness=0.101.
+Movement features: 
+MDVP:Fo=120.289, MDVP:Fhi=128.143, MDVP:Flo=100.209,
+MDVP:Jitter=0.005, MDVP:Jitter=0.005,
+MDVP:RAP=0.003, MDVP:PPQ=0.002, Jitter:DDP=0.008,
+MDVP:Shimmer=0.014, MDVP:Shimmer=0.014,
+Shimmer:APQ3=0.007, Shimmer:APQ5=0.008,
+MDVP:APQ=0.012, Shimmer:DDA=0.021,
+NHR=0.016, HNR=23.949, RPDE=0.467,
+DFA=0.724, spread1=-6.135, spread2=0.204,
+D2=2.540, PPE=0.170.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 6521. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=56.0, sex=0.0, cp=1.0, trestbps=140.0, chol=294.0,
+fbs=0.0, rest ecg=0.0, thalach=153.0, exang=0.0, oldpeak=1.3,
+slope=1.0, ca=0.0,
+Pregnancies=0.0, Glucose=86.0, Blood Pressure=68.0, Skin Thickness=32.0,
+Insulin=0.0, BMI=35.8, Diabetes Pedigree Function=0.238.
+Breast features: mean radius=12.990, mean texture=14.230, mean perimeter=84.080, mean area=514.300, mean smoothness=0.095.
+Movement features: 
+MDVP:Fo=110.417, MDVP:Fhi=131.067, MDVP:Flo=103.370,
+MDVP:Jitter=0.008, MDVP:Jitter=0.008,
+MDVP:RAP=0.004, MDVP:PPQ=0.005, Jitter:DDP=0.011,
+MDVP:Shimmer=0.037, MDVP:Shimmer=0.037,
+Shimmer:APQ3=0.020, Shimmer:APQ5=0.023,
+MDVP:APQ=0.028, Shimmer:DDA=0.061,
+NHR=0.010, HNR=21.422, RPDE=0.542,
+DFA=0.821, spread1=-4.438, spread2=0.238,
+D2=1.923, PPE=0.335.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": [],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+
+Missing routes. Set to domains with confidence >= 0.5.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1916. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=39.0, sex=0.0, cp=2.0, trestbps=138.0, chol=220.0,
+fbs=0.0, rest ecg=1.0, thalach=152.0, exang=0.0, oldpeak=0.0,
+slope=1.0, ca=0.0,
+Pregnancies=5.0, Glucose=97.0, Blood Pressure=76.0, Skin Thickness=27.0,
+Insulin=0.0, BMI=35.6, Diabetes Pedigree Function=0.378.
+Breast features: mean radius=12.340, mean texture=26.860, mean perimeter=81.150, mean area=477.400, mean smoothness=0.103.
+Movement features: 
+MDVP:Fo=120.256, MDVP:Fhi=125.306, MDVP:Flo=104.773,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.007,
+MDVP:Shimmer=0.015, MDVP:Shimmer=0.015,
+Shimmer:APQ3=0.007, Shimmer:APQ5=0.008,
+MDVP:APQ=0.013, Shimmer:DDA=0.022,
+NHR=0.010, HNR=26.017, RPDE=0.469,
+DFA=0.735, spread1=-6.113, spread2=0.217,
+D2=2.528, PPE=0.171.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2334. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=46.0, sex=1.0, cp=2.0, trestbps=150.0, chol=231.0,
+fbs=0.0, rest ecg=1.0, thalach=147.0, exang=0.0, oldpeak=3.6,
+slope=1.0, ca=0.0,
+Pregnancies=3.0, Glucose=74.0, Blood Pressure=68.0, Skin Thickness=28.0,
+Insulin=45.0, BMI=29.7, Diabetes Pedigree Function=0.293.
+Breast features: mean radius=10.180, mean texture=17.530, mean perimeter=65.120, mean area=313.100, mean smoothness=0.106.
+Movement features: 
+MDVP:Fo=245.510, MDVP:Fhi=262.090, MDVP:Flo=231.848,
+MDVP:Jitter=0.002, MDVP:Jitter=0.002,
+MDVP:RAP=0.001, MDVP:PPQ=0.001, Jitter:DDP=0.004,
+MDVP:Shimmer=0.016, MDVP:Shimmer=0.016,
+Shimmer:APQ3=0.009, Shimmer:APQ5=0.010,
+MDVP:APQ=0.011, Shimmer:DDA=0.027,
+NHR=0.005, HNR=24.602, RPDE=0.467,
+DFA=0.632, spread1=-7.156, spread2=0.128,
+D2=2.392, PPE=0.097.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 1607. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=58.0, sex=1.0, cp=1.0, trestbps=125.0, chol=220.0,
+fbs=0.0, rest ecg=1.0, thalach=144.0, exang=0.0, oldpeak=0.4,
+slope=1.0, ca=4.0,
+Pregnancies=1.0, Glucose=79.0, Blood Pressure=60.0, Skin Thickness=42.0,
+Insulin=48.0, BMI=43.5, Diabetes Pedigree Function=0.678.
+Breast features: mean radius=17.990, mean texture=10.380, mean perimeter=122.800, mean area=1001.000, mean smoothness=0.118.
+Movement features: 
+MDVP:Fo=150.440, MDVP:Fhi=163.441, MDVP:Flo=144.736,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.006,
+MDVP:Shimmer=0.026, MDVP:Shimmer=0.026,
+Shimmer:APQ3=0.013, Shimmer:APQ5=0.016,
+MDVP:APQ=0.021, Shimmer:DDA=0.040,
+NHR=0.006, HNR=23.133, RPDE=0.352,
+DFA=0.759, spread1=-6.261, spread2=0.183,
+D2=2.264, PPE=0.144.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2689. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=61.0, sex=1.0, cp=0.0, trestbps=140.0, chol=207.0,
+fbs=0.0, rest ecg=0.0, thalach=138.0, exang=1.0, oldpeak=1.9,
+slope=2.0, ca=1.0,
+Pregnancies=2.0, Glucose=175.0, Blood Pressure=88.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=22.9, Diabetes Pedigree Function=0.326.
+Breast features: mean radius=20.730, mean texture=31.120, mean perimeter=135.700, mean area=1419.000, mean smoothness=0.095.
+Movement features: 
+MDVP:Fo=114.847, MDVP:Fhi=271.314, MDVP:Flo=104.680,
+MDVP:Jitter=0.009, MDVP:Jitter=0.009,
+MDVP:RAP=0.004, MDVP:PPQ=0.005, Jitter:DDP=0.011,
+MDVP:Shimmer=0.032, MDVP:Shimmer=0.032,
+Shimmer:APQ3=0.018, Shimmer:APQ5=0.020,
+MDVP:APQ=0.025, Shimmer:DDA=0.054,
+NHR=0.011, HNR=21.660, RPDE=0.548,
+DFA=0.817, spread1=-4.609, spread2=0.222,
+D2=1.832, PPE=0.316.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2059. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=48.0, sex=1.0, cp=1.0, trestbps=110.0, chol=229.0,
+fbs=0.0, rest ecg=1.0, thalach=168.0, exang=0.0, oldpeak=1.0,
+slope=0.0, ca=0.0,
+Pregnancies=0.0, Glucose=147.0, Blood Pressure=85.0, Skin Thickness=54.0,
+Insulin=0.0, BMI=42.8, Diabetes Pedigree Function=0.375.
+Breast features: mean radius=12.340, mean texture=14.950, mean perimeter=78.290, mean area=469.100, mean smoothness=0.087.
+Movement features: 
+MDVP:Fo=139.173, MDVP:Fhi=179.139, MDVP:Flo=76.556,
+MDVP:Jitter=0.004, MDVP:Jitter=0.004,
+MDVP:RAP=0.002, MDVP:PPQ=0.002, Jitter:DDP=0.005,
+MDVP:Shimmer=0.016, MDVP:Shimmer=0.016,
+Shimmer:APQ3=0.007, Shimmer:APQ5=0.009,
+MDVP:APQ=0.018, Shimmer:DDA=0.022,
+NHR=0.010, HNR=24.889, RPDE=0.430,
+DFA=0.666, spread1=-5.660, spread2=0.255,
+D2=2.519, PPE=0.200.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['heart', 'breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'heart'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2325. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=45.0, sex=1.0, cp=1.0, trestbps=128.0, chol=308.0,
+fbs=0.0, rest ecg=0.0, thalach=170.0, exang=0.0, oldpeak=0.0,
+slope=2.0, ca=0.0,
+Pregnancies=0.0, Glucose=93.0, Blood Pressure=60.0, Skin Thickness=25.0,
+Insulin=92.0, BMI=28.7, Diabetes Pedigree Function=0.532.
+Breast features: mean radius=14.860, mean texture=23.210, mean perimeter=100.400, mean area=671.400, mean smoothness=0.104.
+Movement features: 
+MDVP:Fo=156.405, MDVP:Fhi=189.398, MDVP:Flo=142.822,
+MDVP:Jitter=0.008, MDVP:Jitter=0.008,
+MDVP:RAP=0.004, MDVP:PPQ=0.004, Jitter:DDP=0.011,
+MDVP:Shimmer=0.040, MDVP:Shimmer=0.040,
+Shimmer:APQ3=0.017, Shimmer:APQ5=0.024,
+MDVP:APQ=0.043, Shimmer:DDA=0.052,
+NHR=0.034, HNR=17.153, RPDE=0.650,
+DFA=0.686, spread1=-4.554, spread2=0.340,
+D2=2.857, PPE=0.322.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'heart', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['heart', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2716. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=68.0, sex=0.0, cp=2.0, trestbps=120.0, chol=211.0,
+fbs=0.0, rest ecg=0.0, thalach=115.0, exang=0.0, oldpeak=1.5,
+slope=1.0, ca=0.0,
+Pregnancies=9.0, Glucose=130.0, Blood Pressure=70.0, Skin Thickness=0.0,
+Insulin=0.0, BMI=34.2, Diabetes Pedigree Function=0.652.
+Breast features: mean radius=13.200, mean texture=15.820, mean perimeter=84.070, mean area=537.300, mean smoothness=0.085.
+Movement features: 
+MDVP:Fo=143.533, MDVP:Fhi=162.215, MDVP:Flo=65.809,
+MDVP:Jitter=0.011, MDVP:Jitter=0.011,
+MDVP:RAP=0.006, MDVP:PPQ=0.005, Jitter:DDP=0.019,
+MDVP:Shimmer=0.054, MDVP:Shimmer=0.054,
+Shimmer:APQ3=0.032, Shimmer:APQ5=0.024,
+MDVP:APQ=0.034, Shimmer:DDA=0.095,
+NHR=0.049, HNR=20.338, RPDE=0.513,
+DFA=0.731, spread1=-5.870, spread2=0.152,
+D2=2.118, PPE=0.186.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['diabetes', 'breast_cancer', 'parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer', 'parkinson', 'diabetes'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 2082. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=35.0, sex=0.0, cp=0.0, trestbps=138.0, chol=183.0,
+fbs=0.0, rest ecg=1.0, thalach=182.0, exang=0.0, oldpeak=1.4,
+slope=2.0, ca=0.0,
+Pregnancies=8.0, Glucose=167.0, Blood Pressure=106.0, Skin Thickness=46.0,
+Insulin=231.0, BMI=37.6, Diabetes Pedigree Function=0.165.
+Breast features: mean radius=11.330, mean texture=14.160, mean perimeter=71.790, mean area=396.600, mean smoothness=0.094.
+Movement features: 
+MDVP:Fo=116.879, MDVP:Fhi=131.897, MDVP:Flo=108.153,
+MDVP:Jitter=0.008, MDVP:Jitter=0.008,
+MDVP:RAP=0.003, MDVP:PPQ=0.005, Jitter:DDP=0.010,
+MDVP:Shimmer=0.026, MDVP:Shimmer=0.026,
+Shimmer:APQ3=0.014, Shimmer:APQ5=0.016,
+MDVP:APQ=0.021, Shimmer:DDA=0.042,
+NHR=0.008, HNR=22.603, RPDE=0.540,
+DFA=0.813, spread1=-4.477, spread2=0.263,
+D2=1.827, PPE=0.326.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['breast_cancer'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['breast_cancer'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
+=====START=====
+- INPUT:
+Patient 3104. You are a triage assistant.
+You must decide which diagnostic pathway(s) to run: diabetes, breast_cancer or heart.
+
+Patient features:
+age=58.0, sex=0.0, cp=0.0, trestbps=170.0, chol=225.0,
+fbs=1.0, rest ecg=0.0, thalach=146.0, exang=1.0, oldpeak=2.8,
+slope=1.0, ca=2.0,
+Pregnancies=0.0, Glucose=180.0, Blood Pressure=78.0, Skin Thickness=63.0,
+Insulin=14.0, BMI=59.4, Diabetes Pedigree Function=2.42.
+Breast features: mean radius=12.340, mean texture=14.950, mean perimeter=78.290, mean area=469.100, mean smoothness=0.087.
+Movement features: 
+MDVP:Fo=202.266, MDVP:Fhi=211.604, MDVP:Flo=197.079,
+MDVP:Jitter=0.002, MDVP:Jitter=0.002,
+MDVP:RAP=0.001, MDVP:PPQ=0.001, Jitter:DDP=0.003,
+MDVP:Shimmer=0.010, MDVP:Shimmer=0.010,
+Shimmer:APQ3=0.005, Shimmer:APQ5=0.006,
+MDVP:APQ=0.007, Shimmer:DDA=0.014,
+NHR=0.001, HNR=32.684, RPDE=0.369,
+DFA=0.742, spread1=-7.696, spread2=0.179,
+D2=1.545, PPE=0.056.
+
+Output JSON only.
+Output format (example):
+{
+  "routes": ["diabetes", "heart"],
+  "primary": "heart",
+  "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+  "notes": "Brief triage rationale."
+}
+- OUTPUT:
+{
+          "routes": ['parkinson'],
+          "primary": "heart",
+          "confidence": {"diabetes": 0.35, "heart": 0.72, "breast_cancer": 0.05, "parkinson": 0.20},
+          "notes": "Brief triage rationale."
+        }
+- PARSED OUTPUT:
+{'routes': ['parkinson'], 'primary': 'heart', 'confidence': {'diabetes': 0.35, 'heart': 0.72, 'breast_cancer': 0.05, 'parkinson': 0.2}, 'notes': 'Brief triage rationale.'}
+- VERDICT:
+LLM output parsed successfully.
+=====END=====
