@@ -59,7 +59,7 @@ def call_llm_fn(prompt: str) -> str:
     generated = LLM.generate(**inputs, max_new_tokens=5000)
     return tokenizer.decode(generated[0][inputs["input_ids"].shape[-1]:])
 
-def make_case_text(pid, d_row, b_row, h_row, p_row):
+def make_case_text(pid, d_row, b_row, h_row):
     # d_row, b_row, h_row are 1D arrays (same as you pass to models)
     # Keep it short; it’s triage, not a full report.
     return f"""
