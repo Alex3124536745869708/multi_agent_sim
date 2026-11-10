@@ -1,0 +1,13 @@
+Percentage of positive labels in each dataset:
+
+Diabetes
+268/768 = 0.3489583333333333
+
+Breast Cancer
+357/569 = 0.6274165202108963
+
+Heart
+526/1025 = 0.5131707317073171
+
+Parkinson
+147/195 = 0.7538461538461538
